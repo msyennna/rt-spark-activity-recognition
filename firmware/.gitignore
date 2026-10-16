@@ -1,0 +1,14 @@
+# PlatformIO build output
+.pio/
+
+# CubeMX generated build/framework files
+activity_recognition/Drivers/
+activity_recognition/Core/
+activity_recognition/X-CUBE-MEMS1/
+activity_recognition/Makefile
+activity_recognition/startup_stm32f407xx.s
+activity_recognition/STM32F407xx_FLASH.ld
+activity_recognition/.mxproject
+
+# Keep the CubeMX configuration file
+!activity_recognition/activity_recognition.ioc
