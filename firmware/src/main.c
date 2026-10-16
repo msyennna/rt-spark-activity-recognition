@@ -144,32 +144,32 @@ int main(void)
  while (1)
 {
   if (ICM20608_ReadData(&imu_data) == 0)
-  {
-    char msg[200];
+{
+  float gyro_x_rad = imu_data.gyro_x_dps * 0.01745329252f;
+  float gyro_y_rad = imu_data.gyro_y_dps * 0.01745329252f;
+  float gyro_z_rad = imu_data.gyro_z_dps * 0.01745329252f;
 
-    int32_t ax_mg = (int32_t)(imu_data.accel_x_g * 1000.0f);
-    int32_t ay_mg = (int32_t)(imu_data.accel_y_g * 1000.0f);
-    int32_t az_mg = (int32_t)(imu_data.accel_z_g * 1000.0f);
+  char msg[256];
 
-    int32_t gx_mdps = (int32_t)(imu_data.gyro_x_dps * 1000.0f);
-    int32_t gy_mdps = (int32_t)(imu_data.gyro_y_dps * 1000.0f);
-    int32_t gz_mdps = (int32_t)(imu_data.gyro_z_dps * 1000.0f);
+  snprintf(
+      msg,
+      sizeof(msg),
+      "{\"acceleration_x\":%.6f,"
+      "\"acceleration_y\":%.6f,"
+      "\"acceleration_z\":%.6f,"
+      "\"gyro_x\":%.6f,"
+      "\"gyro_y\":%.6f,"
+      "\"gyro_z\":%.6f}\r\n",
+      (double)imu_data.accel_x_g,
+      (double)imu_data.accel_y_g,
+      (double)imu_data.accel_z_g,
+      (double)gyro_x_rad,
+      (double)gyro_y_rad,
+      (double)gyro_z_rad
+  );
 
-    snprintf(
-        msg,
-        sizeof(msg),
-        "ACC mg X:%6ld Y:%6ld Z:%6ld | "
-        "GYRO mdps X:%7ld Y:%7ld Z:%7ld\r\n",
-        (long)ax_mg,
-        (long)ay_mg,
-        (long)az_mg,
-        (long)gx_mdps,
-        (long)gy_mdps,
-        (long)gz_mdps
-    );
-
-    UART_Print(msg);
-  }
+  UART_Print(msg);
+}
   else
   {
     UART_Print("ERROR: Unable to read ICM20608\r\n");
