@@ -1,8 +1,10 @@
 import json
+import os
 import sys
 from pathlib import Path
 
 import paho.mqtt.client as mqtt
+from dotenv import load_dotenv
 
 
 # Allow imports from the project root
@@ -21,8 +23,12 @@ from cloud.database.database import (
 )
 
 
-BROKER = "localhost"
-PORT = 1883
+load_dotenv(ROOT_DIR / ".env")
+
+BROKER = os.getenv("MQTT_BROKER", "localhost")
+PORT = int(os.getenv("MQTT_PORT", "1883"))
+MQTT_USERNAME = os.getenv("MQTT_USERNAME")
+MQTT_PASSWORD = os.getenv("MQTT_PASSWORD")
 
 SENSOR_TOPIC = "activity/sensor"
 PREDICTION_TOPIC = "activity/prediction"
@@ -128,6 +134,12 @@ client = mqtt.Client(
 
 client.on_connect = on_connect
 client.on_message = on_message
+
+if MQTT_USERNAME and MQTT_PASSWORD:
+    client.username_pw_set(
+        MQTT_USERNAME,
+        MQTT_PASSWORD,
+    )
 
 print("Starting MQTT activity classifier...")
 
