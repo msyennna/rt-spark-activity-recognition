@@ -1,6 +1,9 @@
 # PlatformIO build output
 .pio/
 
+# Local Wi-Fi test credentials
+include/rw007_wifi_config.h
+
 # CubeMX generated build/framework files
 activity_recognition/Drivers/
 activity_recognition/Core/
