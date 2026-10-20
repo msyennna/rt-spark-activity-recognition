@@ -1,7 +1,6 @@
 import json
 import math
 import time
-from getpass import getpass
 from threading import Event
 
 import paho.mqtt.client as mqtt
@@ -9,9 +8,8 @@ import serial
 
 SERIAL_PORT = "COM9"
 BAUD_RATE = 115200
-BROKER = "52.62.47.179"
-MQTT_PORT = 1883
-MQTT_USERNAME = "yena_sensor"
+BROKER = "127.0.0.1"
+MQTT_PORT = 18883
 TOPIC = "activity/sensor"
 
 connection_reply = Event()
@@ -29,8 +27,6 @@ client = mqtt.Client(
 client.on_connect = on_connect
 
 try:
-    password = getpass("MQTT password: ")
-    client.username_pw_set(MQTT_USERNAME, password)
     client.connect(BROKER, MQTT_PORT, keepalive=60)
     client.loop_start()
 

@@ -42,3 +42,11 @@ settings/
 cconfig.h
 libraries
 rt-thread
+
+# Local credentials and firmware containing them
+/applications/rtspark_private.h
+/Debug/
+/Release/
+/rt-thread.elf
+/rtthread.elf
+/rtthread.bin

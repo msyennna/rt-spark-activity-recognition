@@ -1,0 +1,8 @@
+/* Copy to rtspark_private.h locally. Never commit the completed private file. */
+#ifndef RTSPARK_PRIVATE_H
+#define RTSPARK_PRIVATE_H
+#define RTSPARK_WIFI_SSID "YOUR_WIFI_NAME"
+#define RTSPARK_WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+#define RTSPARK_MQTT_PASSWORD "YOUR_MQTT_PASSWORD"
+#define RTSPARK_CLIENT_ID "rtspark-your-device"
+#endif
