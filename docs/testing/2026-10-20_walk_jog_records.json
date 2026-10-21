@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "trial_id": "2026-10-20-walk-jog-40s",
+  "evidence_status": "retrospective_candidate_alignment_not_independently_timed_accuracy",
+  "event_date_utc": "2026-10-20",
+  "reported_protocol": {
+    "first_activity": "WALKING",
+    "first_duration_seconds": 40,
+    "second_activity": "RUNNING",
+    "second_duration_seconds": 40,
+    "jogging_mapped_to_model_label": "RUNNING",
+    "board_level": "Approximately consistent throughout, as reported by the participant.",
+    "resting_in_reported_walking_history": false,
+    "placement_or_mounting_details": "Not separately recorded.",
+    "independent_movement_start_stop_timestamps_available": false,
+    "warmup_or_transition_exclusion_independently_logged": false
+  },
+  "pipeline": {
+    "nominal_publish_hz": 1,
+    "readings_per_prediction_window": 5,
+    "nominal_seconds_per_window": 5
+  },
+  "source": {
+    "type": "Participant-supplied Ubuntu SQLite query output",
+    "table": "activity_records",
+    "selected_columns": [
+      "id",
+      "activity",
+      "confidence",
+      "created_at"
+    ],
+    "id_range_queried_inclusive": [
+      2418,
+      2435
+    ],
+    "confidence_precision": "Transcribed from console percentages displayed to one decimal percentage point; original full-precision values were not supplied.",
+    "screenshots": [
+      "image(20261020-152259).png",
+      "image(20261020-152316).png"
+    ]
+  },
+  "candidate_alignment": {
+    "method": "Take the 16 consecutive records ending at #2434, the last jogging result shown in the supplied screenshots; allocate the first eight to the reported 40-second walk and the next eight to the reported 40-second jog.",
+    "basis": "Reported durations and nominal five-second windows. Actual activity start/stop timestamps were not independently logged.",
+    "important_limitation": "The inferred boundary is consistent with the prediction transition but is not independent ground-truth timing. Agreement is conditional on this allocation and must not be reported as independently validated accuracy.",
+    "context_only_record_ids": [
+      2418,
+      2435
+    ],
+    "context_record_activities_verified": false,
+    "walking_candidate_nominal_window_coverage_utc": [
+      "2026-10-20 15:21:06",
+      "2026-10-20 15:21:46"
+    ],
+    "running_candidate_nominal_window_coverage_utc": [
+      "2026-10-20 15:21:46",
+      "2026-10-20 15:22:26"
+    ],
+    "nominal_coverage_is_reconstructed_not_measured_sample_timing": true
+  },
+  "summary_under_candidate_alignment": {
+    "WALKING": {
+      "candidate_record_ids": [
+        2419,
+        2420,
+        2421,
+        2422,
+        2423,
+        2424,
+        2425,
+        2426
+      ],
+      "record_count": 8,
+      "matching_predictions_under_candidate_alignment": 8,
+      "mean_model_confidence_percent": 67.5,
+      "minimum_model_confidence_percent": 56.0,
+      "maximum_model_confidence_percent": 85.5
+    },
+    "RUNNING": {
+      "candidate_record_ids": [
+        2427,
+        2428,
+        2429,
+        2430,
+        2431,
+        2432,
+        2433,
+        2434
+      ],
+      "record_count": 8,
+      "matching_predictions_under_candidate_alignment": 8,
+      "mean_model_confidence_percent": 88.1875,
+      "minimum_model_confidence_percent": 71.0,
+      "maximum_model_confidence_percent": 99.0
+    }
+  },
+  "observations": {
+    "exported_record_count": 18,
+    "candidate_trial_record_count": 16,
+    "matching_candidate_predictions": 16,
+    "consecutive_record_ids_in_export": true,
+    "all_adjacent_database_timestamp_intervals_seconds": 5,
+    "generalized_model_accuracy_established": false
+  },
+  "records": [
+    {
+      "id": 2418,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 71.5,
+      "created_at_utc": "2026-10-20 15:21:06",
+      "included_in_candidate_trial": false,
+      "reported_activity_under_candidate_alignment": null,
+      "agreement_under_candidate_alignment": null
+    },
+    {
+      "id": 2419,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 73.5,
+      "created_at_utc": "2026-10-20 15:21:11",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2420,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 68.5,
+      "created_at_utc": "2026-10-20 15:21:16",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2421,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 85.5,
+      "created_at_utc": "2026-10-20 15:21:21",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2422,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 75.5,
+      "created_at_utc": "2026-10-20 15:21:26",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2423,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 60.5,
+      "created_at_utc": "2026-10-20 15:21:31",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2424,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 60.5,
+      "created_at_utc": "2026-10-20 15:21:36",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2425,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 60.0,
+      "created_at_utc": "2026-10-20 15:21:41",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2426,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 56.0,
+      "created_at_utc": "2026-10-20 15:21:46",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "WALKING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2427,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 88.5,
+      "created_at_utc": "2026-10-20 15:21:51",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2428,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 99.0,
+      "created_at_utc": "2026-10-20 15:21:56",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2429,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 82.5,
+      "created_at_utc": "2026-10-20 15:22:01",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2430,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 92.5,
+      "created_at_utc": "2026-10-20 15:22:06",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2431,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 89.5,
+      "created_at_utc": "2026-10-20 15:22:11",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2432,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 89.0,
+      "created_at_utc": "2026-10-20 15:22:16",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2433,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 93.5,
+      "created_at_utc": "2026-10-20 15:22:21",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2434,
+      "activity": "RUNNING",
+      "confidence_percent_as_displayed": 71.0,
+      "created_at_utc": "2026-10-20 15:22:26",
+      "included_in_candidate_trial": true,
+      "reported_activity_under_candidate_alignment": "RUNNING",
+      "agreement_under_candidate_alignment": true
+    },
+    {
+      "id": 2435,
+      "activity": "WALKING",
+      "confidence_percent_as_displayed": 66.0,
+      "created_at_utc": "2026-10-20 15:22:31",
+      "included_in_candidate_trial": false,
+      "reported_activity_under_candidate_alignment": null,
+      "agreement_under_candidate_alignment": null
+    }
+  ]
+}
