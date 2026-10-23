@@ -7,8 +7,12 @@ import and the direct MQTT/TLS port both build. Native source and cryptographic
 tests pass. On October 23, 2026, user-provided physical-board logs showed sensor
 readings, Wi-Fi/DHCP, verified TLS and accepted MQTT login. The Ubuntu subscriber
 received five sensor messages, and the local API returned current record 3136.
+The user subsequently reported a public service-checker pass and confirmed
+Android live/history and power-cycle recovery in the emulator workflow.
 See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the evidence and remaining
-PUBACK, cadence, public HTTPS, Android, recovery and regeneration checks.
+PUBACK, measured cadence, physical-phone, network-interruption and regeneration
+checks. A repeatable [timed movement test](testing/TIMED_VALIDATION.md) is ready;
+its offline tests pass, but integration movement results are not yet recorded.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -26,6 +30,8 @@ and the Android app. The earlier serial-to-MQTT gateway remains available in
 - `android_app`: the working Gradle project, launcher `RtsparkActivity`, live view,
   prediction history, automatic refreshing, and stale-data detection.
 - `tools/provisioning`: the MQTT TLS and Nginx HTTPS setup scripts used for this lab.
+- `tools/evaluation`: independently timed walking/jogging evaluation and offline
+  tests using temporary data; the evaluator reads the deployed database read-only.
 - `tools/legacy/rtthread`: archived RT-Thread patch and flashing helpers. These
   target the previous firmware and are outside the active workflow.
 
@@ -109,9 +115,10 @@ bytes and flash 160,860 bytes. The toolchain emits warnings about unused
 libnosys system calls and the default RWX load segment; there are no build errors.
 
 Initial sensor output, Wi-Fi/DHCP, board TLS/login, broker reception and one local
-API record have been observed; see the
-[live report](testing/2026-10-23_cubemx_live_pipeline.md). Extended physical checks
-remain pending. Do not use the archived RT-Thread flashing helper for the
+API record have been observed. Later public connectivity and Android
+live/history/recovery checks were confirmed by the user; see the
+[live report](testing/2026-10-23_cubemx_live_pipeline.md) for their scope.
+Extended physical checks remain pending. Do not use the archived RT-Thread flashing helper for the
 PlatformIO image. Flashing is a separate, explicit manual operation.
 
 ## Ubuntu services
@@ -158,6 +165,11 @@ hostname only, uses HTTPS, and requests latest/history through Volley. It contai
 no Wi-Fi or MQTT password. `local.properties` is specific to the developer's PC
 and is excluded. A physical phone needs network access allowed by the EC2 rules.
 
+The October 23 user confirmation covers the emulator workflow. A physical-phone
+run has not yet been established. For the next model evaluation, follow
+[the timed walking/jogging protocol](testing/TIMED_VALIDATION.md); the helper
+records activity intervals before comparing predictions and preserves errors.
+
 ## Historical baseline verification on the actual lab setup
 
 The following results describe the RT-Thread baseline on October 20, 2026.
@@ -203,3 +215,4 @@ exclusions remain in force, including private headers, environment files,
 database files, signing keys, and compiled board images. Do not copy private
 configuration or generated build directories between worktrees into tracked
 paths. Keep the Gradle wrapper JAR: it is a required build tool.
+

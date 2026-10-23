@@ -1,11 +1,13 @@
-# STM32CubeMX live MQTT and local API observations
+# STM32CubeMX live pipeline observations and user confirmations
 
 On October 23, 2026, Yena supplied physical-board serial output and Ubuntu shell
 results from the integration workflow. The board reported a Wi-Fi connection,
 a DHCP lease, verified TLS 1.2 and accepted MQTT login. A server-local MQTT
 subscriber received five sensor messages, and the local API returned record 3136.
-These observations establish an initial live connection and current local
-prediction output; sustained delivery and Android validation remain open.
+These supplied logs establish an initial live connection and current local
+prediction output. The user later confirmed public connectivity and Android
+live/history/recovery checks; the evidence level for that follow-up is recorded
+separately below.
 
 ## Evidence context
 
@@ -29,7 +31,10 @@ prediction output; sustained delivery and Android validation remain open.
 | Board TLS | `[RTSpark] TLS verified: TLSv1.2` | Successful handshake reported by the board; native negative cases remain separate from board-runtime evidence |
 | MQTT login | `[RTSpark] MQTT CONNACK accepted; topic activity/sensor QoS1` | Broker accepted login; this line alone does not establish acknowledged publications |
 | Broker reception | `mosquitto_sub` returned five six-field readings on `activity/sensor` | Live reception observed; board-side matching PUBACK and timestamped cadence not supplied |
-| Local prediction API | Record 3136, WALKING, confidence 0.66, created_at `2026-10-23 06:31:47` UTC | One current SQLite-backed API result observed; advancing records and history still require confirmation |
+| Local prediction API | Record 3136, WALKING, confidence 0.66, created_at `2026-10-23 06:31:47` UTC | One current SQLite-backed API result supplied; later live refresh/history confirmation is described below |
+
+The last row describes the supplied shell output. Later user confirmation of
+live refresh/history is recorded below; no additional IDs were supplied.
 
 ## Broker reception
 
@@ -68,16 +73,46 @@ external HTTPS access from the new client network or successful Android display.
 The earlier workstation timeouts remain historical observations in
 [the cloud service report](2026-10-23_cloud_service_check.md).
 
+## Subsequent user confirmations on October 23
+
+After updating the EC2 inbound source-IP rule for the new network, the user
+reported that `tools/validation/check_cloud_services.py` passed. The refreshed
+JSON output and its run time were not supplied. This records a reported pass,
+not an independently repeated public HTTPS measurement.
+
+Android Studio then reported that `AdbServerController` was stopping/stopped.
+After the ADB/emulator recovery instructions, the user said it was working.
+The user subsequently confirmed that the requested LIVE refresh, newest-first
+history and board-power-removal/recovery checks worked. These are user-reported
+outcomes; no new IDs, measured stale interval or screen recording accompanied
+the confirmation. The visible Android target was an emulator. A physical-phone
+test remains unconfirmed.
+
+Power-cycle recovery does not separately establish DHCP lease renewal or
+recovery from a controlled Wi-Fi outage. Board-side packet-ID PUBACK capture
+and measured publication cadence also remain open.
+
+## Timed evaluation preparation
+
+The [walking/jogging helper](TIMED_VALIDATION.md) is included for the next
+physical test. It records requested labels and UTC intervals on the database
+host, reads SQLite in read-only mode, and retains incorrect predictions.
+Eight offline tests passed during this update. They use temporary data and
+simulated clocks; their deliberately synthetic scores do not measure this model.
+No new timed physical trial or model accuracy score is claimed here.
+
 ## Remaining verification
 
 1. Capture board-side PUBACK lines and measure publication/prediction cadence.
-2. Read latest predictions twice and inspect history while the board continues
-   publishing; record increasing IDs and UTC timestamps.
-3. Rerun the CA-verified public service checker from the current Windows network.
-4. Confirm matching latest/history records on a physical Android phone and
-   observe WAITING FOR SENSOR followed by LIVE after power removal/recovery.
+2. Retain increasing prediction IDs and UTC timestamps from latest/history while
+   the board publishes; user confirmation already covers live refresh/history.
+3. Retain the next public checker output when validating a network change;
+   the current-network pass is recorded above as user-reported.
+4. Confirm matching latest/history records on a physical Android phone. Emulator
+   LIVE/history and power-cycle recovery have already been confirmed by the user.
 5. Complete the CubeMX regeneration review and remaining physical regression
    checks in [the integration checklist](../STM32_INTEGRATION.md).
-6. Run independently timed, labelled walking/jogging trials and retain training
-   and evaluation evidence. The 0.66 confidence above is not measured accuracy;
-   the actual activity during this connectivity check was not labelled.
+6. Run the independently timed, labelled [walking/jogging protocol](TIMED_VALIDATION.md)
+   and retain training and evaluation evidence. The 0.66 confidence above is not
+   measured accuracy; the activity during that connectivity check was not labelled.
+
