@@ -20,11 +20,20 @@ are preserved. RT-Thread-specific patch/flashing helpers are archived under
 
 ## Milestone record
 
+Completed commits pushed to `origin/integration/stm32cubemx`:
+
+- `8cc22b9`: exact reviewed firmware import after its successful initial build.
+- `4b780de`: active CubeMX workflow documentation and RT-Thread helper retirement.
+- `c5cc43f`: MAC/CubeMX reconciliation, bare-metal MQTT/TLS port, and host tests.
+
 | Stage | Status | Evidence and limits |
 | --- | --- | --- |
 | Import unchanged Shanice firmware | Complete | `pio run -d firmware` passed on October 23, 2026: RAM 27,560 bytes; flash 56,212 bytes. This establishes a clean build before porting. |
-| Review network MAC and CubeMX/ICM20608 differences | Pending integration review | Imported MAC and `.ioc` mismatch are documented below; changes require a separate build. |
-| Direct MQTT/TLS port with foreground polling | Pending | Requires TCP, DNS, UTC clock, hardware RNG, verified TLS, authenticated MQTT, and matching QoS 1 PUBACK. |
+| Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, CubeMX guard passed, PLLQ corrected for RNG. Hardware/regeneration checks remain pending. |
+| Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; board runtime remains pending. |
+| Native C host verification | Pass | Actual packet, platform, MQTT state, bounded heap and ICM20608 modules pass five mock-driven native suites; no physical networking or cryptographic handshake is claimed. |
+| Native TLS cryptographic verification | Pass: five cases | Actual Mbed TLS client completed verified ECDHE_RSA/AES-128-GCM with the 56 KiB arena. Wrong CA, hostname, premature date and expired date were rejected. The successful test yielded 68 times for crypto and twice for network readiness, with 86 foreground iterations. This is host evidence, not F407 polling latency. |
+| Existing service reachability | Unreachable from this workstation | Read-only TLS/API attempts at 13:41:24 Asia/Manila on October 23, 2026 timed out. This does not identify a service, certificate or firmware fault. See the [service check report](testing/2026-10-23_cloud_service_check.md). |
 | Sensor and Wi-Fi/DHCP regression checks | Pending physical board | The imported build has not been flashed or observed running during this integration. |
 | Live TLS/MQTT acknowledgement | Pending physical board and network | A successful build does not establish TLS compatibility or broker receipt. |
 | New database/API records | Pending live integration | Historical baseline records are preserved; they are not evidence of this firmware. |
@@ -37,8 +46,9 @@ lwIP build script. CubeMX regenerates into `firmware/activity_recognition/Core`
 and related ignored framework directories. Regeneration alone does not update
 the code PlatformIO compiles.
 
-The imported `.ioc` contains an X-CUBE-MEMS1 LSM6DSL selection. The installed
-sensor and compiled `icm20608.c` driver are ICM20608. That driver uses I2C2,
+The imported `.ioc` contained an X-CUBE-MEMS1 LSM6DSL selection. That stale
+selection was removed; the installed sensor and compiled `icm20608.c` driver
+remain ICM20608. That driver uses I2C2,
 checks WHO_AM_I, configures ±2 g and ±250 degrees/second, and exposes both raw
 and scaled readings. Do not replace it with generated LSM6DSL code. Review the
 CubeMX sensor selection and pin assignments, then reconcile generated
@@ -48,16 +58,34 @@ SPI2 is shared by the RW007 and onboard flash. Preserve the proven RW007 reset,
 SPI handshake, transaction spacing, queued receive handling, and flash chip
 select behavior. Preserve foreground polling and DHCP timer servicing.
 
-The imported lwIP interface has a hard-coded MAC while startup separately
-queries the RW007 station MAC. Compare the queried value with the interface
-address used for Ethernet and DHCP; the module's real unicast station MAC
-must be used consistently. Do not invent a shared replacement MAC for multiple
-boards.
+The imported lwIP interface had a hard-coded MAC while startup separately
+queried the RW007 station MAC. The integration initializes the interface using
+that queried station MAC before link/DHCP activation. Zero and multicast MACs
+are rejected; missing or invalid MAC leaves networking disabled while sensor
+diagnostics continue. Confirm the MAC in the runtime logs and DHCP lease on
+the physical board. There is no shared replacement MAC.
 
-Until the `.ioc` and compiled initialization are reconciled, treat generated
-files as review inputs. Review clock source/PLL settings, SPI prescalers,
+The `.ioc` and compiled clock initialization now agree on PLLM 4, PLLN 168,
+PLLP 2 and PLLQ 7, with an 8 MHz HSE: CPU remains 168 MHz and the RNG domain
+is corrected to 48 MHz. The original SPI2 prescaler 8 remains. These changes
+require the physical regression checks below.
+
+Treat future generated files as review inputs. Review clock source/PLL settings, SPI prescalers,
 GPIO levels and pulls, I2C2 bus behavior, UART, interrupt behavior, and any new
-RNG initialization before copying generated code. Rebuild after reconciliation.
+RNG initialization before copying generated code. `custom_bus.c` retains sole
+ownership of I2C2 initialization; remove any duplicate handle/init that CubeMX
+generates in main.c. Seed a scratch CubeMX `Core` tree from the active files,
+then run the guard against the regenerated scratch project:
+
+```powershell
+python firmware/scripts/check_cubemx.py
+python firmware/scripts/check_cubemx.py --generated path/to/scratch-project
+```
+
+The guard checks reviewed settings and preserves nonempty active USER CODE
+blocks. It copies no files. Actual CubeMX regeneration has not been exercised
+during this integration. Follow the full procedure in
+[`firmware/README.md`](../firmware/README.md), review non-user code, then rebuild.
 
 ## Preserved publisher contract
 
@@ -78,6 +106,38 @@ The baseline firmware CA and Android's
 `android_app/app/src/main/res/raw/rtspark_ca.crt` were compared and match.
 Private CA/server keys and broker password files remain outside Git.
 
+Wi-Fi uses ignored `firmware/include/rw007_wifi_config.h`; MQTT uses ignored
+`firmware/include/rtspark_private.h`. The two example headers contain no working
+credentials. An empty MQTT password or client ID disables the publisher. The
+pinned Mbed TLS archive/cache and PlatformIO outputs are ignored.
+
+Mbed TLS 3.6.7 comes from the complete official release archive, verified against
+the build script's pinned SHA256 before extraction. The STM32 platform, framework
+and ARM GCC versions are pinned as well. Firmware linking places its fixed 56
+KiB TLS allocator in the F407's separate 64 KiB CCM bank, reserves a 16 KiB
+foreground stack, and bounds the C library heap to 8 KiB in SRAM. lwIP retains
+its separate bounded SRAM allocation pool. `_sbrk` returns `ENOMEM` without
+moving its cursor on exhaustion or invalid shrink; it cannot grow into the stack.
+The linker reserves the stack separately; its generic minimum-heap reservation
+is zero because the C heap is already counted as static SRAM. The final linked
+image has no RT-Thread, socket or pthread dependency symbols. The ARM build
+passes with toolchain warnings concerning unused libnosys system calls and
+the default RWX load segment; it is not a warning-free build.
+
+The dependency build applies one hash-checked upstream adaptation so TLS 1.2
+ECDHE_RSA uses Mbed TLS's existing restartable ECDH paths. RSA signature
+verification remains synchronous. The actual-library localhost suite validates
+the adaptation and negative verification cases; see
+[`tests/firmware_tls/README.md`](../tests/firmware_tls/README.md) for the exact
+source hashes and retest requirements when updating Mbed TLS. Board polling
+latency and stack/arena high-water marks still need physical measurement.
+
+The UTC implementation resolves `time.cloudflare.com`, checks SNTP source,
+mode/version/leap/stratum and the random request token, and handles the 2036 NTP
+era rollover. SNTP bootstraps certificate time; it is not authenticated time.
+UTC refreshes hourly and expires after 24 hours. Blocking DNS or UDP 123 leaves
+TLS waiting for UTC; there is no manual shell-time fallback in this port.
+
 ## Verification procedure
 
 Run each stage separately and record its actual result before proceeding to the
@@ -87,7 +147,11 @@ command is included in the build workflow.
 | Check | Procedure and acceptance evidence | Physical board required? | Current result |
 | --- | --- | --- | --- |
 | Unchanged import build | `pio run -d firmware`; record RAM/flash and build completion. | No | Pass: 27,560 / 56,212 bytes |
-| Port build | Run the same command after network/clock/RNG/TLS/MQTT changes; keep outputs private. | No | Pending port |
+| Port build | Run the same command after network/clock/RNG/TLS/MQTT changes; keep outputs private. | No | Pass: SRAM 66,756; CCM 57,344; flash 160,860 bytes |
+| Native C verification | `python -B tests/firmware_host/run.py`; actual packet/platform/MQTT/heap/sensor modules with mocked HAL/lwIP/TLS/I2C. | No | Pass: five suites |
+| Native TLS verification | `python -B tests/firmware_tls/test_tls.py`; local test certificates and the actual Mbed TLS client, no cloud messages. | No | Pass: verified handshake and four certificate rejection cases |
+| CubeMX source guard | `python firmware/scripts/check_cubemx.py`; compare reviewed `.ioc` settings and USER CODE blocks. | No | Pass; actual regeneration remains pending |
+| Existing service reachability | `python tools/validation/check_cloud_services.py`; TLS 8883 and read-only verified HTTPS schema checks. | No | Unreachable: connection timeouts on October 23, 2026; see [report](testing/2026-10-23_cloud_service_check.md) |
 | Sensor output | Observe ICM20608 identity, six finite fields each second, stationary acceleration magnitude near 1 g and gyro near zero; rotate/move board to confirm axes respond. | Yes | Pending |
 | Wi-Fi/DHCP | Confirm station join, actual module MAC, IP/netmask/gateway/DNS lease, lease renewal and reconnect; ensure poll continues while other connection work runs. | Yes | Pending |
 | DNS/TCP/UTC/RNG | Confirm broker resolution, TCP 8883 connection, plausible synchronized UTC, and functioning hardware RNG; failures must stop TLS connection attempts. | Yes | Pending |

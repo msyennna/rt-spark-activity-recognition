@@ -3,7 +3,8 @@
 The `integration/stm32cubemx` branch combines Shanice's STM32Cube/HAL firmware
 with the existing cloud, trained model, provisioning scripts, and Android app.
 The firmware uses PlatformIO and foreground lwIP networking. The unchanged
-import builds, but direct MQTT/TLS publishing is a separate integration stage.
+import and the direct MQTT/TLS port both build. Native source and cryptographic
+tests pass; physical sensor/network and end-to-end runtime checks remain pending.
 See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the stage results and the
 physical-board checks still required. No integration image has been flashed.
 
@@ -44,21 +45,26 @@ The CA certificate is public. Its private signing key is not included.
 
    This command builds only. It does not upload firmware. The first, unchanged
    Shanice import passed with 27,560 bytes RAM and 56,212 bytes flash.
+   The integrated build pins the STM32 platform/framework/toolchain and Mbed
+   TLS 3.6.7. On a clean checkout, its build script downloads the complete official
+   Mbed TLS release and verifies its SHA256 before extraction. The dependency
+   cache lives in ignored `firmware/.deps`.
 3. For local Wi-Fi setup, copy `firmware/include/rw007_wifi_config.example.h` to
    the ignored `firmware/include/rw007_wifi_config.h`, then supply the SSID and
    password locally. Use valid C strings. The imported transport accepts an SSID
    of 1–32 bytes and a password of 0–31 bytes, with an empty password only for an
    open access point. Its 32-byte password wire field includes a terminating NUL.
    Do not assume the old RT-Thread credential limits apply to this transport.
-4. MQTT credentials belong in ignored local configuration when the publisher
-   stage is added. Keep the broker account `yena_sensor`, its existing password,
-   and a unique MQTT client ID for this board. Never commit credentials or built
-   board images; completed images contain the configured secrets.
+4. Copy `firmware/include/rtspark_private.h.example` to the ignored
+   `firmware/include/rtspark_private.h` and set the existing MQTT password and a
+   unique client ID locally. The broker username remains `yena_sensor`. MQTT
+   stays disabled while either private value is empty. Never commit credentials
+   or built board images; completed images contain the configured secrets.
 5. Review [CubeMX regeneration and hardware differences](STM32_INTEGRATION.md#cubemx-regeneration-and-hardware-differences)
    before regenerating. PlatformIO compiles `src`/`include`, not the ignored
-   CubeMX `Core` output. The imported `.ioc` selects LSM6DSL, while the actual
-   compiled driver is ICM20608. The network MAC also requires review against
-   the value returned by the actual RW007 module.
+   CubeMX `Core` output. The stale LSM6DSL selection was removed; the actual
+   compiled driver remains ICM20608. The network interface now uses the station
+   MAC returned by the actual RW007 module, with no shared fallback MAC.
 
 The publishing contract to preserve is one reading per second to
 `activity/sensor`, QoS 1, retain false, with exactly `acceleration_x`,
@@ -67,11 +73,38 @@ Acceleration is in g and angular velocity is in rad/s. The broker hostname is
 `ec2-15-134-214-242.ap-southeast-2.compute.amazonaws.com`, TCP port 8883.
 TLS must verify the existing lab CA, hostname, and certificate dates using UTC.
 The matching public CA remains in Android's `app/src/main/res/raw/rtspark_ca.crt`.
+The firmware copy is `firmware/include/rtspark_ca.h`.
+
+The platform obtains UTC asynchronously from `time.cloudflare.com` using UDP
+123, refreshes it hourly and refuses new TLS connections when UTC is unavailable
+or over 24 hours old. This port has no RT-Thread shell time-setting command; a
+network that blocks NTP will leave publishing waiting for UTC. Hardware RNG
+requires the corrected 48 MHz PLLQ domain and fails closed on status faults,
+timeout or a repeated word. Credentials are not logged by the MQTT module.
 
 Each PUBACK confirms broker acknowledgement. It does not by itself confirm
 database or Android processing. Keep `RW007_Network_Poll()` running while
 waiting for DNS, TCP, UTC synchronization, TLS, and MQTT traffic. A blocking wait
 that stops foreground polling also stops incoming packets and lwIP timers.
+
+Run `python -B tests/firmware_host/run.py` for the native C tests and
+`python firmware/scripts/check_cubemx.py` for the read-only configuration guard.
+The host tests exercise actual MQTT/platform source with mocked peripherals and
+TLS calls. They do not establish an actual board connection or TLS handshake.
+The separate `python -B tests/firmware_tls/test_tls.py` suite uses the real Mbed
+TLS client and temporary localhost certificates. Its five cases pass: a verified
+ECDHE_RSA handshake and rejection of a wrong CA, wrong hostname, premature date
+and expired date. See its [README](../tests/firmware_tls/README.md) for the
+hash-checked restartable ECDHE_RSA adaptation and retest instructions.
+
+The linker reserves a 16 KiB foreground stack. TLS uses a fixed 56 KiB arena in
+the separate 64 KiB CCM bank; the C library uses an independently bounded 8 KiB
+heap in SRAM, and lwIP uses its own bounded SRAM heap. TLS allocation failures
+enter retry; C heap exhaustion returns `ENOMEM` with its bounds preserved.
+Final bank usage is recorded separately in the integration milestone table.
+The integrated ARM build passes with SRAM 66,756 bytes, separate CCM 57,344
+bytes and flash 160,860 bytes. The toolchain emits warnings about unused
+libnosys system calls and the default RWX load segment; there are no build errors.
 
 Sensor output, Wi-Fi/DHCP, and direct TLS/MQTT operation on the imported firmware
 remain physical-board checks. Do not use the archived RT-Thread flashing helper
