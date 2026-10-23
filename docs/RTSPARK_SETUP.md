@@ -1,59 +1,81 @@
-# RT-Spark activity recognition: setup and verified behavior
+# RT-Spark activity recognition: STM32CubeMX integration setup
 
-The working path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
+The `integration/stm32cubemx` branch combines Shanice's STM32Cube/HAL firmware
+with the existing cloud, trained model, provisioning scripts, and Android app.
+The firmware uses PlatformIO and foreground lwIP networking. The unchanged
+import builds, but direct MQTT/TLS publishing is a separate integration stage.
+See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the stage results and the
+physical-board checks still required. No integration image has been flashed.
+
+The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
-and the Android app. A Windows serial-to-MQTT gateway is an earlier optional path;
-the current board publishes directly and does not need that gateway running.
+and the Android app. The earlier serial-to-MQTT gateway remains available in
+`data_collection`; it is not required when the direct publisher is running.
 
 ## What is included
 
-- `firmware/activity_recognition/applications`: direct board publisher and public CA.
+- `firmware/src` and `firmware/include`: compiled STM32Cube/HAL application,
+  ICM20608 driver, RW007 transport, and foreground lwIP network interface.
+- `firmware/platformio.ini`: active `black_f407zg` build configuration.
+- `firmware/activity_recognition/activity_recognition.ioc`: CubeMX configuration;
+  review its differences from the compiled files before regeneration.
 - `cloud`: classifier, database, and HTTP API source already in the project.
 - `android_app`: the working Gradle project, launcher `RtsparkActivity`, live view,
   prediction history, automatic refreshing, and stale-data detection.
-- `tools/firmware`: reviewed mbedTLS port fixes that must survive a package download.
 - `tools/provisioning`: the MQTT TLS and Nginx HTTPS setup scripts used for this lab.
-- `tools/flashing/flash_rtspark_wifi.py`: checked, block-based flashing helper.
+- `tools/legacy/rtthread`: archived RT-Thread patch and flashing helpers. These
+  target the previous firmware and are outside the active workflow.
 
 The scripts and trust configuration target this lab's hostname and CA. They are
 not an unattended installer for an unrelated server. Review their hostname,
 fingerprint, repository path, prerequisites, and account settings before reuse.
 The CA certificate is public. Its private signing key is not included.
 
-## Board setup
+## Firmware build and local configuration
 
-1. Open the existing `firmware/activity_recognition` project in RT-Thread Studio.
-   It uses RT-Thread 4.1.1, RW007 v2.0.1, ICM20608, Paho MQTTPacket, and
-   mbedTLS v2.7.10.1. Download the packages selected in the tracked `.config`.
-2. From the repository root in Windows PowerShell, run:
+1. Use the separate integration worktree on `integration/stm32cubemx`. Its base
+   is the reviewed `feature/sensor-data-collection` commit; the original checkout
+   and its private configuration remain separate.
+2. Install/use PlatformIO Core, then build from this worktree's repository root:
 
    ```powershell
-   python .\tools\firmware\apply_mbedtls_fixes.py
+   pio run -d firmware
    ```
 
-   Reapply the fixes after re-downloading mbedTLS. They enable certificate date
-   validation and the time callback, add POSIX declarations needed by the port,
-   and replace its pseudo-random entropy stub with the STM32 hardware RNG adapter.
-3. Copy `applications/rtspark_private.h.example` to `applications/rtspark_private.h`
-   within the firmware project. Enter your local Wi-Fi and MQTT credentials in
-   the copied file. Use valid C strings, escaping quotes and backslashes if needed.
-   The tested configuration uses Wi-Fi passwords of 8–32 ASCII characters and an
-   MQTT password of 12–64 characters, matching the broker account `yena_sensor`.
-   Use a unique MQTT client ID for each board. Keep the completed header private.
-4. The CA in `rtspark_ca.h`, the hostname in the application, and the broker's
-   server certificate must agree. A different CA/server requires updating both
-   the board and Android trust configuration; keep certificate verification on.
-5. Refresh, clean, and build the project in RT-Thread Studio. Keep all built
-   firmware private because credentials are embedded in it.
-6. The supplied flashing helper is pinned to the original lab's ST-LINK serial
-   number and checks both ELF and BIN files. For that board, run the helper from
-   PowerShell after closing active debug sessions. For another board, review the
-   target checks and programmer path first. Do not bypass a failed identity check.
+   This command builds only. It does not upload firmware. The first, unchanged
+   Shanice import passed with 27,560 bytes RAM and 56,212 bytes flash.
+3. For local Wi-Fi setup, copy `firmware/include/rw007_wifi_config.example.h` to
+   the ignored `firmware/include/rw007_wifi_config.h`, then supply the SSID and
+   password locally. Use valid C strings. The imported transport accepts an SSID
+   of 1–32 bytes and a password of 0–31 bytes, with an empty password only for an
+   open access point. Its 32-byte password wire field includes a terminating NUL.
+   Do not assume the old RT-Thread credential limits apply to this transport.
+4. MQTT credentials belong in ignored local configuration when the publisher
+   stage is added. Keep the broker account `yena_sensor`, its existing password,
+   and a unique MQTT client ID for this board. Never commit credentials or built
+   board images; completed images contain the configured secrets.
+5. Review [CubeMX regeneration and hardware differences](STM32_INTEGRATION.md#cubemx-regeneration-and-hardware-differences)
+   before regenerating. PlatformIO compiles `src`/`include`, not the ignored
+   CubeMX `Core` output. The imported `.ioc` selects LSM6DSL, while the actual
+   compiled driver is ICM20608. The network MAC also requires review against
+   the value returned by the actual RW007 module.
 
-The working board obtains an IP address, synchronizes UTC, verifies TLS 1.2, and
-publishes one six-field sensor reading per second to `activity/sensor` with QoS 1.
-Acceleration is in g and angular velocity is in rad/s. Each PUBACK confirms broker
-acknowledgement. It does not by itself confirm database or Android processing.
+The publishing contract to preserve is one reading per second to
+`activity/sensor`, QoS 1, retain false, with exactly `acceleration_x`,
+`acceleration_y`, `acceleration_z`, `gyro_x`, `gyro_y`, and `gyro_z`.
+Acceleration is in g and angular velocity is in rad/s. The broker hostname is
+`ec2-15-134-214-242.ap-southeast-2.compute.amazonaws.com`, TCP port 8883.
+TLS must verify the existing lab CA, hostname, and certificate dates using UTC.
+The matching public CA remains in Android's `app/src/main/res/raw/rtspark_ca.crt`.
+
+Each PUBACK confirms broker acknowledgement. It does not by itself confirm
+database or Android processing. Keep `RW007_Network_Poll()` running while
+waiting for DNS, TCP, UTC synchronization, TLS, and MQTT traffic. A blocking wait
+that stops foreground polling also stops incoming packets and lwIP timers.
+
+Sensor output, Wi-Fi/DHCP, and direct TLS/MQTT operation on the imported firmware
+remain physical-board checks. Do not use the archived RT-Thread flashing helper
+for the PlatformIO image. Flashing is a separate, explicit manual operation.
 
 ## Ubuntu services
 
@@ -99,9 +121,10 @@ hostname only, uses HTTPS, and requests latest/history through Volley. It contai
 no Wi-Fi or MQTT password. `local.properties` is specific to the developer's PC
 and is excluded. A physical phone needs network access allowed by the EC2 rules.
 
-## Verified on the actual lab setup
+## Historical baseline verification on the actual lab setup
 
-On October 20, 2026:
+The following results describe the RT-Thread baseline on October 20, 2026.
+They do not verify the STM32CubeMX integration:
 
 - The board's ARM firmware built and ran on the physical board.
 - Direct Wi-Fi MQTT TLS readings arrived at the Ubuntu broker.
@@ -132,12 +155,14 @@ An emulator set to UTC will show a time eight hours behind Manila.
 
 ## Git workflow
 
-The preparation helper updates ignore rules, exports only public support files,
-checks staged content against the current private board passwords and private-key
-markers, and stages the reviewed project paths. It does not commit or push.
-This targeted check does not claim to find every possible unrelated credential.
+Commit and push each completed integration milestone to
+`integration/stm32cubemx`. Keep `main` and `feature/sensor-data-collection` intact.
+Record build results separately from hardware and live-service evidence in
+[STM32_INTEGRATION.md](STM32_INTEGRATION.md); do not count pending physical
+checks as passes.
 
-Review `git diff --cached --stat` and, locally, `git diff --cached` before a commit.
-Never post a diff containing passwords. Commit to `feature/sensor-data-collection`
-and push normally to origin. Keep the Gradle wrapper JAR: it is a required build
-tool, not a compiled board binary containing credentials.
+Review staged paths and the staged diff locally before each commit. Root secret
+exclusions remain in force, including private headers, environment files,
+database files, signing keys, and compiled board images. Do not copy private
+configuration or generated build directories between worktrees into tracked
+paths. Keep the Gradle wrapper JAR: it is a required build tool.
