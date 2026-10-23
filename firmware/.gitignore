@@ -1,5 +1,6 @@
 # PlatformIO build output
 .pio/
+.deps/
 
 # Local Wi-Fi test credentials
 include/rw007_wifi_config.h

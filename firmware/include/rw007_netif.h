@@ -12,7 +12,11 @@ typedef struct
 } RW007_Network_Stats;
 
 /* Foreground only: lwIP and SPI must never be entered from an interrupt. */
+/* Set the validated station MAC returned by RW007 CMD_MAC_GET before Init. */
+int RW007_Network_SetMAC(const uint8_t mac[6]);
 int RW007_Network_Init(void);
+/* True only while Wi-Fi is connected and DHCP supplied a usable address. */
+int RW007_Network_Ready(void);
 void RW007_Network_SetLink(int connected);
 void RW007_Network_Poll(void);
 void RW007_Network_Receive(const uint8_t *frame, uint32_t length);

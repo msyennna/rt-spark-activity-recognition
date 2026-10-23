@@ -32,6 +32,8 @@ static int initialized;
 static int service_enabled;
 static int dhcp_attempted;
 static int bound_reported;
+static uint8_t station_mac[6];
+static int station_mac_valid;
 
 static err_t rw007_linkoutput(struct netif *netif, struct pbuf *packet)
 {
@@ -126,17 +128,41 @@ static void rw007_status_callback(struct netif *netif)
 
 static err_t rw007_netif_init(struct netif *netif)
 {
-    static const uint8_t mac[6] = {0xFC, 0x58, 0x4A, 0xA6, 0xE5, 0x68};
-
     netif->name[0] = 'r';
     netif->name[1] = 'w';
-    memcpy(netif->hwaddr, mac, sizeof(mac));
-    netif->hwaddr_len = sizeof(mac);
+    memcpy(netif->hwaddr, station_mac, sizeof(station_mac));
+    netif->hwaddr_len = sizeof(station_mac);
     netif->mtu = 1500;
     netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_ETHERNET;
     netif->output = etharp_output;
     netif->linkoutput = rw007_linkoutput;
     return ERR_OK;
+}
+
+int RW007_Network_SetMAC(const uint8_t mac[6])
+{
+    uint8_t nonzero = 0U;
+    unsigned int i;
+
+    if (mac == NULL)
+    {
+        return -1;
+    }
+    for (i = 0U; i < sizeof(station_mac); ++i)
+    {
+        nonzero |= mac[i];
+    }
+    /* Ethernet source addresses must be individual, nonzero addresses.
+     * Reject changing the hardware identity of a running DHCP interface.
+     */
+    if ((nonzero == 0U) || ((mac[0] & 1U) != 0U) ||
+        (initialized && (memcmp(mac, station_mac, sizeof(station_mac)) != 0)))
+    {
+        return -1;
+    }
+    memcpy(station_mac, mac, sizeof(station_mac));
+    station_mac_valid = 1;
+    return 0;
 }
 
 int RW007_Network_Init(void)
@@ -146,6 +172,11 @@ int RW007_Network_Init(void)
     if (initialized)
     {
         return 0;
+    }
+    if (!station_mac_valid)
+    {
+        LWIP_PLATFORM_DIAG(("LWIP: INIT REFUSED - VALID RW007 MAC REQUIRED\r\n"));
+        return -1;
     }
     LWIP_PLATFORM_DIAG(("LWIP: INIT START\r\n"));
     lwip_init();
@@ -162,10 +193,21 @@ int RW007_Network_Init(void)
     netif_set_default(&rw007_netif);
     /* Administrative up only; the real CONNECT callback enables the link. */
     netif_set_up(&rw007_netif);
-    LWIP_PLATFORM_DIAG(("LWIP: MAC FC:58:4A:A6:E5:68\r\n"));
+    LWIP_PLATFORM_DIAG(("LWIP: MAC %02X:%02X:%02X:%02X:%02X:%02X\r\n",
+                        (unsigned int)station_mac[0], (unsigned int)station_mac[1],
+                        (unsigned int)station_mac[2], (unsigned int)station_mac[3],
+                        (unsigned int)station_mac[4], (unsigned int)station_mac[5]));
     LWIP_PLATFORM_DIAG(("LWIP: LINK DOWN - WAITING FOR WIFI CONNECTED\r\n"));
     initialized = 1;
     return 0;
+}
+
+int RW007_Network_Ready(void)
+{
+    return initialized && netif_is_up(&rw007_netif) &&
+           netif_is_link_up(&rw007_netif) &&
+           dhcp_supplied_address(&rw007_netif) &&
+           !ip4_addr_isany_val(*netif_ip4_addr(&rw007_netif));
 }
 
 void RW007_Network_SetLink(int connected)

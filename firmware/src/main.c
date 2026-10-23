@@ -25,6 +25,8 @@
 #include "icm20608.h"
 #include "rw007_netif.h"
 #include "rw007_transport.h"
+#include "rtspark_platform.h"
+#include "rtspark_mqtt.h"
 #include <stdio.h>
 #include <string.h>
 #if defined(__has_include)
@@ -1579,6 +1581,11 @@ static int RW007_MAC_Test(void)
         UART_Print("RW007 MAC: response length invalid\r\n");
         return -1;
     }
+    if (RW007_Network_SetMAC(value) != 0)
+    {
+        UART_Print("RW007 MAC: invalid station address; networking disabled\r\n");
+        return -1;
+    }
     /* mac_value may include padding; print only the first six address bytes. */
     snprintf(msg, sizeof(msg), "RW007 MAC: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
              (unsigned int)value[0], (unsigned int)value[1], (unsigned int)value[2],
@@ -1818,10 +1825,11 @@ int main(void)
  char msg[160];
   uint8_t device_id = 0;
 
-  if (RW007_Network_Init() != 0)
-  {
-    UART_Print("LWIP: INIT FAILED; continuing existing tests\r\n");
-  }
+  /* DNS and DHCP consume hardware random numbers during lwip_init(). */
+  rtspark_platform_init();
+  UART_Print(rtspark_random_ready() ? "[RTSpark] Hardware RNG ready\r\n" :
+                                    "[RTSpark] Hardware RNG fault; cloud disabled\r\n");
+  rtspark_mqtt_init();
 
   UART_Print("RW007: resetting module...\r\n");
 
@@ -1851,6 +1859,10 @@ if (RW007_HardwareReset() == 0)
         else if (RW007_MAC_Test() != 0)
         {
             UART_Print("RW007: MAC QUERY FAILED; continuing IMU test\r\n");
+        }
+        else if (RW007_Network_Init() != 0)
+        {
+            UART_Print("LWIP: INIT FAILED; continuing IMU test\r\n");
         }
         else if (RW007_SCAN_Test() != 0)
         {
@@ -1901,13 +1913,19 @@ else
   }
 
   UART_Print("====================================\r\n");
+  uint32_t imu_last_report = HAL_GetTick() - 1000U;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
- uint32_t imu_last_report = HAL_GetTick() - 1000U;
  while (1)
 {
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+  RW007_Network_Poll();
+  rtspark_platform_poll();
+  rtspark_mqtt_poll();
   RW007_Network_Poll();
   if ((HAL_GetTick() - imu_last_report) < 1000U)
   {
@@ -1923,7 +1941,7 @@ else
 
   char msg[256];
 
-  snprintf(
+  int payload_length = snprintf(
       msg,
       sizeof(msg),
       "{\"acceleration_x\":%.6f,"
@@ -1940,7 +1958,15 @@ else
       (double)gyro_z_rad
   );
 
-  UART_Print(msg);
+  if (payload_length > 0 && (size_t)payload_length < sizeof(msg))
+  {
+    UART_Print(msg);
+    (void)rtspark_mqtt_offer(msg);
+  }
+  else
+  {
+    UART_Print("[RTSpark] Sample formatting failed; reading skipped\r\n");
+  }
 }
   else
   {
@@ -1948,12 +1974,8 @@ else
   }
 
 
-  /* USER CODE END WHILE */
-
-  /* USER CODE BEGIN 3 */
 }
-
-  /* USER CODE BEGIN 3 */
+  /* USER CODE END 3 */
 }
 
 /**
@@ -1980,7 +2002,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  /* 8 MHz / 4 * 168 = 336 MHz VCO; / 7 gives the RNG's 48 MHz clock. */
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -2009,6 +2032,13 @@ void SystemClock_Config(void)
 
 static void MX_SPI2_Init(void)
 {
+  /* USER CODE BEGIN SPI2_Init 0 */
+
+  /* USER CODE END SPI2_Init 0 */
+
+  /* USER CODE BEGIN SPI2_Init 1 */
+
+  /* USER CODE END SPI2_Init 1 */
   hspi2.Instance = SPI2;
   hspi2.Init.Mode = SPI_MODE_MASTER;
   hspi2.Init.Direction = SPI_DIRECTION_2LINES;
@@ -2026,6 +2056,9 @@ static void MX_SPI2_Init(void)
   {
     Error_Handler();
   }
+  /* USER CODE BEGIN SPI2_Init 2 */
+
+  /* USER CODE END SPI2_Init 2 */
 }
 
 static void MX_SPI3_Init(void)
@@ -2145,7 +2178,7 @@ HAL_GPIO_Init(RW007_RST_GPIO_Port, &GPIO_InitStruct);
 
 /* Configure RW007 INT/BUSY pin: PG11 */
   GPIO_InitStruct.Pin = RW007_INT_BUSY_Pin;
-  GPIO_InitStruct.Pin = RW007_INT_BUSY_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(RW007_INT_BUSY_GPIO_Port, &GPIO_InitStruct);
 
