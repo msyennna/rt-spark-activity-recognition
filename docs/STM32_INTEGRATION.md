@@ -30,14 +30,19 @@ Completed commits pushed to `origin/integration/stm32cubemx`:
 | --- | --- | --- |
 | Import unchanged Shanice firmware | Complete | `pio run -d firmware` passed on October 23, 2026: RAM 27,560 bytes; flash 56,212 bytes. This establishes a clean build before porting. |
 | Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, CubeMX guard passed, PLLQ corrected for RNG. Hardware/regeneration checks remain pending. |
-| Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; board runtime remains pending. |
+| Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; initial physical-board TLS/CONNACK and broker reception were observed on October 23, 2026; PUBACK capture, cadence and recovery checks remain pending. |
 | Native C host verification | Pass | Actual packet, platform, MQTT state, bounded heap and ICM20608 modules pass five mock-driven native suites; no physical networking or cryptographic handshake is claimed. |
 | Native TLS cryptographic verification | Pass: five cases | Actual Mbed TLS client completed verified ECDHE_RSA/AES-128-GCM with the 56 KiB arena. Wrong CA, hostname, premature date and expired date were rejected. The successful test yielded 68 times for crypto and twice for network readiness, with 86 foreground iterations. This is host evidence, not F407 polling latency. |
-| Existing service reachability | Unreachable from this workstation | Read-only TLS/API attempts at 13:41:24 Asia/Manila on October 23, 2026 timed out. This does not identify a service, certificate or firmware fault. See the [service check report](testing/2026-10-23_cloud_service_check.md). |
-| Sensor and Wi-Fi/DHCP regression checks | Pending physical board | The imported build has not been flashed or observed running during this integration. |
-| Live TLS/MQTT acknowledgement | Pending physical board and network | A successful build does not establish TLS compatibility or broker receipt. |
-| New database/API records | Pending live integration | Historical baseline records are preserved; they are not evidence of this firmware. |
+| Existing service reachability | Initial timeout; later board and local API observations recorded | The workstation probes at 13:41:24 Asia/Manila timed out; preserve the [historical report](testing/2026-10-23_cloud_service_check.md). Later board TLS succeeded and the server-local API returned record 3136. Public HTTPS still needs a current-network retest. |
+| Sensor and Wi-Fi/DHCP regression checks | Initial physical observations recorded | User-provided serial output shows ICM20608 WHO_AM_I 0xAF, six-field readings, module-MAC initialization, Wi-Fi connection and DHCP BOUND. Axis-motion, measured cadence, lease renewal and reconnect checks remain pending. |
+| Live TLS/MQTT acknowledgement | TLS/login and broker reception observed; PUBACK capture pending | Serial output reports verified TLSv1.2 and accepted MQTT CONNACK. The Ubuntu subscriber received five sensor messages. Packet-ID-matched PUBACK, timing and recovery evidence has not yet been supplied. |
+| New database/API records | First current local API record observed | The SQLite-backed local API returned ID 3136 with created_at 2026-10-23 06:31:47 UTC, WALKING and confidence 0.66. Advancing IDs, history and sustained cadence still need confirmation. |
 | Android display and recovery | Pending live integration | Requires new board-originated predictions and Android observation. |
+
+October 23 live observations and their remaining checks are recorded in
+[the live MQTT and local API report](testing/2026-10-23_cubemx_live_pipeline.md).
+The exact flashed binary hash was not captured; the reviewed integration source
+baseline for these observations is `63842cc`.
 
 ## CubeMX regeneration and hardware differences
 
@@ -151,13 +156,13 @@ command is included in the build workflow.
 | Native C verification | `python -B tests/firmware_host/run.py`; actual packet/platform/MQTT/heap/sensor modules with mocked HAL/lwIP/TLS/I2C. | No | Pass: five suites |
 | Native TLS verification | `python -B tests/firmware_tls/test_tls.py`; local test certificates and the actual Mbed TLS client, no cloud messages. | No | Pass: verified handshake and four certificate rejection cases |
 | CubeMX source guard | `python firmware/scripts/check_cubemx.py`; compare reviewed `.ioc` settings and USER CODE blocks. | No | Pass; actual regeneration remains pending |
-| Existing service reachability | `python tools/validation/check_cloud_services.py`; TLS 8883 and read-only verified HTTPS schema checks. | No | Unreachable: connection timeouts on October 23, 2026; see [report](testing/2026-10-23_cloud_service_check.md) |
-| Sensor output | Observe ICM20608 identity, six finite fields each second, stationary acceleration magnitude near 1 g and gyro near zero; rotate/move board to confirm axes respond. | Yes | Pending |
-| Wi-Fi/DHCP | Confirm station join, actual module MAC, IP/netmask/gateway/DNS lease, lease renewal and reconnect; ensure poll continues while other connection work runs. | Yes | Pending |
-| DNS/TCP/UTC/RNG | Confirm broker resolution, TCP 8883 connection, plausible synchronized UTC, and functioning hardware RNG; failures must stop TLS connection attempts. | Yes | Pending |
-| TLS/authentication | Confirm CA, hostname and date verification succeed, valid MQTT CONNACK, and incorrect trust/credentials fail in a controlled test without printing secrets. | Yes | Pending |
-| MQTT QoS 1/timing | Observe packet-ID-matched PUBACK and one six-field reading/second without catch-up bursts; check recovery after network interruption. | Yes | Pending |
-| Database | Read new `activity_records` IDs and UTC `created_at` values while the integration board runs; nominally one prediction per five one-second readings. | Yes, for board-originated evidence | Pending |
+| Existing service reachability | `python tools/validation/check_cloud_services.py`; TLS 8883 and read-only verified HTTPS schema checks. | No | Initial workstation probe timed out; later board TLS and local API succeeded. Public HTTPS retest pending; see [live report](testing/2026-10-23_cubemx_live_pipeline.md). |
+| Sensor output | Observe ICM20608 identity, six finite fields each second, stationary acceleration magnitude near 1 g and gyro near zero; rotate/move board to confirm axes respond. | Yes | Partial: WHO_AM_I 0xAF and six-field readings observed. Motion response and measured cadence remain pending. |
+| Wi-Fi/DHCP | Confirm station join, actual module MAC, IP/netmask/gateway/DNS lease, lease renewal and reconnect; ensure poll continues while other connection work runs. | Yes | Partial: module MAC, join and DHCP IP/netmask/gateway observed. DNS lease details, renewal and reconnect not separately verified. |
+| DNS/TCP/UTC/RNG | Confirm broker resolution, TCP 8883 connection, plausible synchronized UTC, and functioning hardware RNG; failures must stop TLS connection attempts. | Yes | Partial: DNS/TCP connected and UTC ready reported before verified TLS. Detailed clock/RNG and failure-path measurements remain pending. |
+| TLS/authentication | Confirm CA, hostname and date verification succeed, valid MQTT CONNACK, and incorrect trust/credentials fail in a controlled test without printing secrets. | Yes | Partial: positive board TLSv1.2 and MQTT CONNACK observed. Negative board-runtime cases remain pending; native negative tests are separate evidence. |
+| MQTT QoS 1/timing | Observe packet-ID-matched PUBACK and one six-field reading/second without catch-up bursts; check recovery after network interruption. | Yes | Partial: five messages received by the broker subscriber. PUBACK capture, measured cadence and interruption/recovery checks remain pending. |
+| Database | Read new `activity_records` IDs and UTC `created_at` values while the integration board runs; nominally one prediction per five one-second readings. | Yes, for board-originated evidence | Partial: record 3136 observed through the SQLite-backed local API. Repeated IDs/timestamps, history and cadence checks remain pending. |
 | HTTPS API | Read `/api/activity/latest` and `/api/activity/history?limit=50` over verified HTTPS; IDs must match new database rows. | Yes, for board-originated evidence | Pending |
 | Android | Confirm new matching IDs, latest prediction and newest-first history; power removal should show WAITING FOR SENSOR after 20 seconds while preserving the last reading, then return to LIVE after recovery. | Yes, plus Android device or emulator | Pending |
 

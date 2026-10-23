@@ -4,9 +4,11 @@ The `integration/stm32cubemx` branch combines Shanice's STM32Cube/HAL firmware
 with the existing cloud, trained model, provisioning scripts, and Android app.
 The firmware uses PlatformIO and foreground lwIP networking. The unchanged
 import and the direct MQTT/TLS port both build. Native source and cryptographic
-tests pass; physical sensor/network and end-to-end runtime checks remain pending.
-See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the stage results and the
-physical-board checks still required. No integration image has been flashed.
+tests pass. On October 23, 2026, user-provided physical-board logs showed sensor
+readings, Wi-Fi/DHCP, verified TLS and accepted MQTT login. The Ubuntu subscriber
+received five sensor messages, and the local API returned current record 3136.
+See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the evidence and remaining
+PUBACK, cadence, public HTTPS, Android, recovery and regeneration checks.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -106,9 +108,11 @@ The integrated ARM build passes with SRAM 66,756 bytes, separate CCM 57,344
 bytes and flash 160,860 bytes. The toolchain emits warnings about unused
 libnosys system calls and the default RWX load segment; there are no build errors.
 
-Sensor output, Wi-Fi/DHCP, and direct TLS/MQTT operation on the imported firmware
-remain physical-board checks. Do not use the archived RT-Thread flashing helper
-for the PlatformIO image. Flashing is a separate, explicit manual operation.
+Initial sensor output, Wi-Fi/DHCP, board TLS/login, broker reception and one local
+API record have been observed; see the
+[live report](testing/2026-10-23_cubemx_live_pipeline.md). Extended physical checks
+remain pending. Do not use the archived RT-Thread flashing helper for the
+PlatformIO image. Flashing is a separate, explicit manual operation.
 
 ## Ubuntu services
 
