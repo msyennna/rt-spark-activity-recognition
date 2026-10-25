@@ -1,0 +1,313 @@
+{
+  "session_id": "timed_walk_jog_20261025T153506Z_0abffb",
+  "audit_status": "PASS",
+  "original_files": [
+    {
+      "name": "session.json",
+      "bytes": 21941,
+      "sha256": "2015ac3ce8fd4326c4ed4b1a3982d8354825fdcddf8241f7bd5fa5e86a15c002",
+      "git_blob_sha1": "7599048cedd4c6f1f367e4f3b0924cf452f31640"
+    },
+    {
+      "name": "summary.md",
+      "bytes": 1985,
+      "sha256": "7869c10e9363ef43795dfddcecf5f609d8f2ec41a188da41d47a529e7c10315c",
+      "git_blob_sha1": "c46ded17d13a23008e7607ebe01cb09218157b48"
+    }
+  ],
+  "raw_row_occurrences": 82,
+  "unique_raw_rows": 82,
+  "excluded_raw_rows": 30,
+  "scored_windows": 52,
+  "correct_windows": 51,
+  "metrics": {
+    "confusion_matrix_rows_actual_columns_predicted": {
+      "WALKING": {
+        "WALKING": 25,
+        "RUNNING": 1
+      },
+      "RUNNING": {
+        "WALKING": 0,
+        "RUNNING": 26
+      }
+    },
+    "valid_trial_count": 6,
+    "scored_windows": 52,
+    "correct_windows": 51,
+    "support_by_actual_activity": {
+      "WALKING": 26,
+      "RUNNING": 26
+    },
+    "window_accuracy_percent": 98.07692307692308,
+    "correct_identification_percent_by_activity": {
+      "WALKING": 96.15384615384616,
+      "RUNNING": 100
+    }
+  },
+  "misclassified_windows": [
+    {
+      "trial": 1,
+      "requested_activity": "WALKING",
+      "id": 4092,
+      "activity_id": 1,
+      "activity": "RUNNING",
+      "confidence": 0.505,
+      "created_at": "2026-10-25 15:36:44"
+    }
+  ],
+  "trial_count": 6,
+  "trials": [
+    {
+      "trial": 1,
+      "activity": "WALKING",
+      "start_utc": "2026-10-25T15:36:00.857006Z",
+      "end_utc": "2026-10-25T15:37:00.857145Z",
+      "elapsed_monotonic_seconds": 60.00017573102377,
+      "utc_monotonic_difference_seconds": 0.00003673102377632631,
+      "raw_rows": 14,
+      "eligible_rows": 9,
+      "correct": 8,
+      "baseline_id": 4082,
+      "eligible_ids": [
+        4087,
+        4088,
+        4089,
+        4090,
+        4091,
+        4092,
+        4093,
+        4094,
+        4095
+      ],
+      "first_eligible_timestamp_utc": "2026-10-25T15:36:19.000000Z",
+      "last_eligible_timestamp_utc": "2026-10-25T15:36:59.000000Z",
+      "within_trial_prediction_gaps_seconds": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "errors": [
+        {
+          "trial": 1,
+          "requested_activity": "WALKING",
+          "id": 4092,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.505,
+          "created_at": "2026-10-25 15:36:44"
+        }
+      ],
+      "quality_issues": []
+    },
+    {
+      "trial": 2,
+      "activity": "RUNNING",
+      "start_utc": "2026-10-25T15:37:24.403886Z",
+      "end_utc": "2026-10-25T15:38:24.404018Z",
+      "elapsed_monotonic_seconds": 60.000168855069205,
+      "utc_monotonic_difference_seconds": 0.000036855069204477786,
+      "raw_rows": 12,
+      "eligible_rows": 9,
+      "correct": 9,
+      "baseline_id": 4099,
+      "eligible_ids": [
+        4101,
+        4102,
+        4103,
+        4104,
+        4105,
+        4106,
+        4107,
+        4108,
+        4109
+      ],
+      "first_eligible_timestamp_utc": "2026-10-25T15:37:41.000000Z",
+      "last_eligible_timestamp_utc": "2026-10-25T15:38:21.000000Z",
+      "within_trial_prediction_gaps_seconds": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "errors": [],
+      "quality_issues": []
+    },
+    {
+      "trial": 3,
+      "activity": "WALKING",
+      "start_utc": "2026-10-25T15:38:40.263957Z",
+      "end_utc": "2026-10-25T15:39:40.264083Z",
+      "elapsed_monotonic_seconds": 60.0001594099449,
+      "utc_monotonic_difference_seconds": 0.000033409944897755395,
+      "raw_rows": 14,
+      "eligible_rows": 9,
+      "correct": 9,
+      "baseline_id": 4111,
+      "eligible_ids": [
+        4116,
+        4117,
+        4118,
+        4119,
+        4120,
+        4121,
+        4122,
+        4123,
+        4124
+      ],
+      "first_eligible_timestamp_utc": "2026-10-25T15:38:58.000000Z",
+      "last_eligible_timestamp_utc": "2026-10-25T15:39:38.000000Z",
+      "within_trial_prediction_gaps_seconds": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "errors": [],
+      "quality_issues": []
+    },
+    {
+      "trial": 4,
+      "activity": "RUNNING",
+      "start_utc": "2026-10-25T15:39:54.438133Z",
+      "end_utc": "2026-10-25T15:40:54.438260Z",
+      "elapsed_monotonic_seconds": 60.00015772401821,
+      "utc_monotonic_difference_seconds": 0.00003072401820958248,
+      "raw_rows": 14,
+      "eligible_rows": 8,
+      "correct": 8,
+      "baseline_id": 4126,
+      "eligible_ids": [
+        4131,
+        4132,
+        4133,
+        4134,
+        4135,
+        4136,
+        4137,
+        4138
+      ],
+      "first_eligible_timestamp_utc": "2026-10-25T15:40:13.000000Z",
+      "last_eligible_timestamp_utc": "2026-10-25T15:40:49.000000Z",
+      "within_trial_prediction_gaps_seconds": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        5
+      ],
+      "errors": [],
+      "quality_issues": []
+    },
+    {
+      "trial": 5,
+      "activity": "WALKING",
+      "start_utc": "2026-10-25T15:41:08.506947Z",
+      "end_utc": "2026-10-25T15:42:08.507069Z",
+      "elapsed_monotonic_seconds": 60.00015746697318,
+      "utc_monotonic_difference_seconds": 0.00003546697318057568,
+      "raw_rows": 14,
+      "eligible_rows": 8,
+      "correct": 8,
+      "baseline_id": 4141,
+      "eligible_ids": [
+        4146,
+        4147,
+        4148,
+        4149,
+        4150,
+        4151,
+        4152,
+        4153
+      ],
+      "first_eligible_timestamp_utc": "2026-10-25T15:41:29.000000Z",
+      "last_eligible_timestamp_utc": "2026-10-25T15:42:05.000000Z",
+      "within_trial_prediction_gaps_seconds": [
+        6,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "errors": [],
+      "quality_issues": []
+    },
+    {
+      "trial": 6,
+      "activity": "RUNNING",
+      "start_utc": "2026-10-25T15:42:23.335610Z",
+      "end_utc": "2026-10-25T15:43:23.335756Z",
+      "elapsed_monotonic_seconds": 60.000180115923285,
+      "utc_monotonic_difference_seconds": 0.000034115923284616656,
+      "raw_rows": 14,
+      "eligible_rows": 9,
+      "correct": 9,
+      "baseline_id": 4155,
+      "eligible_ids": [
+        4160,
+        4161,
+        4162,
+        4163,
+        4164,
+        4165,
+        4166,
+        4167,
+        4168
+      ],
+      "first_eligible_timestamp_utc": "2026-10-25T15:42:40.000000Z",
+      "last_eligible_timestamp_utc": "2026-10-25T15:43:20.000000Z",
+      "within_trial_prediction_gaps_seconds": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "errors": [],
+      "quality_issues": []
+    }
+  ],
+  "monotonic_duration_range_seconds": [
+    60.00015746697318,
+    60.000180115923285
+  ],
+  "max_utc_monotonic_difference_seconds": 0.000036855069204477786,
+  "within_trial_eligible_prediction_gap_seconds": {
+    "count": 46,
+    "min": 5,
+    "max": 6,
+    "median": 5,
+    "mean": 5.043478260869565
+  },
+  "summary_regeneration_byte_identical": true,
+  "session_regeneration_byte_identical": true,
+  "scope": "Independent local reanalysis of supplied evidence, not an independent physical trial or sensor-rate measurement.",
+  "review_method": {
+    "independent_selection": "id > baseline_latest_record_id and start_utc + 16 seconds <= created_at <= end_utc - 1 second; confidence and predicted label do not affect selection",
+    "evaluator_repository": "msyennna/rt-spark-activity-recognition",
+    "evaluator_ref": "ebc5fc92b3f4e9a3ba8ff87d5a7e4a8d574ed62a",
+    "evaluator_path": "tools/evaluation/timed_walk_jog.py",
+    "evaluator_git_blob_sha1": "0238eb68d0b997bfc1f7378580b4d5de143ee8c6",
+    "exact_repository_source_replayed": true,
+    "raw_files_preserved_unchanged": true
+  }
+}

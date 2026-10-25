@@ -2,43 +2,47 @@
 
 ## Result and provenance
 
-The user supplied the Ubuntu terminal transcript of timed validation v1.0 for
-session `timed_walk_jog_20261025T153506Z_0abffb`. The helper reported
-**COMPLETE**, with six Valid trials and **51/52 correct eligible windows
-(98.1%)**. The per-trial totals and reported confusion matrix agree.
+The supplied original session data confirms **51/52 correct eligible windows
+(98.1%)**, with six valid trials. Independent selection from the raw rows
+reproduces every stored trial analysis and the aggregate confusion matrix.
+Replaying the reviewed helper regenerates both supplied files byte-for-byte.
 
-This is a record of the supplied terminal summary. The reviewer did not observe
-the movements or operate the board. The original `session.json` and
-`summary.md` have not yet been supplied, so raw timestamps, prediction IDs,
-window selection and quality flags have not been independently recomputed.
-No raw records or missing times are reconstructed in this report.
+Session: `timed_walk_jog_20261025T153506Z_0abffb`.
 
-The repository head inspected before this result entry was
-`423a0b41cef9bb0470c06ba971214e4c50fb0321`. The reviewed evaluator source reports
-version 1.0, matching the transcript. The exact VM script, flashed firmware and
-model hashes were not supplied.
+- [Original session.json](timed_walk_jog_20261025T153506Z_0abffb/session.json)
+- [Original summary.md](timed_walk_jog_20261025T153506Z_0abffb/summary.md)
+- [Machine-readable audit](timed_walk_jog_20261025T153506Z_0abffb/audit.json)
 
-## Reported protocol
+The reviewer reanalysed the uploaded files locally and did not observe the
+participant or operate the board. This verifies consistency of supplied
+evidence; it is not a second independent physical trial.
+
+The repository source reviewed for replay is
+`ebc5fc92b3f4e9a3ba8ff87d5a7e4a8d574ed62a`, evaluator v1.0,
+Git blob `0238eb68d0b997bfc1f7378580b4d5de143ee8c6`.
+The local replay copy was checked against that exact blob. The actual VM script,
+flashed firmware and model hashes were not supplied.
+
+## Recorded protocol
 
 - One participant; board placement: **held in right hand**.
-- Three rounds of WALKING followed by RUNNING, six trials total.
+- Three rounds alternating WALKING and RUNNING: six requested 60-second trials.
 - WALKING meant normal walking; RUNNING trials requested jogging.
-- Each requested interval lasted 60 seconds, with a three-second countdown.
-- The participant answered `y` after every interval.
-- Breaks were allowed before each subsequent countdown.
-- Requested activity order and server-side time intervals were fixed before
-  comparison with predictions.
-- The reviewed helper uses ten seconds of settling time, a nominal five-second
-  prediction window and one-second edge margins.
-- Predictions were hidden by the helper until the session ended; the protocol
-  also asked the participant to minimize the app's prediction display.
-- The transcript does not establish the exact start/end time of each trial.
-  The UTC value embedded in the session ID identifies the session name, not a
-  substitute for the missing trial timestamps.
+- Each trial followed a three-second countdown. Breaks were allowed between trials.
+- The participant confirmed completing the requested activity in all six intervals.
+- Activity order and server-side timestamps were recorded before prediction comparison.
+- Ten settling seconds, a nominal five-second prediction window and one-second
+  edge margins define the eligible interval.
+- The helper hid comparisons until the end and asked the participant to minimize
+  the app's prediction display. No independent observation of that action is claimed.
 
-## Reported confusion matrix
+The session was created at `2026-10-25T15:35:06.440728Z` and finished at
+`2026-10-25T15:43:29.336782Z`. Those are session metadata; the per-trial movement
+boundaries are recorded separately below.
 
-Rows are the requested actual activity; columns are the predicted activity.
+## Verified confusion matrix
+
+Rows are requested actual activity; columns are predicted activity.
 
 | Actual activity | Predicted WALKING | Predicted RUNNING | Eligible windows |
 | --- | ---: | ---: | ---: |
@@ -46,79 +50,101 @@ Rows are the requested actual activity; columns are the predicted activity.
 | RUNNING | 0 | 26 | 26 |
 | Total | 25 | 27 | 52 |
 
-| Metric within this session | Checked arithmetic |
+| Metric within this session | Recomputed result |
 | --- | --- |
 | Overall window accuracy | 51 / 52 = 98.0769%, rounded to 98.1% |
 | WALKING windows identified correctly | 25 / 26 = 96.2% |
 | RUNNING windows identified correctly | 26 / 26 = 100.0% |
-| Observed classification error in the summary | One WALKING window predicted RUNNING, in trial 1 |
 
-These percentages measure agreement with the participant-labelled timed
-intervals in this session. They are not model confidence values.
+These percentages measure agreement with participant-labelled timed intervals.
+They are distinct from the model's per-window confidence values.
 
-## Reported trials
+## Verified trial boundaries and selected IDs
 
-| Trial | Requested activity | Participant confirmed | Eligible windows | Correct predictions | Helper quality result |
-| --- | --- | --- | ---: | ---: | --- |
-| 1 | WALKING | Yes | 9 | 8 | Valid |
-| 2 | RUNNING | Yes | 9 | 9 | Valid |
-| 3 | WALKING | Yes | 9 | 9 | Valid |
-| 4 | RUNNING | Yes | 8 | 8 | Valid |
-| 5 | WALKING | Yes | 8 | 8 | Valid |
-| 6 | RUNNING | Yes | 9 | 9 | Valid |
-| Total | Both classes | All six | 52 | 51 | All six reported Valid |
+All displayed times are **October 25, Asia/Manila (UTC+8)**, to milliseconds.
+The original JSON retains full UTC microsecond timestamps.
 
-The helper's COMPLETE result means its configured trial-quality checks passed
-according to the supplied output. Independent confirmation of those checks
-requires the original session data.
+| Trial | Activity | Start, Manila | End, Manila | Correct/scored | Eligible IDs |
+| --- | --- | --- | --- | ---: | --- |
+| 1 | WALKING | 23:36:00.857 | 23:37:00.857 | 8/9 | 4087–4095 |
+| 2 | RUNNING | 23:37:24.403 | 23:38:24.404 | 9/9 | 4101–4109 |
+| 3 | WALKING | 23:38:40.263 | 23:39:40.264 | 9/9 | 4116–4124 |
+| 4 | RUNNING | 23:39:54.438 | 23:40:54.438 | 8/8 | 4131–4138 |
+| 5 | WALKING | 23:41:08.506 | 23:42:08.507 | 8/8 | 4146–4153 |
+| 6 | RUNNING | 23:42:23.335 | 23:43:23.335 | 9/9 | 4160–4168 |
 
-## Data-flow implications
+All six requested-activity confirmations and quality checks pass reanalysis.
+Monotonic durations range from 60.000157 to 60.000180 seconds. The largest
+recorded UTC/monotonic duration difference is under 0.000037 seconds; this
+compares recorded clocks and does not independently establish clock accuracy.
 
-The earlier October 25 attempt stopped because its latest prediction was stale.
-The later output completes all six trials. The reviewed helper checks freshness
-before each trial, reads SQLite in read-only mode and selects prediction IDs
-beyond each trial's baseline. This supports resumed prediction flow during the
-movement session.
+## Independent raw-data audit
 
-The summary does not itself capture current board-side TLS/PUBACK logs, the
-individual sensor sampling cadence or matching current HTTPS/Android records.
-Those are separate observations; exact prediction cadence can be reviewed after
-the raw session is available.
+The originals contain **82 distinct raw prediction records**. Reanalysis selects
+**52 unique eligible windows**. The other **30 records remain preserved** and
+are excluded by the predefined time/baseline rule.
 
-## Preserve and review the original files
+For each trial, a row is eligible only when both conditions hold:
 
-The helper printed this Ubuntu results directory:
+1. Its prediction ID is greater than that trial's baseline latest ID.
+2. Its database timestamp is between trial start + 16 seconds and trial end -
+   1 second, inclusively.
 
-```text
-/home/ubuntu/rt-spark-activity-recognition/docs/testing/timed_walk_jog_20261025T153506Z_0abffb
-```
+Class label and confidence do not affect selection. The audit independently
+recomputed those bounds and IDs, then checked:
 
-Transfer its original `session.json` and `summary.md` into the integration
-worktree. Keep the session directory name unchanged. Review and commit those
-files as the next evidence milestone; do not recreate the raw JSON from this
-aggregate report.
+- JSON structure, finite confidence values, valid labels/class IDs and UTC formats.
+- Raw rows within the recorded capture ranges, increasing IDs/timestamps and
+  consistent records, with no duplicate selected ID across trials.
+- Trial order, confirmations, planned ends, monotonic duration and UTC agreement.
+- Per-trial counts, correctness, quality results and the aggregate metrics.
+- Agreement with the exact repository helper's record validation, trial analysis,
+  aggregation and file regeneration.
 
-Raw review should recompute the time/ID selection, check the six confirmations
-and quality reasons, compare all counts and identify the single incorrect
-window. Incorrect and low-confidence predictions must remain included.
+Among the **46 adjacent eligible prediction intervals within trials**, 44 are
+5 seconds and two are 6 seconds; median 5 seconds, mean 5.0435 seconds.
+These are prediction-completion intervals at the database timestamp's one-second
+resolution. They do not measure the individual sensor acquisition interval.
 
-## Limits and remaining laboratory checks
+## Single scored error retained
 
-This is a short, fixed-order, single-participant test with one hand-held
-placement. Windows from the same trials do not establish independent evidence
-across people, placements or environments. There is no resting class.
+- Trial: **1, WALKING**.
+- Prediction ID: **4092**.
+- Timestamp: **October 25, 23:36:44 Asia/Manila**
+  (`2026-10-25 15:36:44` UTC).
+- Prediction: **RUNNING**, confidence **50.5%**.
+- The incorrect window remains included in the 51/52 result.
 
-Database timestamps mark prediction completion, not individual sensor
-acquisition. Settling time and margins reduce transition ambiguity but do not
-measure transport delay. The trial does not evaluate training cross-validation
-or held-out generalization.
+All other eligible windows match their requested activity. Raw records outside
+eligible intervals are retained without being assigned movement-test correctness.
 
-After preserving and reviewing the raw session, finish the current Android
-physical-phone demonstration, capture remaining board acknowledgement evidence,
-and complete the CubeMX regeneration review in
-[STM32_INTEGRATION.md](../STM32_INTEGRATION.md). Retain or recover the original
-model-training/evaluation evidence separately from this movement result.
+## Original file integrity
 
-The earlier exploratory trial remains in
+Both uploaded originals are committed unchanged; the hashes below describe the
+attached bytes. Exact helper replay produces the same two files.
+
+| File | Bytes | SHA-256 |
+| --- | ---: | --- |
+| session.json | 21,941 | `2015ac3ce8fd4326c4ed4b1a3982d8354825fdcddf8241f7bd5fa5e86a15c002` |
+| summary.md | 1,985 | `7869c10e9363ef43795dfddcecf5f609d8f2ec41a188da41d47a529e7c10315c` |
+
+## Limits and remaining checks
+
+This is one short, fixed-order test with one participant and one hand-held
+placement. Its windows do not establish independent performance across people,
+placements or environments. There is no resting class.
+
+Database timestamps mark prediction completion, not sensor acquisition.
+Settling time and margins reduce transition ambiguity but do not measure
+transport delay. This trial does not evaluate training cross-validation or
+held-out generalization.
+
+Current board-side acknowledgements, matching HTTPS/Android display records,
+the physical Android-phone demonstration and the CubeMX regeneration review
+remain separate checks in [STM32_INTEGRATION.md](../STM32_INTEGRATION.md).
+Original model-training/evaluation evidence should be retained or recovered
+separately.
+
+The earlier exploratory observation remains in
 [the October 20 report](2026-10-20_walk_jog_trial.md). Its retrospectively inferred
-activity boundaries are not used to score this new timed session.
+boundaries are not used to score this new session.

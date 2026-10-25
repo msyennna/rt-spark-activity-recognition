@@ -12,9 +12,10 @@ Android live/history and power-cycle recovery in the emulator workflow.
 See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the evidence and remaining
 PUBACK, measured cadence, physical-phone, network-interruption and regeneration
 checks. The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
-offline tests. A later October 25 user-supplied six-trial result reports 51/52
-correct windows (98.1%); its arithmetic is consistent, and the raw session files
-are still needed for independent review. See the
+offline tests. The October 25 six-trial result is now checked against the
+supplied raw files: 51/52 correct windows (98.1%). Independent time/ID selection,
+quality checks and exact helper replay agree; both originals are preserved
+unchanged. See the
 [trial report](testing/2026-10-25_cubemx_walk_jog_trial.md).
 
 On October 25, the public checker passed TLS/HTTPS checks but returned a stale
@@ -22,9 +23,11 @@ October 23 prediction, so the movement-test preflight stopped. A later board
 reset excerpt shows Wi-Fi connected, DHCP started and sensor initialization;
 current DHCP lease, MQTT acknowledgement and fresh database output remain open.
 See the [October 25 checkpoint](testing/2026-10-25_wifi_recovery.md).
-The subsequent timed trial reported current prediction flow across six Valid
-intervals. Exact sample/window timestamps, packet acknowledgements and current
-Android matching records have not yet been supplied.
+The subsequent timed trial provides 82 distinct current prediction rows across
+six valid intervals. Its 52 eligible windows and metrics are independently
+reproduced; eligible prediction completion gaps are 5–6 seconds. Individual
+sensor acquisition timestamps, board acknowledgements and current Android
+matching records remain separate checks.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -203,7 +206,8 @@ They do not verify the STM32CubeMX integration:
 The October 25 reported 98.1% result covers 52 eligible windows from one
 participant holding the board in the right hand. It does not establish accuracy
 across people, placements or environments, and it does not replace training or
-held-out evaluation evidence. The raw session is pending review.
+held-out evaluation evidence. The supplied raw session passed local reanalysis;
+this is not a second independent physical test.
 
 The saved model recognizes only WALKING and RUNNING. A resting board can receive
 either label because REST is not a trained class. The displayed confidence is

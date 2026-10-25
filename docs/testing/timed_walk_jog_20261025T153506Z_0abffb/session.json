@@ -1,0 +1,814 @@
+{
+  "schema_version": 1,
+  "tool_version": "1.0",
+  "session_id": "timed_walk_jog_20261025T153506Z_0abffb",
+  "status": "COMPLETE",
+  "board_placement": "held in right hand",
+  "protocol": {
+    "rounds": 3,
+    "trial_seconds": 60,
+    "warmup_seconds": 10,
+    "nominal_window_seconds": 5,
+    "edge_margin_seconds": 1,
+    "planned_activities": [
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING"
+    ]
+  },
+  "created_utc": "2026-10-25T15:35:06.440728Z",
+  "trials": [
+    {
+      "trial_number": 1,
+      "requested_activity": "WALKING",
+      "start_utc": "2026-10-25T15:36:00.857006Z",
+      "planned_end_utc": "2026-10-25T15:37:00.857006Z",
+      "baseline_latest_record_id": 4082,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 4083,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.665,
+          "created_at": "2026-10-25 15:35:59"
+        },
+        {
+          "id": 4084,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.88,
+          "created_at": "2026-10-25 15:36:04"
+        },
+        {
+          "id": 4085,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.51,
+          "created_at": "2026-10-25 15:36:09"
+        },
+        {
+          "id": 4086,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.52,
+          "created_at": "2026-10-25 15:36:14"
+        },
+        {
+          "id": 4087,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.56,
+          "created_at": "2026-10-25 15:36:19"
+        },
+        {
+          "id": 4088,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.51,
+          "created_at": "2026-10-25 15:36:24"
+        },
+        {
+          "id": 4089,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.51,
+          "created_at": "2026-10-25 15:36:29"
+        },
+        {
+          "id": 4090,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.535,
+          "created_at": "2026-10-25 15:36:34"
+        },
+        {
+          "id": 4091,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.58,
+          "created_at": "2026-10-25 15:36:39"
+        },
+        {
+          "id": 4092,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.505,
+          "created_at": "2026-10-25 15:36:44"
+        },
+        {
+          "id": 4093,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.55,
+          "created_at": "2026-10-25 15:36:49"
+        },
+        {
+          "id": 4094,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.505,
+          "created_at": "2026-10-25 15:36:54"
+        },
+        {
+          "id": 4095,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.59,
+          "created_at": "2026-10-25 15:36:59"
+        },
+        {
+          "id": 4096,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.505,
+          "created_at": "2026-10-25 15:37:04"
+        }
+      ],
+      "end_utc": "2026-10-25T15:37:00.857145Z",
+      "elapsed_monotonic_seconds": 60.00017573102377,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-25T15:36:16.857006Z",
+        "latest_eligible_prediction_end_utc": "2026-10-25T15:36:59.857145Z",
+        "eligible_record_ids": [
+          4087,
+          4088,
+          4089,
+          4090,
+          4091,
+          4092,
+          4093,
+          4094,
+          4095
+        ],
+        "eligible_count": 9,
+        "matching_predictions": 8,
+        "quality_issues": [],
+        "valid_for_scoring": true
+      }
+    },
+    {
+      "trial_number": 2,
+      "requested_activity": "RUNNING",
+      "start_utc": "2026-10-25T15:37:24.403886Z",
+      "planned_end_utc": "2026-10-25T15:38:24.403886Z",
+      "baseline_latest_record_id": 4099,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 4099,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.82,
+          "created_at": "2026-10-25 15:37:19"
+        },
+        {
+          "id": 4100,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.58,
+          "created_at": "2026-10-25 15:37:24"
+        },
+        {
+          "id": 4101,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.995,
+          "created_at": "2026-10-25 15:37:41"
+        },
+        {
+          "id": 4102,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.995,
+          "created_at": "2026-10-25 15:37:46"
+        },
+        {
+          "id": 4103,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.995,
+          "created_at": "2026-10-25 15:37:51"
+        },
+        {
+          "id": 4104,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.99,
+          "created_at": "2026-10-25 15:37:56"
+        },
+        {
+          "id": 4105,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.99,
+          "created_at": "2026-10-25 15:38:01"
+        },
+        {
+          "id": 4106,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.985,
+          "created_at": "2026-10-25 15:38:06"
+        },
+        {
+          "id": 4107,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.995,
+          "created_at": "2026-10-25 15:38:11"
+        },
+        {
+          "id": 4108,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 1.0,
+          "created_at": "2026-10-25 15:38:16"
+        },
+        {
+          "id": 4109,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.995,
+          "created_at": "2026-10-25 15:38:21"
+        },
+        {
+          "id": 4110,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.99,
+          "created_at": "2026-10-25 15:38:26"
+        }
+      ],
+      "end_utc": "2026-10-25T15:38:24.404018Z",
+      "elapsed_monotonic_seconds": 60.000168855069205,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-25T15:37:40.403886Z",
+        "latest_eligible_prediction_end_utc": "2026-10-25T15:38:23.404018Z",
+        "eligible_record_ids": [
+          4101,
+          4102,
+          4103,
+          4104,
+          4105,
+          4106,
+          4107,
+          4108,
+          4109
+        ],
+        "eligible_count": 9,
+        "matching_predictions": 9,
+        "quality_issues": [],
+        "valid_for_scoring": true
+      }
+    },
+    {
+      "trial_number": 3,
+      "requested_activity": "WALKING",
+      "start_utc": "2026-10-25T15:38:40.263957Z",
+      "planned_end_utc": "2026-10-25T15:39:40.263957Z",
+      "baseline_latest_record_id": 4111,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 4112,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.64,
+          "created_at": "2026-10-25 15:38:38"
+        },
+        {
+          "id": 4113,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.64,
+          "created_at": "2026-10-25 15:38:43"
+        },
+        {
+          "id": 4114,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.595,
+          "created_at": "2026-10-25 15:38:48"
+        },
+        {
+          "id": 4115,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.62,
+          "created_at": "2026-10-25 15:38:53"
+        },
+        {
+          "id": 4116,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.555,
+          "created_at": "2026-10-25 15:38:58"
+        },
+        {
+          "id": 4117,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.595,
+          "created_at": "2026-10-25 15:39:03"
+        },
+        {
+          "id": 4118,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.535,
+          "created_at": "2026-10-25 15:39:08"
+        },
+        {
+          "id": 4119,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.62,
+          "created_at": "2026-10-25 15:39:13"
+        },
+        {
+          "id": 4120,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.61,
+          "created_at": "2026-10-25 15:39:18"
+        },
+        {
+          "id": 4121,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.54,
+          "created_at": "2026-10-25 15:39:23"
+        },
+        {
+          "id": 4122,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.59,
+          "created_at": "2026-10-25 15:39:28"
+        },
+        {
+          "id": 4123,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.59,
+          "created_at": "2026-10-25 15:39:33"
+        },
+        {
+          "id": 4124,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.585,
+          "created_at": "2026-10-25 15:39:38"
+        },
+        {
+          "id": 4125,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.585,
+          "created_at": "2026-10-25 15:39:43"
+        }
+      ],
+      "end_utc": "2026-10-25T15:39:40.264083Z",
+      "elapsed_monotonic_seconds": 60.0001594099449,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-25T15:38:56.263957Z",
+        "latest_eligible_prediction_end_utc": "2026-10-25T15:39:39.264083Z",
+        "eligible_record_ids": [
+          4116,
+          4117,
+          4118,
+          4119,
+          4120,
+          4121,
+          4122,
+          4123,
+          4124
+        ],
+        "eligible_count": 9,
+        "matching_predictions": 9,
+        "quality_issues": [],
+        "valid_for_scoring": true
+      }
+    },
+    {
+      "trial_number": 4,
+      "requested_activity": "RUNNING",
+      "start_utc": "2026-10-25T15:39:54.438133Z",
+      "planned_end_utc": "2026-10-25T15:40:54.438133Z",
+      "baseline_latest_record_id": 4126,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 4127,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.765,
+          "created_at": "2026-10-25 15:39:53"
+        },
+        {
+          "id": 4128,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 1.0,
+          "created_at": "2026-10-25 15:39:58"
+        },
+        {
+          "id": 4129,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 1.0,
+          "created_at": "2026-10-25 15:40:03"
+        },
+        {
+          "id": 4130,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.905,
+          "created_at": "2026-10-25 15:40:08"
+        },
+        {
+          "id": 4131,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.99,
+          "created_at": "2026-10-25 15:40:13"
+        },
+        {
+          "id": 4132,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.96,
+          "created_at": "2026-10-25 15:40:18"
+        },
+        {
+          "id": 4133,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.985,
+          "created_at": "2026-10-25 15:40:23"
+        },
+        {
+          "id": 4134,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.955,
+          "created_at": "2026-10-25 15:40:28"
+        },
+        {
+          "id": 4135,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.985,
+          "created_at": "2026-10-25 15:40:33"
+        },
+        {
+          "id": 4136,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.98,
+          "created_at": "2026-10-25 15:40:38"
+        },
+        {
+          "id": 4137,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.99,
+          "created_at": "2026-10-25 15:40:44"
+        },
+        {
+          "id": 4138,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.935,
+          "created_at": "2026-10-25 15:40:49"
+        },
+        {
+          "id": 4139,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.965,
+          "created_at": "2026-10-25 15:40:54"
+        },
+        {
+          "id": 4140,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.955,
+          "created_at": "2026-10-25 15:40:59"
+        }
+      ],
+      "end_utc": "2026-10-25T15:40:54.438260Z",
+      "elapsed_monotonic_seconds": 60.00015772401821,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-25T15:40:10.438133Z",
+        "latest_eligible_prediction_end_utc": "2026-10-25T15:40:53.438260Z",
+        "eligible_record_ids": [
+          4131,
+          4132,
+          4133,
+          4134,
+          4135,
+          4136,
+          4137,
+          4138
+        ],
+        "eligible_count": 8,
+        "matching_predictions": 8,
+        "quality_issues": [],
+        "valid_for_scoring": true
+      }
+    },
+    {
+      "trial_number": 5,
+      "requested_activity": "WALKING",
+      "start_utc": "2026-10-25T15:41:08.506947Z",
+      "planned_end_utc": "2026-10-25T15:42:08.506947Z",
+      "baseline_latest_record_id": 4141,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 4141,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.625,
+          "created_at": "2026-10-25 15:41:04"
+        },
+        {
+          "id": 4142,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.565,
+          "created_at": "2026-10-25 15:41:09"
+        },
+        {
+          "id": 4143,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.53,
+          "created_at": "2026-10-25 15:41:14"
+        },
+        {
+          "id": 4144,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.59,
+          "created_at": "2026-10-25 15:41:19"
+        },
+        {
+          "id": 4145,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.545,
+          "created_at": "2026-10-25 15:41:24"
+        },
+        {
+          "id": 4146,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.57,
+          "created_at": "2026-10-25 15:41:29"
+        },
+        {
+          "id": 4147,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.56,
+          "created_at": "2026-10-25 15:41:35"
+        },
+        {
+          "id": 4148,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.535,
+          "created_at": "2026-10-25 15:41:40"
+        },
+        {
+          "id": 4149,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.55,
+          "created_at": "2026-10-25 15:41:45"
+        },
+        {
+          "id": 4150,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.505,
+          "created_at": "2026-10-25 15:41:50"
+        },
+        {
+          "id": 4151,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.575,
+          "created_at": "2026-10-25 15:41:55"
+        },
+        {
+          "id": 4152,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.575,
+          "created_at": "2026-10-25 15:42:00"
+        },
+        {
+          "id": 4153,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.535,
+          "created_at": "2026-10-25 15:42:05"
+        },
+        {
+          "id": 4154,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.525,
+          "created_at": "2026-10-25 15:42:10"
+        }
+      ],
+      "end_utc": "2026-10-25T15:42:08.507069Z",
+      "elapsed_monotonic_seconds": 60.00015746697318,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-25T15:41:24.506947Z",
+        "latest_eligible_prediction_end_utc": "2026-10-25T15:42:07.507069Z",
+        "eligible_record_ids": [
+          4146,
+          4147,
+          4148,
+          4149,
+          4150,
+          4151,
+          4152,
+          4153
+        ],
+        "eligible_count": 8,
+        "matching_predictions": 8,
+        "quality_issues": [],
+        "valid_for_scoring": true
+      }
+    },
+    {
+      "trial_number": 6,
+      "requested_activity": "RUNNING",
+      "start_utc": "2026-10-25T15:42:23.335610Z",
+      "planned_end_utc": "2026-10-25T15:43:23.335610Z",
+      "baseline_latest_record_id": 4155,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 4156,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.625,
+          "created_at": "2026-10-25 15:42:20"
+        },
+        {
+          "id": 4157,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.82,
+          "created_at": "2026-10-25 15:42:25"
+        },
+        {
+          "id": 4158,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.96,
+          "created_at": "2026-10-25 15:42:30"
+        },
+        {
+          "id": 4159,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.83,
+          "created_at": "2026-10-25 15:42:35"
+        },
+        {
+          "id": 4160,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.61,
+          "created_at": "2026-10-25 15:42:40"
+        },
+        {
+          "id": 4161,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.77,
+          "created_at": "2026-10-25 15:42:45"
+        },
+        {
+          "id": 4162,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.7,
+          "created_at": "2026-10-25 15:42:50"
+        },
+        {
+          "id": 4163,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.675,
+          "created_at": "2026-10-25 15:42:55"
+        },
+        {
+          "id": 4164,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.815,
+          "created_at": "2026-10-25 15:43:00"
+        },
+        {
+          "id": 4165,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.66,
+          "created_at": "2026-10-25 15:43:05"
+        },
+        {
+          "id": 4166,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.69,
+          "created_at": "2026-10-25 15:43:10"
+        },
+        {
+          "id": 4167,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.67,
+          "created_at": "2026-10-25 15:43:15"
+        },
+        {
+          "id": 4168,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.67,
+          "created_at": "2026-10-25 15:43:20"
+        },
+        {
+          "id": 4169,
+          "activity_id": 1,
+          "activity": "RUNNING",
+          "confidence": 0.765,
+          "created_at": "2026-10-25 15:43:25"
+        }
+      ],
+      "end_utc": "2026-10-25T15:43:23.335756Z",
+      "elapsed_monotonic_seconds": 60.000180115923285,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-25T15:42:39.335610Z",
+        "latest_eligible_prediction_end_utc": "2026-10-25T15:43:22.335756Z",
+        "eligible_record_ids": [
+          4160,
+          4161,
+          4162,
+          4163,
+          4164,
+          4165,
+          4166,
+          4167,
+          4168
+        ],
+        "eligible_count": 9,
+        "matching_predictions": 9,
+        "quality_issues": [],
+        "valid_for_scoring": true
+      }
+    }
+  ],
+  "metrics": {
+    "confusion_matrix_rows_actual_columns_predicted": {
+      "WALKING": {
+        "WALKING": 25,
+        "RUNNING": 1
+      },
+      "RUNNING": {
+        "WALKING": 0,
+        "RUNNING": 26
+      }
+    },
+    "valid_trial_count": 6,
+    "scored_windows": 52,
+    "correct_windows": 51,
+    "support_by_actual_activity": {
+      "WALKING": 26,
+      "RUNNING": 26
+    },
+    "window_accuracy_percent": 98.07692307692308,
+    "correct_identification_percent_by_activity": {
+      "WALKING": 96.15384615384616,
+      "RUNNING": 100.0
+    }
+  },
+  "finished_utc": "2026-10-25T15:43:29.336782Z"
+}
