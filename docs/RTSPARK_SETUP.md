@@ -14,6 +14,12 @@ PUBACK, measured cadence, physical-phone, network-interruption and regeneration
 checks. A repeatable [timed movement test](testing/TIMED_VALIDATION.md) is ready;
 its offline tests pass, but integration movement results are not yet recorded.
 
+On October 25, the public checker passed TLS/HTTPS checks but returned a stale
+October 23 prediction, so the movement-test preflight stopped. A later board
+reset excerpt shows Wi-Fi connected, DHCP started and sensor initialization;
+current DHCP lease, MQTT acknowledgement and fresh database output remain open.
+See the [October 25 checkpoint](testing/2026-10-25_wifi_recovery.md).
+
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
 and the Android app. The earlier serial-to-MQTT gateway remains available in
