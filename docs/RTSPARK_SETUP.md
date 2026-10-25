@@ -180,6 +180,12 @@ hostname only, uses HTTPS, and requests latest/history through Volley. It contai
 no Wi-Fi or MQTT password. `local.properties` is specific to the developer's PC
 and is excluded. A physical phone needs network access allowed by the EC2 rules.
 
+An Android History image reviewed October 26 shows visible IDs 4585–4580 in
+newest-first order, with displayed timestamps five seconds apart. The counter
+reports 50 Walking and 0 Running among the latest 50; the earlier movement-test
+records are older. See the [history observation](testing/2026-10-26_android_history.md).
+A current Live screenshot and matching recent API records are still needed.
+
 The October 23 user confirmation covers the emulator workflow. A physical-phone
 run has not yet been established. For the next model evaluation, follow
 [the timed walking/jogging protocol](testing/TIMED_VALIDATION.md); the helper
