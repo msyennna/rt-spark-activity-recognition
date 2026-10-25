@@ -28,8 +28,9 @@ The subsequent timed trial provides 82 distinct current prediction rows across
 six valid intervals. Its 52 eligible windows and metrics are independently
 reproduced; eligible prediction completion gaps are 5–6 seconds. Individual
 sensor acquisition timestamps and board acknowledgements remain separate
-checks. A later Android History card matches supplied local API record 4754;
-current Live-page matching and automatic-refresh observation remain pending.
+checks. Later Android History and Live cards match supplied local API records
+4754 and 4877. Two Live images show LIVE with advancing prediction IDs,
+supporting the requested automatic-refresh check. Device type remains unconfirmed.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -189,9 +190,15 @@ UTC with matching displayed clock fields. The API contains nine newer rows at
 five-second completion intervals. The counter reports 50 Walking and 0 Running
 among the latest 50; the earlier movement-test records are older. See the
 [history/API observation](testing/2026-10-26_android_history.md) and retained API
-response. A current Live screenshot, a matching Live record and an observation
-of advancing IDs without tapping Refresh are still needed. The local curl check
-does not independently repeat public HTTPS trust verification.
+response.
+
+A later [Live/API check](testing/2026-10-26_android_live.md) shows LIVE in two
+images, prediction IDs advancing from 4874 to 4877, and recorded timestamps
+15 seconds apart. Live record 4877 matches the supplied local API: WALKING,
+67.5%, timestamp 2026-10-25 16:42:41 UTC with matching displayed clock fields.
+The sequence supports the requested automatic-refresh check. The still images
+do not independently measure polling precision or intervening user input.
+The local curl checks do not independently repeat public HTTPS trust verification.
 
 The October 23 user confirmation covers the emulator workflow. A physical-phone
 run has not yet been established. For the next model evaluation, follow

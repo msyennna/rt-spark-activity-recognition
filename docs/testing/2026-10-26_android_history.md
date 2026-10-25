@@ -104,15 +104,17 @@ did not operate the device or query the deployed server. The local curl command
 does not independently repeat the public HTTPS, CA or hostname-verification
 check. The image does not show the **Live activity** page or LIVE status.
 
-## Remaining Android evidence
+## Subsequent Live check and remaining evidence
 
-1. Show the **Live activity** page with the LIVE badge and current prediction ID.
-2. Match that Live ID, activity and confidence to recent server API records;
-   the History match above is complete for record 4754.
-3. Observe the Live ID/timestamp advance without tapping Refresh to confirm
-   automatic refresh.
-4. Record the actual device type. Earlier context involved Android Studio and
-   an emulator; a cropped app image alone does not establish a physical-phone run.
+The later [Live/API report](2026-10-26_android_live.md) records two Live images
+with LIVE status, IDs advancing from 4874 to 4877, and an exact local API match
+for record 4877. This completes the requested Live display/record comparison
+and supports the requested automatic-refresh observation. Precise polling and
+intervening input were not independently instrumented by the still images.
+
+The actual device type remains unconfirmed. Earlier context involved Android
+Studio and an emulator; a cropped app image alone does not establish a
+physical-phone run.
 
 Earlier power-cycle/stale-data recovery was confirmed by the user on October 23.
 This single History image is not a repeat of that recovery check. Firmware
