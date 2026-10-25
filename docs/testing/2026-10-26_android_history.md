@@ -112,9 +112,9 @@ for record 4877. This completes the requested Live display/record comparison
 and supports the requested automatic-refresh observation. Precise polling and
 intervening input were not independently instrumented by the still images.
 
-The actual device type remains unconfirmed. Earlier context involved Android
-Studio and an emulator; a cropped app image alone does not establish a
-physical-phone run.
+The user subsequently confirmed that this workflow uses the virtual phone
+inside Android Studio. These app observations are classified as emulator
+evidence; a physical Android-phone run is still pending.
 
 Earlier power-cycle/stale-data recovery was confirmed by the user on October 23.
 This single History image is not a repeat of that recovery check. Firmware

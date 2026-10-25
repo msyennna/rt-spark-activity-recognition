@@ -15,7 +15,9 @@ Images reviewed:
 
 The screenshots remain in the user's attachments. This repository retains the
 visible observations as text and the supplied API JSON; it does not publish
-the images or infer the actual device type from their appearance.
+the images. In a subsequent reply, the user explicitly identified the target
+as the virtual phone inside Android Studio. These observations are therefore
+classified as emulator evidence.
 
 The user supplied the output of this read-only Ubuntu command:
 
@@ -88,9 +90,9 @@ reviewer.
 - The supplied sequence supports the requested automatic-refresh check;
   precise refresh timing and absence of input between still images were not
   independently instrumented.
-- The actual target remains unconfirmed: an emulator and a physical Android
-  phone can both display these screens. Earlier context involved Android Studio
-  and an emulator.
+- Device type is confirmed by the user's follow-up: **Android Studio emulator**
+  ("virtual phone inside android studio"). This completes device attribution for
+  the supplied Live screenshots. A physical Android-phone run is still pending.
 - Earlier power-cycle/stale-data recovery remains user-confirmed. These two
   Live images do not repeat a power interruption.
 - Local HTTP curl does not independently repeat public HTTPS certificate

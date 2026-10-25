@@ -30,7 +30,8 @@ reproduced; eligible prediction completion gaps are 5–6 seconds. Individual
 sensor acquisition timestamps and board acknowledgements remain separate
 checks. Later Android History and Live cards match supplied local API records
 4754 and 4877. Two Live images show LIVE with advancing prediction IDs,
-supporting the requested automatic-refresh check. Device type remains unconfirmed.
+supporting the requested automatic-refresh check. The user confirms the target
+is the Android Studio emulator; a physical Android-phone run remains pending.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -200,10 +201,41 @@ The sequence supports the requested automatic-refresh check. The still images
 do not independently measure polling precision or intervening user input.
 The local curl checks do not independently repeat public HTTPS trust verification.
 
-The October 23 user confirmation covers the emulator workflow. A physical-phone
-run has not yet been established. For the next model evaluation, follow
+The user explicitly confirms that the October 26 Live-check workflow runs on
+the virtual phone inside Android Studio. Together with the matching local API
+records, this establishes the emulator display workflow. A physical Android-phone
+run has not yet been established.
+
+### Run the same app on a physical Android phone
+
+Keep the RT-Spark board powered and publishing. Connect the phone to the same
+Wi-Fi network as the laptop so it can use the already allowed network path to
+the lab API.
+
+1. On the phone, find **Build number** in Settings > About phone (sometimes
+   under Software information), then tap it seven times to enable Developer
+   options. Open Developer options and enable **USB debugging**.
+2. Connect the unlocked phone to the laptop with a USB data cable. Accept the
+   phone's **Allow USB debugging?** prompt for this computer.
+3. In Android Studio, use the existing working `android_app` project. Select the
+   phone's model in the target-device dropdown, select the `app` configuration,
+   and click **Run**.
+4. In the installed app on the phone, check **Live activity** for LIVE status and
+   an advancing prediction number; open **History** and check newest-first rows.
+   Record the phone model and capture matching prediction IDs for the evidence.
+5. If the phone is absent from the target list, use **Tools > Troubleshoot Device
+   Connections**. Windows may need the phone manufacturer's ADB USB driver.
+
+These are deployment steps; a successful phone run has not yet been reported.
+See the official Android instructions for
+[developer options](https://developer.android.com/studio/debug/dev-options) and
+[running on hardware](https://developer.android.com/studio/run/device).
+
+For a future model evaluation, follow
 [the timed walking/jogging protocol](testing/TIMED_VALIDATION.md); the helper
 records activity intervals before comparing predictions and preserves errors.
+The completed six-trial result remains preserved; installing the app on a phone
+does not require repeating it.
 
 ## Historical baseline verification on the actual lab setup
 
