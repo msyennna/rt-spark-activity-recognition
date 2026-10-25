@@ -21,13 +21,15 @@ unchanged. See the
 On October 25, the public checker passed TLS/HTTPS checks but returned a stale
 October 23 prediction, so the movement-test preflight stopped. A later board
 reset excerpt shows Wi-Fi connected, DHCP started and sensor initialization;
-current DHCP lease, MQTT acknowledgement and fresh database output remain open.
-See the [October 25 checkpoint](testing/2026-10-25_wifi_recovery.md).
+a current DHCP lease, MQTT acknowledgement and fresh database output were still
+unverified at that checkpoint. See the
+[October 25 checkpoint](testing/2026-10-25_wifi_recovery.md).
 The subsequent timed trial provides 82 distinct current prediction rows across
 six valid intervals. Its 52 eligible windows and metrics are independently
 reproduced; eligible prediction completion gaps are 5–6 seconds. Individual
-sensor acquisition timestamps, board acknowledgements and current Android
-matching records remain separate checks.
+sensor acquisition timestamps and board acknowledgements remain separate
+checks. A later Android History card matches supplied local API record 4754;
+current Live-page matching and automatic-refresh observation remain pending.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -180,11 +182,16 @@ hostname only, uses HTTPS, and requests latest/history through Volley. It contai
 no Wi-Fi or MQTT password. `local.properties` is specific to the developer's PC
 and is excluded. A physical phone needs network access allowed by the EC2 rules.
 
-An Android History image reviewed October 26 shows visible IDs 4585–4580 in
-newest-first order, with displayed timestamps five seconds apart. The counter
-reports 50 Walking and 0 Running among the latest 50; the earlier movement-test
-records are older. See the [history observation](testing/2026-10-26_android_history.md).
-A current Live screenshot and matching recent API records are still needed.
+Android History images reviewed October 26 show visible IDs 4585–4580 and,
+later, 4754–4749 in newest-first order. Follow-up record 4754 matches the supplied
+local API: WALKING, confidence 0.675 (67.5%), and timestamp 2026-10-25 16:32:23
+UTC with matching displayed clock fields. The API contains nine newer rows at
+five-second completion intervals. The counter reports 50 Walking and 0 Running
+among the latest 50; the earlier movement-test records are older. See the
+[history/API observation](testing/2026-10-26_android_history.md) and retained API
+response. A current Live screenshot, a matching Live record and an observation
+of advancing IDs without tapping Refresh are still needed. The local curl check
+does not independently repeat public HTTPS trust verification.
 
 The October 23 user confirmation covers the emulator workflow. A physical-phone
 run has not yet been established. For the next model evaluation, follow

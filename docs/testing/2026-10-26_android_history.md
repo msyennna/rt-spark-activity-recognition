@@ -52,11 +52,65 @@ the participant's actual activity at capture.
 See the [audited trial report](2026-10-25_cubemx_walk_jog_trial.md) for the
 unchanged original data, window selection and single scored error.
 
+## Follow-up: matching History to the local server API
+
+The user next supplied `image(20261025-163234).png` and the output of this
+read-only command run in Ubuntu:
+
+```bash
+curl -sS --max-time 10 "http://127.0.0.1:5000/api/activity/history?limit=10"
+```
+
+The second image is still **Activity history**. It shows a **Refreshing…**
+button and the same 50 recent / 50 Walking / 0 Running counter. Its visible
+cards are:
+
+| Prediction ID | Displayed timestamp | Activity | Confidence |
+| --- | --- | --- | --- |
+| 4754 | Oct 25, 2026 · 4:32:23 PM | Walking | 67.5% |
+| 4753 | Oct 25, 2026 · 4:32:18 PM | Walking | 67.5% |
+| 4752 | Oct 25, 2026 · 4:32:13 PM | Walking | 67.5% |
+| 4751 | Oct 25, 2026 · 4:32:08 PM | Walking | 67.5% |
+| 4750 | Oct 25, 2026 · 4:32:03 PM | Walking | 67.5% |
+| 4749 | Oct 25, 2026 · 4:31:58 PM | Walking | 67.5% |
+
+The supplied API response is retained in
+[`2026-10-26_android_history_api.json`](2026-10-26_android_history_api.json).
+It contains ten distinct IDs, 4763 through 4754 newest first, all WALKING
+(activity_id 0) with confidence 0.675. Adjacent UTC completion timestamps are
+five seconds apart, from 16:32:23 through 16:33:08 on October 25.
+
+**Prediction 4754 matches the visible History card:** ID 4754, WALKING,
+0.675 = 67.5%, and API time `2026-10-25 16:32:23` UTC corresponding to the
+displayed `Oct 25, 2026 · 4:32:23 PM`. The matching clock fields are consistent
+with a UTC display for this record; the device timezone setting was not
+independently inspected. The other five visible cards are older than the
+ten-row API response and were not independently matched in this follow-up.
+
+The API includes nine records newer than the top visible card. Their completion
+timestamps span another 45 seconds. This is consistent with continuing
+prediction inserts between the displayed record and the later API output.
+It does not establish the screenshot's exact capture time, app latency, or
+automatic refresh behavior.
+
+Compared with the earlier image (top ID 4585), the follow-up displays a newer
+set of predictions (top ID 4754). These two images establish that the displayed
+History content changed between observations. They do not distinguish manual
+from automatic refreshing. **Refreshing…** alone does not prove a completed
+request or show whether it was triggered manually.
+
+This is a History-to-local-API match using user-supplied evidence. The reviewer
+did not operate the device or query the deployed server. The local curl command
+does not independently repeat the public HTTPS, CA or hostname-verification
+check. The image does not show the **Live activity** page or LIVE status.
+
 ## Remaining Android evidence
 
 1. Show the **Live activity** page with the LIVE badge and current prediction ID.
-2. Compare that ID, activity and confidence with recent server API records.
-3. Observe advancing IDs/timestamps over time to confirm automatic refresh.
+2. Match that Live ID, activity and confidence to recent server API records;
+   the History match above is complete for record 4754.
+3. Observe the Live ID/timestamp advance without tapping Refresh to confirm
+   automatic refresh.
 4. Record the actual device type. Earlier context involved Android Studio and
    an emulator; a cropped app image alone does not establish a physical-phone run.
 
