@@ -90,3 +90,15 @@ the earlier target network's name.
 Earlier October 23 success remains historical evidence in
 [the live pipeline report](2026-10-23_cubemx_live_pipeline.md). It is not a
 substitute for current delivery after this restart.
+
+## Subsequent timed movement result
+
+Later in the same troubleshooting sequence, the user supplied a COMPLETE
+six-trial output for `timed_walk_jog_20261025T153506Z_0abffb`: 51/52 eligible
+windows correct (98.1%), with all trials reported Valid. This supports resumed
+database prediction flow after the earlier stale-data stop. The original
+`session.json` and `summary.md` remain to be transferred from Ubuntu and reviewed.
+
+See the [movement trial report](2026-10-25_cubemx_walk_jog_trial.md) for the
+reported matrix, arithmetic checks and limits. Detailed DHCP/PUBACK capture and
+current Android record matching remain separate checks.
