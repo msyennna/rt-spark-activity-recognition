@@ -26,7 +26,8 @@ received five sensor messages, and the local API returned current record 3136.
 The user subsequently reported a public service-checker pass and confirmed
 Android live/history and power-cycle recovery in the emulator workflow.
 See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the evidence and remaining
-measured cadence, network-interruption and regeneration checks. The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
+measured cadence and network-interruption checks. The user-supplied CubeMX
+6.18.1 output is now [reviewed and reconciled](testing/2026-10-27_cubemx_generation_review.md). The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
 offline tests. The October 25 six-trial result is now checked against the
 supplied raw files: 51/52 correct windows (98.1%). Independent time/ID selection,
 quality checks and exact helper replay agree; both originals are preserved
@@ -312,8 +313,8 @@ are now recorded. See [LAB_COMPLETION.md](LAB_COMPLETION.md) for the handout
 comparison. The handout names TensorFlow/PyTorch; the active source now uses
 PyTorch, and the Ubuntu cutover/local API check is now recorded. Public checks
 and new-model Android Live/History are also observed. A labelled PyTorch
-movement trial, coreMQTT physical verification and actual CubeMX
-regeneration remain pending. Training-data provenance and reproducibility are
+movement trial and coreMQTT physical verification remain pending. Actual
+CubeMX 6.18.1 output is now reviewed and reconciled into the active sources. Training-data provenance and reproducibility are
 documented in the model guide; the handout hardware/toolchain conflict remains open.
 
 ## Git workflow

@@ -99,10 +99,9 @@ static int rw007_join_ap_found;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_SPI2_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_USART1_UART_Init(void);
-
+static void MX_SPI2_Init(void);
 /* USER CODE BEGIN PFP */
 static void UART_Print(const char *text);
 static int RW007_HardwareReset(void);
@@ -1820,7 +1819,6 @@ int main(void)
   MX_SPI3_Init();
   MX_USART1_UART_Init();
   MX_SPI2_Init();
-
   /* USER CODE BEGIN 2 */
  char msg[160];
   uint8_t device_id = 0;
@@ -1920,9 +1918,9 @@ else
   /* USER CODE BEGIN WHILE */
  while (1)
 {
-  /* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-  /* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
   RW007_Network_Poll();
   rtspark_platform_poll();
   rtspark_mqtt_poll();
@@ -2002,7 +2000,6 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 4;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  /* 8 MHz / 4 * 168 = 336 MHz VCO; / 7 gives the RNG's 48 MHz clock. */
   RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -2025,13 +2022,13 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief SPI3 Initialization Function
+  * @brief SPI2 Initialization Function
   * @param None
   * @retval None
   */
-
 static void MX_SPI2_Init(void)
 {
+
   /* USER CODE BEGIN SPI2_Init 0 */
 
   /* USER CODE END SPI2_Init 0 */
@@ -2039,6 +2036,7 @@ static void MX_SPI2_Init(void)
   /* USER CODE BEGIN SPI2_Init 1 */
 
   /* USER CODE END SPI2_Init 1 */
+  /* SPI2 parameter configuration*/
   hspi2.Instance = SPI2;
   hspi2.Init.Mode = SPI_MODE_MASTER;
   hspi2.Init.Direction = SPI_DIRECTION_2LINES;
@@ -2051,7 +2049,6 @@ static void MX_SPI2_Init(void)
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi2.Init.CRCPolynomial = 10;
-
   if (HAL_SPI_Init(&hspi2) != HAL_OK)
   {
     Error_Handler();
@@ -2059,8 +2056,14 @@ static void MX_SPI2_Init(void)
   /* USER CODE BEGIN SPI2_Init 2 */
 
   /* USER CODE END SPI2_Init 2 */
+
 }
 
+/**
+  * @brief SPI3 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_SPI3_Init(void)
 {
 
@@ -2140,51 +2143,48 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
- __HAL_RCC_GPIOF_CLK_ENABLE();
-__HAL_RCC_GPIOH_CLK_ENABLE();
-__HAL_RCC_GPIOA_CLK_ENABLE();
-__HAL_RCC_GPIOC_CLK_ENABLE();
-__HAL_RCC_GPIOB_CLK_ENABLE();
-__HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
 
-/* Deselect onboard SPI flash on shared SPI2 bus: PB12 = HIGH */
-GPIO_InitStruct.Pin = GPIO_PIN_12;
-GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-GPIO_InitStruct.Pull = GPIO_NOPULL;
-GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(RW007_CS_GPIO_Port, RW007_CS_Pin, GPIO_PIN_SET);
 
-HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SPI_FLASH_CS_GPIO_Port, SPI_FLASH_CS_Pin, GPIO_PIN_SET);
 
-/* RW007 CS idle HIGH */
-HAL_GPIO_WritePin(RW007_CS_GPIO_Port, RW007_CS_Pin, GPIO_PIN_SET);
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(RW007_RST_GPIO_Port, RW007_RST_Pin, GPIO_PIN_SET);
 
-/* RW007 RESET idle HIGH */
-HAL_GPIO_WritePin(RW007_RST_GPIO_Port, RW007_RST_Pin, GPIO_PIN_SET);
+  /*Configure GPIO pin : RW007_CS_Pin */
+  GPIO_InitStruct.Pin = RW007_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(RW007_CS_GPIO_Port, &GPIO_InitStruct);
 
-/* Configure RW007 CS pin: PF10 */
-GPIO_InitStruct.Pin = RW007_CS_Pin;
-GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-GPIO_InitStruct.Pull = GPIO_NOPULL;
-GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-HAL_GPIO_Init(RW007_CS_GPIO_Port, &GPIO_InitStruct);
+  /*Configure GPIO pin : SPI_FLASH_CS_Pin */
+  GPIO_InitStruct.Pin = SPI_FLASH_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(SPI_FLASH_CS_GPIO_Port, &GPIO_InitStruct);
 
-/* Configure RW007 RESET pin: PG15 */
-GPIO_InitStruct.Pin = RW007_RST_Pin;
-GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-GPIO_InitStruct.Pull = GPIO_NOPULL;
-GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-HAL_GPIO_Init(RW007_RST_GPIO_Port, &GPIO_InitStruct);
-
-/* Configure RW007 INT/BUSY pin: PG11 */
+  /*Configure GPIO pin : RW007_INT_BUSY_Pin */
   GPIO_InitStruct.Pin = RW007_INT_BUSY_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(RW007_INT_BUSY_GPIO_Port, &GPIO_InitStruct);
 
-  /* Enable EXTI11 interrupt */
-  //HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
- // HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  /*Configure GPIO pin : RW007_RST_Pin */
+  GPIO_InitStruct.Pin = RW007_RST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(RW007_RST_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

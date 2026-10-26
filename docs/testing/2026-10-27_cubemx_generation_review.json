@@ -1,0 +1,120 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "scope": "User-supplied CubeMX generation output; reviewed source acceptance, no flashing",
+  "baseline_commit": "02bf2e1ccc86d37b78d0e41aeee59557703588ee",
+  "archive": {
+    "path": "tests/fixtures/cubemx_6_18_1_review.zip",
+    "sha256": "fd6e2664658a419215e7fd823d55d2c46adba9280136a8eae8fae3e8cfa75340",
+    "bytes": 34510,
+    "files": 11
+  },
+  "generator": "STM32CubeMX 6.18.1",
+  "database": "DB.6.0.181",
+  "framework": "STM32Cube FW_F4 V1.28.3",
+  "files": [
+    {
+      "source": "firmware/activity_recognition/activity_recognition.ioc",
+      "generated": "activity_recognition.ioc",
+      "baseline_sha256": "6dd6ff2924f016f2b5571c28535f4699325cf55d2eecdc136602bbc1e71af614",
+      "windows_seed_sha256": "9a1d4a0ecb7d9decdd00bcd936038b748562b95a9c1331cd2718a8309e3b445c",
+      "baseline_crlf_matches_seed": true,
+      "generated_raw_sha256": "6f4a5f17716448795727c2e3ab4a075009311958ec5c4e8fe554822210f518ae",
+      "accepted_lf_sha256": "9990740a17caad3ee1ac87bf93dff6337b80708832fe79d9dd8c84c5f4115743"
+    },
+    {
+      "source": "firmware/src/main.c",
+      "generated": "Core/Src/main.c",
+      "baseline_sha256": "3196496219a836383d3f0b8b2f98a67fd513d4565872e0c7443023ac69fd5057",
+      "windows_seed_sha256": "a4fc7dc5ee6dc113157d87b4b67a8243e0c1d2432785fabe007f8a64fe64bd68",
+      "baseline_crlf_matches_seed": true,
+      "generated_raw_sha256": "3b2161cb2257f3904a2b6d58c09a21b4dfaa735290f29d340993f437ce3dc045",
+      "accepted_lf_sha256": "d1438d825e0ce46ccf98b05f24e92f344800604ab39d16a3239083ffec9362fb",
+      "nonempty_baseline_user_blocks": 12,
+      "all_nonempty_user_blocks_retained": true
+    },
+    {
+      "source": "firmware/src/stm32f4xx_hal_msp.c",
+      "generated": "Core/Src/stm32f4xx_hal_msp.c",
+      "baseline_sha256": "334d0cceb9f447518325d92a9da595bb4ffb32a27b2e8b7822c7b3c414da3755",
+      "windows_seed_sha256": "40af22d94f1b43e0be832d25ff55fe37b40ecccf13c24fd7a36de0e77f00df9a",
+      "baseline_crlf_matches_seed": true,
+      "generated_raw_sha256": "819047ddc7a61de6250dab7fb4396be38bebc41958639f358ca3a95044a999c8",
+      "accepted_lf_sha256": "334d0cceb9f447518325d92a9da595bb4ffb32a27b2e8b7822c7b3c414da3755",
+      "nonempty_baseline_user_blocks": 1,
+      "all_nonempty_user_blocks_retained": true
+    },
+    {
+      "source": "firmware/src/stm32f4xx_it.c",
+      "generated": "Core/Src/stm32f4xx_it.c",
+      "baseline_sha256": "2db1e4750ba7c42d19f068e9403619f47a0aa9f04d46cb8468449215d0e36ac0",
+      "windows_seed_sha256": "23c11f290fbc7d9eca452722558ebc4ac8f3413f58e50ad88bbb73528df06441",
+      "baseline_crlf_matches_seed": true,
+      "generated_raw_sha256": "ab404d36fa77f11bcd73c59bf80bbc1bad68dadb57790dd90df775e61e995fda",
+      "accepted_lf_sha256": "44e155c04ecbe2ce79adf37d7db7b8607a6d9493f8955ab1b8430cfd9ac7cfd3",
+      "nonempty_baseline_user_blocks": 2,
+      "all_nonempty_user_blocks_retained": true
+    },
+    {
+      "source": "firmware/include/main.h",
+      "generated": "Core/Inc/main.h",
+      "baseline_sha256": "f94e431a284da65418c14fe8ba4324b7f71f1290c1426e452c6a21f95f88d852",
+      "windows_seed_sha256": "d93a04b95c5ab63d823e98bfb0762b0c51dc35fb99ecc5994de44b1c348aaed2",
+      "baseline_crlf_matches_seed": true,
+      "generated_raw_sha256": "83ad71a53555e0e098b1e7d950df205bebef67d3d1a89cf12bbf9fdaa1507c79",
+      "accepted_lf_sha256": "dd67de355ddfd3926efba93de95a074da23c0302e8cc6d79d25204eb9a52fc2d",
+      "nonempty_baseline_user_blocks": 1,
+      "all_nonempty_user_blocks_retained": true
+    },
+    {
+      "source": "firmware/include/stm32f4xx_it.h",
+      "generated": "Core/Inc/stm32f4xx_it.h",
+      "baseline_sha256": "a873e0fb7c9dc6106eee6d0ad53dfecf008d191dffb6544e8c15b74d1902fdae",
+      "windows_seed_sha256": "4334f00d0bac9c173a89321fed46877e066fe4289f2ef545dff30524b75bc51e",
+      "baseline_crlf_matches_seed": true,
+      "generated_raw_sha256": "4334f00d0bac9c173a89321fed46877e066fe4289f2ef545dff30524b75bc51e",
+      "accepted_lf_sha256": "a873e0fb7c9dc6106eee6d0ad53dfecf008d191dffb6544e8c15b74d1902fdae",
+      "nonempty_baseline_user_blocks": 1,
+      "all_nonempty_user_blocks_retained": true
+    }
+  ],
+  "checks": {
+    "source_guard": "PASS",
+    "accepted_candidate_guard": "PASS",
+    "review_regressions": {
+      "passed": 12
+    },
+    "native_firmware_suites": {
+      "passed": 5
+    },
+    "arm_build": {
+      "status": "PASS",
+      "mode": "Incremental ARM build with restored pinned dependencies; public-default configuration",
+      "platform": "ststm32@20.0.0",
+      "framework": "framework-stm32cubef4@1.28.3",
+      "compiler": "GCC 12.3.1",
+      "coremqtt": "2.3.1",
+      "telemetry": "No",
+      "elapsed_seconds_including_dependency_restoration": 493.0,
+      "static_sram_bytes": 66756,
+      "sram_limit_bytes": 131072,
+      "flash_bytes": 162468,
+      "flash_limit_bytes": 1048576,
+      "ccmram_bytes": 57344,
+      "log_path": "docs/testing/2026-10-27_cubemx_arm_build.txt",
+      "log_sha256": "305efa3ac4f026e944f5998ac2d5508977d71eadc32f9aab3d3c4b8777694e83",
+      "linker_warning_count": 9,
+      "dependency_notes": "Checksum-mismatched downloads and a timed-out mirror were rejected. PlatformIO obtained matching packages from alternate mirrors; verification was not disabled.",
+      "flashed": false
+    },
+    "physical_flashing_performed": false,
+    "new_firmware_runtime_verified": false
+  },
+  "findings": {
+    "exti": "Disabled key omitted; no generated NVIC enable. Original guard produced a false positive. New guard checks present values and actual C enable calls.",
+    "i2c2": "Removed generated main handle, prototype, call and definition, plus generated HAL_I2C_MspInit/DeInit. Retained original custom_bus.c/h byte-for-byte.",
+    "gpio": "Accepted output-latch HIGH before output-mode setup for shared-flash PB12 and RW007 PF10/PG15. Final pin modes, pulls and speeds retained.",
+    "interrupts": "Accepted removal of unused EXTI15_10 handler and alias; foreground polling retained. SPI3 and SysTick handlers retained.",
+    "clocks": "8 MHz HSE, PLLM4/PLLN168/PLLP2/PLLQ7 and SPI2 prescaler8 retained. UART/SPI MSP code retained.",
+    "other_generated_files": "HAL conf, syscalls, sysmem and system_stm32f4xx not imported; PlatformIO/framework retain ownership."
+  }
+}

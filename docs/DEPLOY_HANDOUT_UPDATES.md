@@ -7,7 +7,7 @@ coreMQTT firmware still needs physical verification. Follow the handout's
 cloud, firmware, then mobile order. Existing trial evidence remains historical.
 The subsequent [public/Android check](testing/2026-10-26_pytorch_android_public.md)
 also passed public TLS/HTTPS and shows new Live/History records. Remaining
-work is firmware/regeneration and a fresh labelled movement trial, retaining
+work is local firmware rebuild/flashing and a fresh labelled movement trial, retaining
 the hardware-instruction differences in the record. Another cloud cutover is
 not needed.
 The user has chosen to proceed with the installed RT-Spark hardware while
@@ -132,9 +132,11 @@ Record the actual installed CubeMX version and generation result.
 
 The user has now supplied a successful Windows build with the private header
 present; [the original log and metrics](testing/2026-10-26_windows_coremqtt_build.md)
-are preserved. Next prepare the public-file review project and run actual
-CubeMX generation as described in the firmware README. The preparation helper
-does not generate, flash or copy generated output into the active build.
+are preserved. The subsequent CubeMX 6.18.1 output has now been
+[reviewed and reconciled](testing/2026-10-27_cubemx_generation_review.md). Pull
+the accepted source, run the guard and rebuild locally with the existing
+private configuration. Future generator runs still require the review workflow;
+the preparation helper itself does not generate or flash.
 
 For the reviewed actual-board source, in Windows PowerShell:
 

@@ -87,7 +87,8 @@ The read-only guard rejects malformed/duplicate USER CODE markers and any lost
 nonempty active USER CODE block. It also checks the reviewed clock, bus and
 interrupt settings. It never copies generated sources into the build.
 With `--generated`, both source and candidate `.ioc` settings are checked.
-The helper's four temporary-directory tests run with
+The 12 review regression tests, including the original user-supplied CubeMX
+6.18.1 fixture, run with
 `python -m unittest discover -s tests -p test_cubemx_review.py -v`.
 
 Review generated code outside USER CODE blocks before accepting changes:
@@ -97,6 +98,10 @@ Review generated code outside USER CODE blocks before accepting changes:
    second `hi2c2` and `MX_I2C2_Init(void)`. Remove those generated main.c
    declarations, definition and call; the BSP initializes I2C2 when the sensor
    starts. Its `MX_I2C2_Init(I2C_HandleTypeDef *)` has a different signature.
+   Remove generated `HAL_I2C_MspInit` / `HAL_I2C_MspDeInit` as well; the BSP
+   owns their pin/clock setup. In CubeMX Advanced Settings, disabling the
+   I2C2 **Generate code** option can avoid duplicate generation on future runs;
+   disabling only the function call leaves other generated definitions to review.
 2. Retain the RW007 boot-pin transitions, shared-flash deselection, foreground
    polling, and disabled PG11 NVIC. Generated GPIO defaults do not replace the
    reset routine's deliberate input/alternate-function changes.
@@ -108,5 +113,10 @@ Review generated code outside USER CODE blocks before accepting changes:
 
 The corrected USER CODE boundaries preserve the application loop and RW007
 helpers during a seeded regeneration. Passing the guard verifies preservation,
-not CubeMX compatibility or hardware behavior; CubeMX regeneration itself must
-still be exercised with the installed CubeMX version.
+not physical hardware behavior. The user-supplied CubeMX 6.18.1 output has
+now been reviewed and its accepted changes copied into the active sources;
+see [the generation record](../docs/testing/2026-10-27_cubemx_generation_review.md).
+The original external review copy and immutable test fixture intentionally
+retain the generated I2C2 duplicates, so checking that raw copy still reports
+them. Use the active-source guard for the accepted firmware after pulling.
+No automatic import or flashing occurs. A new regeneration requires a new review.

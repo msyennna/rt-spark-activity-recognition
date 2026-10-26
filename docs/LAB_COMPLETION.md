@@ -1,6 +1,6 @@
 # Laboratory Activity 3: current completion review
 
-Reviewed October 26, 2026 (Asia/Manila), against all seven pages of the supplied
+Reviewed October 27, 2026 (Asia/Manila), against all seven pages of the supplied
 `BCA180 ESP - Laboratory Activity 3 (3).docx`. Its SHA-256 is
 `8efc5cf8d9c75abff183d1f76581beaded74cc0c1460bce08006ef6a08ef6bc8`.
 This review distinguishes source/build results from deployment and physical
@@ -13,8 +13,8 @@ evidence. The earlier working system does not establish that new code is live.
 | Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. PyTorch cutover reported matching model hash/new ID 5942, followed by local API 5943. Later public MQTT TLS and both HTTPS checks passed with fresh ID 6060. | Public reachability and post-cutover record progress are evidenced; validate new firmware physically. |
 | TensorFlow or PyTorch; all axes, temporal learning, lightweight design | A trained 450-parameter PyTorch GRU uses ordered five-reading windows and all six axes. Verified Kaggle provenance/preparation and matching deployed model SHA-256 are recorded; ten model/contract tests passed on Ubuntu. | Perform a labelled live test for this model. Earlier Random Forest results do not measure PyTorch accuracy. |
 | Rigorous model testing | New PyTorch development OOF: 2219/2258 (98.27%). Untouched latest-two-day holdout: 1197/1300 (92.08%). Ten actual model/database/API tests passed. | Repeat a labelled live movement test after deployment. This dataset contains one participant; no population-accuracy claim is justified. |
-| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. The user chose to continue with this hardware without an instructor reply. | Retain the reference-hardware difference in the record. Actual CubeMX regeneration and new coreMQTT physical checks remain pending. |
-| AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. The user's Windows build also succeeded in 16.75 s, SRAM 66,756 bytes and flash 162,788 bytes, with the private-header file present. | Finish the CubeMX review and flash the reviewed firmware, then collect new physical logs. The earlier custom-encoder PUBACKs are historical. |
+| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. The user chose to continue with this hardware without an instructor reply. | CubeMX 6.18.1 output is now supplied, reviewed and reconciled with all application blocks retained. Retain the reference-hardware difference and complete new coreMQTT physical checks. |
+| AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. The user's Windows build also succeeded in 16.75 s, SRAM 66,756 bytes and flash 162,788 bytes, with the private-header file present. | The CubeMX review is complete; rebuild the reconciled source locally and flash it, then collect new physical logs. The earlier custom-encoder PUBACKs are historical. |
 | One reading/message per second | Firmware schedules a nominal one-second publish interval. Earlier excerpt contains 17 accepted PUBACKs, IDs 1482–1498. | Obtain a timestamped capture to measure cadence. An untimed log cannot establish it. |
 | Android smartphone, live predictions and history | Kotlin, Android Studio and Volley match listed choices. Earlier physical Xiaomi target and exact API match are preserved. Post-PyTorch screens show LIVE record 6067 and newest-first History 6068–6064, all at displayed 99.9% confidence. | Supplied display checks are complete. Actual movement accuracy and precise refresh/interaction timing are not measured by these screenshots. |
 
@@ -43,6 +43,7 @@ See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 - [Successful Ubuntu PyTorch deployment and local API result](testing/2026-10-26_pytorch_cloud_deployment.md)
 - [Post-PyTorch public checks and Android Live/History screenshots](testing/2026-10-26_pytorch_android_public.md)
 - [User's Windows coreMQTT firmware build and CubeMX review preparation](testing/2026-10-26_windows_coremqtt_build.md)
+- [Actual CubeMX 6.18.1 generated-file review and source reconciliation](testing/2026-10-27_cubemx_generation_review.md)
 - [Earlier physical PUBACK report and full transcript](testing/2026-10-26_cubemx_puback.md)
 - [Earlier physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
 - [Earlier independently timed trial and raw-data audit](testing/2026-10-25_cubemx_walk_jog_trial.md)
@@ -64,9 +65,10 @@ does not separately require a resting class or specify a minimum score.
 Source changes are prepared and tested, and the user-supplied Ubuntu output
 now establishes the PyTorch cutover and new local API record. Subsequent public
 checks passed and Android Live/History screens show later predictions. No
-coreMQTT firmware flashing, actual CubeMX regeneration or new labelled PyTorch
-movement validation is established. Strict completion remains pending those
-applicable physical/generator actions. The hardware/toolchain differences
+coreMQTT firmware flashing or new labelled PyTorch movement validation is
+established. Actual CubeMX 6.18.1 generated files have now been supplied and
+reconciled into the active sources. Strict completion remains pending the
+applicable physical actions. The hardware/toolchain differences
 remain explicitly recorded under the user's actual-board continuation choice.
 
 The integration checklist includes additional engineering checks such as DHCP

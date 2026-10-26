@@ -61,8 +61,11 @@ The subsequent Windows build also passed in 16.75 seconds, with coreMQTT 2.3.1,
 66,756 bytes static SRAM and 162,788 bytes flash. The private-header existence
 check was True; its values were not inspected. See
 [the preserved build evidence](testing/2026-10-26_windows_coremqtt_build.md).
-The review-copy helper and candidate-configuration guard are now available;
-they do not count as an actual CubeMX generation run.
+The subsequent user-supplied CubeMX 6.18.1 output now provides generation
+evidence. Its reviewed peripheral changes are reconciled into the active
+sources; the generated I2C2 main/MSP duplicates were removed. All 17 nonempty
+application USER CODE blocks survived. See
+[the generation review](testing/2026-10-27_cubemx_generation_review.md).
 
 The handout specifies RT-Spark on page 1 and VSCode PlatformIO on page 2,
 but its later reference steps name
@@ -89,16 +92,17 @@ the existing PlatformIO project. Using the real coreMQTT library can close the
 MQTT-library difference, but does not by itself complete those reference
 toolchain steps or supply the missing WiFi_ISM43362_HW.c reference file.
 
-Actual CubeMX regeneration still needs to run in the user's installed CubeMX,
-following the scratch-copy and review procedure in
-[firmware/README.md](../firmware/README.md). A source-guard pass alone is not a
-generator run.
+Actual CubeMX 6.18.1 output was supplied and reviewed. The original ZIP,
+seed hashes, accepted source hashes and checks are preserved in the generation
+review. Future regeneration follows the scratch-copy/review procedure in
+[firmware/README.md](../firmware/README.md); a guard pass alone is not a
+generator run or a physical test.
 
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-new-model movement checks, coreMQTT physical verification and CubeMX
-regeneration remain pending. The user has chosen to continue with the actual
+new-model movement checks and coreMQTT physical verification remain pending.
+CubeMX generation output is now reviewed and reconciled. The user has chosen to continue with the actual
 hardware; completion documentation must retain the hardware/toolchain
 differences rather than claim that every conflicting reference step was run.
 Historical evidence is retained with its original implementation attribution.

@@ -59,9 +59,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define RW007_CS_Pin GPIO_PIN_10
 #define RW007_CS_GPIO_Port GPIOF
+#define SPI_FLASH_CS_Pin GPIO_PIN_12
+#define SPI_FLASH_CS_GPIO_Port GPIOB
 #define RW007_INT_BUSY_Pin GPIO_PIN_11
 #define RW007_INT_BUSY_GPIO_Port GPIOG
-#define RW007_INT_BUSY_EXTI_IRQn EXTI15_10_IRQn
 #define RW007_RST_Pin GPIO_PIN_15
 #define RW007_RST_GPIO_Port GPIOG
 

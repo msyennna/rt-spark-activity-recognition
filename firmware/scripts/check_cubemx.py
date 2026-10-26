@@ -41,6 +41,31 @@ def user_blocks(text, label):
     return blocks
 
 
+def without_comments(text):
+    """Remove C comments while retaining quoted strings and character literals."""
+    return re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*',
+                  lambda match: " " if match[0].startswith(("/*", "//")) else match[0],
+                  text, flags=re.DOTALL)
+
+
+def check_peripheral_code(main, msp, label):
+    errors = []
+    main, msp = without_comments(main), without_comments(msp)
+    for name, expected_value in (("PLLM", "4"), ("PLLN", "168"), ("PLLQ", "7")):
+        if not re.search(rf"PLL\.{name}\s*=\s*{expected_value}\s*;", main):
+            errors.append(f"{label} main.c: compiled {name} differs from .ioc")
+    if not re.search(r"hspi2\.Init\.BaudRatePrescaler\s*=\s*SPI_BAUDRATEPRESCALER_8\s*;", main):
+        errors.append(f"{label} main.c: compiled SPI2 prescaler differs from .ioc")
+    if re.search(r"\bMX_I2C2_Init\s*\(|I2C_HandleTypeDef\s+hi2c2\s*;", main):
+        errors.append(f"{label} main.c: remove Cube's duplicate I2C2 handle/init; retain custom_bus.c")
+    if re.search(r"\bHAL_I2C_Msp(?:Init|DeInit)\s*\(", msp):
+        errors.append(f"{label} MSP: remove Cube's I2C2 MSP functions; retain custom_bus.c")
+    if re.search(r"\b(?:HAL_)?NVIC_EnableIRQ\s*\(\s*(?:EXTI15_10_IRQn|RW007_INT_BUSY_EXTI_IRQn)\s*\)",
+                 main + "\n" + msp):
+        errors.append(f"{label} C code: EXTI15_10 NVIC must stay disabled for foreground polling")
+    return errors
+
+
 def check(generated=None):
     errors = []
     expected = {
@@ -77,22 +102,27 @@ def check(generated=None):
         for key, value in expected.items():
             if config.get(key) != value:
                 errors.append(f"{label}: {key} must be {value}")
-        if not config.get("NVIC.EXTI15_10_IRQn", "").startswith("false\\:"):
+        # CubeMX 6.18.1 removes this key when the interrupt is disabled. Check
+        # enabled/malformed values if present, and check the generated C too.
+        exti = config.get("NVIC.EXTI15_10_IRQn")
+        if exti is not None and not exti.startswith("false\\:"):
             errors.append(f"{label}: EXTI15_10 NVIC must stay disabled for foreground polling")
         if "LSM6DSL" in ioc_text or "X-CUBE-MEMS1" in ioc_text:
             errors.append(f"{label}: stale LSM6DSL/MEMS pack selection must be removed")
 
     main = (FIRMWARE / "src/main.c").read_text()
-    for name, expected_value in (("PLLM", "4"), ("PLLN", "168"), ("PLLQ", "7")):
-        if not re.search(rf"PLL\.{name}\s*=\s*{expected_value}\s*;", main):
-            errors.append(f"src/main.c: compiled {name} differs from .ioc")
-    if not re.search(r"hspi2\.Init\.BaudRatePrescaler\s*=\s*SPI_BAUDRATEPRESCALER_8\s*;", main):
-        errors.append("src/main.c: compiled SPI2 prescaler differs from .ioc")
+    errors.extend(check_peripheral_code(
+        main, (FIRMWARE / "src/stm32f4xx_hal_msp.c").read_text(), "active"))
     bus = (FIRMWARE / "src/custom_bus.c").read_text()
     if not re.search(r"hi2c->Init\.ClockSpeed\s*=\s*100000\s*;", bus):
         errors.append("src/custom_bus.c: reviewed I2C2 speed must stay 100 kHz")
-    if re.search(r"\bMX_I2C2_Init\s*\(", main) or re.search(r"I2C_HandleTypeDef\s+hi2c2\s*;", main):
-        errors.append("src/main.c: custom_bus.c must retain sole ownership of I2C2 initialization")
+
+    if generated is not None:
+        generated_main = generated / CORE_FILES["src/main.c"]
+        generated_msp = generated / CORE_FILES["src/stm32f4xx_hal_msp.c"]
+        if generated_main.is_file() and generated_msp.is_file():
+            errors.extend(check_peripheral_code(
+                generated_main.read_text(), generated_msp.read_text(), "generated"))
 
     for active_relative, generated_relative in CORE_FILES.items():
         active = FIRMWARE / active_relative
@@ -108,11 +138,6 @@ def check(generated=None):
                 for name, body in active_blocks.items():
                     if body and candidate_blocks.get(name) != body:
                         errors.append(f"{generated_relative}: active USER CODE {name} was changed/lost")
-                if active_relative == "src/main.c" and (
-                    re.search(r"\bMX_I2C2_Init\s*\(", candidate_text) or
-                    re.search(r"I2C_HandleTypeDef\s+hi2c2\s*;", candidate_text)
-                ):
-                    errors.append("generated main.c: remove Cube's duplicate I2C2 handle/init; retain custom_bus.c")
         except ValueError as exc:
             errors.append(str(exc))
     return errors
