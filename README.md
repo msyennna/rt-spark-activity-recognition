@@ -137,4 +137,4 @@ cloud/
 
 The accompanying lab brief describes a complete IoT system, including RT-Spark firmware and a mobile client. Those components are outside this repository's current contents. To complete the end-to-end activity, add a device publisher that sends compatible sensor readings and a mobile app that consumes the API. Before reporting model performance, run the training/evaluation workflow with the intended dataset and validate it with the target hardware.
 
-For the detailed implementation status and evaluation notes, see [LABORATORY_REPORT.md](LABORATORY_REPORT.md). The assignment brief is [BCA180 ESP - Laboratory Activity 3.md](<BCA180 ESP - Laboratory Activity 3.md>).
+For the detailed implementation status and evaluation notes, see [Laboratory Report 3_ Activity Recognition.pdf].
