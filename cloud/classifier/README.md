@@ -14,8 +14,9 @@ remains in Git history at c23b596.
 The Ubuntu cutover reported PASS on October 26, 2026 at 04:08:05 UTC with a
 matching model startup hash and new prediction ID 5942, followed by local API
 ID 5943. See [the supplied deployment evidence](../../docs/testing/2026-10-26_pytorch_cloud_deployment.md).
-This establishes deployment progress, not live movement accuracy or a new
-physical-phone display check.
+Subsequent [public TLS/HTTPS and Android Live/History observations](../../docs/testing/2026-10-26_pytorch_android_public.md)
+show later records 6060 and 6067/6068 respectively. These establish service and
+display progress, not labelled live movement accuracy.
 
 ## Dataset and units
 
@@ -95,5 +96,6 @@ and the actual PyTorch-to-callback-to-temporary-SQLite-to-Flask path.
 
 The prior 98.1% six-trial result belongs to the **Random Forest baseline**.
 It remains preserved as historical evidence and must not be claimed for this
-PyTorch model. A fresh board-to-cloud/phone check and timed movement test are
-required after deployment. There is no resting class.
+PyTorch model. Post-cutover service/display checks are now recorded; a fresh
+labelled timed movement test is still needed for this model. There is no
+resting class.

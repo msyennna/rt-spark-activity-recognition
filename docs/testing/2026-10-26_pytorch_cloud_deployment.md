@@ -68,3 +68,8 @@ also does not measure one-second publishing.
 Continue with the phone/public check and the remaining applicable steps in
 [the deployment guide](../DEPLOY_HANDOUT_UPDATES.md). Do not repeat an already
 successful cutover just to collect another success message.
+
+Subsequent evidence is now recorded in [the public/Android report](2026-10-26_pytorch_android_public.md):
+all public checks passed with ID 6060 and later Android screens show LIVE 6067
+and History through 6068. The limitations above describe this cutover transcript
+itself; the later report separately states what the new evidence establishes.

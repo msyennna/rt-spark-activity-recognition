@@ -9,6 +9,13 @@ and new ID 5942, followed by local API ID 5943. See
 [the model guide](../cloud/classifier/README.md). Earlier
 Random Forest live results below retain their original attribution.
 
+Post-cutover public checks now pass verified MQTT TLS and HTTPS latest/history
+with record 6060. New Android screens show LIVE 6067 and History through 6068
+at displayed 99.9% confidence. See
+[the post-cutover report and screenshots](testing/2026-10-26_pytorch_android_public.md).
+These display observations do not measure accuracy; the labelled PyTorch
+movement trial and new coreMQTT physical verification are still pending.
+
 The `integration/stm32cubemx` branch combines Shanice's STM32Cube/HAL firmware
 with the existing cloud, trained model, provisioning scripts, and Android app.
 The firmware uses PlatformIO and foreground lwIP networking. The unchanged
@@ -300,8 +307,9 @@ displays the device's timezone.
 The board-to-broker acknowledgement capture and physical-phone Live/API match
 are now recorded. See [LAB_COMPLETION.md](LAB_COMPLETION.md) for the handout
 comparison. The handout names TensorFlow/PyTorch; the active source now uses
-PyTorch, and the Ubuntu cutover/local API check is now recorded. New-model
-phone/movement checks, coreMQTT physical verification and actual CubeMX
+PyTorch, and the Ubuntu cutover/local API check is now recorded. Public checks
+and new-model Android Live/History are also observed. A labelled PyTorch
+movement trial, coreMQTT physical verification and actual CubeMX
 regeneration remain pending. Training-data provenance and reproducibility are
 documented in the model guide; the handout hardware/toolchain conflict remains open.
 

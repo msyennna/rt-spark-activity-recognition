@@ -5,6 +5,10 @@ Ubuntu PyTorch cutover now has [a supplied PASS and local API result](testing/20
 Do not repeat that successful deployment just to rerun this guide. The new
 coreMQTT firmware still needs physical verification. Follow the handout's
 cloud, firmware, then mobile order. Existing trial evidence remains historical.
+The subsequent [public/Android check](testing/2026-10-26_pytorch_android_public.md)
+also passed public TLS/HTTPS and shows new Live/History records. Remaining
+work is firmware/regeneration, hardware-instruction clarification and a fresh
+labelled movement trial; another cloud cutover is not needed.
 The handout's conflicting hardware/AC6 instructions still need correction;
 see [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 

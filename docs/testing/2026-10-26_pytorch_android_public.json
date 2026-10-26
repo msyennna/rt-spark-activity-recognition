@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "evidence_source": "User-supplied Windows checker transcript and two attached Android screenshots; images visually reviewed. No independent EC2/phone access by the reviewer.",
+  "source_commit": "c7488f8d6a747c93ad6ad615264d5b81adac063b",
+  "model_attribution": "Post-PyTorch-cutover observations, referring to the matching model hash/new-ID deployment evidence; individual SQLite rows do not include a model-version column.",
+  "model_sha256": "be60d75d699a6bc317806426c2ec7e47432c2e907e0ceafbab145ba16cce3331",
+  "public_checker_output": {
+    "checked_at_utc": "2026-10-26T04:18:02.877096Z",
+    "host": "ec2-15-134-214-242.ap-southeast-2.compute.amazonaws.com",
+    "ca_file": "android_app/app/src/main/res/raw/rtspark_ca.crt",
+    "read_only": true,
+    "firmware_database_updates_verified": false,
+    "checks": [
+      {
+        "check": "mqtt_tls_8883_no_mqtt_connect",
+        "status": "PASS",
+        "tls": "TLSv1.2",
+        "cipher": "ECDHE-RSA-AES256-GCM-SHA384",
+        "mqtt_application_bytes_sent": 0
+      },
+      {
+        "check": "https_latest",
+        "status": "PASS",
+        "http_status": 200,
+        "schema_valid": true,
+        "record": {
+          "id": 6060,
+          "created_at_utc": "2026-10-26T04:17:56Z"
+        }
+      },
+      {
+        "check": "https_history_limit_1",
+        "status": "PASS",
+        "http_status": 200,
+        "schema_valid": true,
+        "count": 1,
+        "records": [
+          {
+            "id": 6060,
+            "created_at_utc": "2026-10-26T04:17:56Z"
+          }
+        ]
+      }
+    ]
+  },
+  "images": [
+    {
+      "uploaded_name": "e9782732-6ef8-4ad5-b2f0-0584bcc5c828.jpeg",
+      "repository_path": "docs/testing/images/2026-10-26_pytorch_android_live.jpeg",
+      "sha256": "293eacf684d7f6b8adcfd47212f2617429b3afa3c6b341026b9c9987d3d323ee"
+    },
+    {
+      "uploaded_name": "a31b4f22-08a8-42e3-994f-4726fd94a977.jpeg",
+      "repository_path": "docs/testing/images/2026-10-26_pytorch_android_history.jpeg",
+      "sha256": "ff2acb79aea9d159279fef119d433ba5bb86a2a191474d2a3c1cabfb1afac2bf"
+    }
+  ],
+  "android_live": {
+    "status_badge": "LIVE",
+    "id": 6067,
+    "activity_display": "Walking",
+    "confidence_display": "99.9%",
+    "displayed_local_time": "2026-10-26 12:18:36",
+    "utc_if_asia_manila": "2026-10-26T04:18:36Z",
+    "refresh_status_text": "Updated 5s ago · checking every 5 seconds"
+  },
+  "android_history": {
+    "summary_display": "50 recent · 50 walking · 0 running",
+    "fully_visible_cards": [
+      {
+        "id": 6068,
+        "activity_display": "Walking",
+        "confidence_display": "99.9%",
+        "displayed_local_time": "2026-10-26 12:18:41",
+        "utc_if_asia_manila": "2026-10-26T04:18:41Z"
+      },
+      {
+        "id": 6067,
+        "activity_display": "Walking",
+        "confidence_display": "99.9%",
+        "displayed_local_time": "2026-10-26 12:18:36",
+        "utc_if_asia_manila": "2026-10-26T04:18:36Z"
+      },
+      {
+        "id": 6066,
+        "activity_display": "Walking",
+        "confidence_display": "99.9%",
+        "displayed_local_time": "2026-10-26 12:18:31",
+        "utc_if_asia_manila": "2026-10-26T04:18:31Z"
+      },
+      {
+        "id": 6065,
+        "activity_display": "Walking",
+        "confidence_display": "99.9%",
+        "displayed_local_time": "2026-10-26 12:18:26",
+        "utc_if_asia_manila": "2026-10-26T04:18:26Z"
+      },
+      {
+        "id": 6064,
+        "activity_display": "Walking",
+        "confidence_display": "99.9%",
+        "displayed_local_time": "2026-10-26 12:18:21",
+        "utc_if_asia_manila": "2026-10-26T04:18:21Z"
+      }
+    ]
+  },
+  "interpretation": {
+    "checker_false_flag_is_a_failure": false,
+    "checker_did_not_send_mqtt_connect_or_publish": true,
+    "same_live_record_visible_in_history": 6067,
+    "phone_ids_are_later_than_checker_id": true,
+    "screenshot_status_text_independently_measures_poll_interval": false,
+    "actual_activity_labels_provided_for_this_observation": false
+  },
+  "limits": [
+    "The checker returned ID 6060 and redacts activity/confidence. No exact server-row comparison for screenshot IDs 6067/6068 is supplied here.",
+    "The History summary reports 50 records; only five complete cards are legible in this image.",
+    "Screenshots show Android UI; the physical Xiaomi target was established in earlier evidence, not newly identified by these standalone screen captures.",
+    "Confidence and predicted class totals do not establish movement accuracy or resting detection.",
+    "No new coreMQTT firmware flashing, actual CubeMX regeneration or fresh labelled PyTorch movement trial is shown."
+  ]
+}

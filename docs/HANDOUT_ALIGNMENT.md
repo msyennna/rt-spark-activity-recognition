@@ -26,7 +26,11 @@ reports a matching model startup hash and a new prediction ID 5942 at
 2026-10-26 04:08:05 UTC; the subsequent local API response returned ID 5943.
 Ten model/contract tests also passed on Ubuntu before cutover. See
 [the deployment evidence](testing/2026-10-26_pytorch_cloud_deployment.md).
-New physical-phone results and a labelled PyTorch movement trial remain
+Subsequent public TLS/HTTPS checks all passed with record 6060; supplied
+Android screens show LIVE record 6067 and History through 6068 at displayed
+99.9% confidence. See [the post-cutover public/Android evidence](testing/2026-10-26_pytorch_android_public.md).
+The screens were captured later than the checker; an exact server-row match
+for those screen IDs is not claimed. A labelled PyTorch movement trial remains
 pending. Earlier Random Forest observations retain their original attribution.
 
 Use [the Windows/Ubuntu deployment runbook](DEPLOY_HANDOUT_UPDATES.md).
@@ -79,7 +83,7 @@ generator run.
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-the project must not be presented as strictly complete while new-model phone
-and movement checks, coreMQTT physical verification, CubeMX regeneration or
+the project must not be presented as strictly complete while new-model
+movement checks, coreMQTT physical verification, CubeMX regeneration or
 the hardware/toolchain conflict remain unresolved.
 Historical evidence is retained with its original implementation attribution.
