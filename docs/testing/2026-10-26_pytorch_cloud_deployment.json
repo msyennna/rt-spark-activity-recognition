@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "evidence_source": "User-supplied Ubuntu terminal outputs in this conversation; transcribed values, not direct server access by the reviewer.",
+  "source_commit": "19dfcbea1dc388a9427bb9388ab3e8cdeb97ca91",
+  "branch": "integration/stm32cubemx",
+  "preflight_inspection": {
+    "mode": "read-only inspection",
+    "project": "/home/ubuntu/rt-spark-activity-recognition",
+    "classifier_service": "rtspark-classifier.service",
+    "staged_model_sha256": "be60d75d699a6bc317806426c2ec7e47432c2e907e0ceafbab145ba16cce3331",
+    "baseline_database_id": 5888
+  },
+  "preflight_sensor_reception": {
+    "command": "mosquitto_sub -h 127.0.0.1 -p 1883 -t activity/sensor -C 5 -W 15 -v",
+    "received_messages": 5,
+    "all_six_fields_present_and_finite": true,
+    "per_message_timestamps_available": false
+  },
+  "installed_torch": "2.14.1+cpu",
+  "ubuntu_test_run": {
+    "tests": 10,
+    "seconds": 0.525,
+    "result": "OK",
+    "scope": "Actual PyTorch model, MQTT callback, temporary SQLite and Flask API contract tests before cutover."
+  },
+  "standalone_sudo_validation": {
+    "command": "sudo -v",
+    "result": "3 incorrect password attempts",
+    "helper_result": "Subsequent helper completed and reported PASS. The exact sudo policy or reason it permitted the helper operations was not inspected."
+  },
+  "deployment": {
+    "status": "PASS",
+    "service": "rtspark-classifier.service",
+    "model_sha256": "be60d75d699a6bc317806426c2ec7e47432c2e907e0ceafbab145ba16cce3331",
+    "baseline_database_id": 5941,
+    "observed_new_database_id": 5942,
+    "completed_at_utc": "2026-10-26T04:08:05.963386+00:00",
+    "backup": "/home/ubuntu/rtspark-model-backups/20261026T040758Z_1961e7",
+    "targets": [
+      "cloud/classifier/temporal_model.py",
+      "cloud/classifier/temporal_data.py",
+      "cloud/classifier/train_model.py",
+      "cloud/classifier/predictor.py",
+      "cloud/classifier/activity_model.pt",
+      "cloud/classifier/activity_model.json",
+      "cloud/mqtt/mqtt_classifier.py"
+    ]
+  },
+  "local_api_check": {
+    "command": "curl -sS --max-time 10 http://127.0.0.1:5000/api/activity/latest",
+    "record": {
+      "activity": "WALKING",
+      "activity_id": 0,
+      "confidence": 0.9988260865211487,
+      "created_at": "2026-10-26 04:08:10",
+      "id": 5943
+    }
+  },
+  "interpretation": {
+    "helper_success_gate": "The reviewed helper requires a new DB ID and the matching model hash in a fresh classifier startup journal entry.",
+    "api_record_after_observed_deployment_id": true,
+    "api_created_at_timezone": "UTC",
+    "api_confidence_percent": 99.88260865211487,
+    "accuracy_measured_by_this_deployment_check": false
+  },
+  "not_established_by_this_evidence": [
+    "Independent server inspection by the reviewer or downloaded original deployment.json.",
+    "Public HTTPS reachability after this model cutover.",
+    "Physical-phone display of a new PyTorch prediction.",
+    "New PyTorch labelled live movement accuracy.",
+    "Physical coreMQTT firmware flashing/runtime or actual CubeMX regeneration.",
+    "A measured one-second sensor publish interval.",
+    "A live rollback experiment or a specific sudoers configuration."
+  ]
+}

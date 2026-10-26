@@ -10,8 +10,8 @@ evidence. The earlier working system does not establish that new code is live.
 
 | Handout area | Current evidence | Remaining action |
 | --- | --- | --- |
-| Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. Earlier MQTT reception, saved rows and API responses establish the deployed baseline. | Deploy the new classifier and verify fresh rows and API output. |
-| TensorFlow or PyTorch; all axes, temporal learning, lightweight design | Random Forest has been replaced in the repository by a trained 450-parameter PyTorch GRU over ordered five-reading windows and all six axes. Verified Kaggle dataset provenance and timestamp-based preparation are recorded. | The Ubuntu service still has the earlier model until cutover. Use the deployment runbook. |
+| Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. October 26 PyTorch cutover reported PASS with new ID 5942 and a matching model startup hash; the subsequent local API returned ID 5943. | Verify public HTTPS and fresh phone display after cutover. |
+| TensorFlow or PyTorch; all axes, temporal learning, lightweight design | A trained 450-parameter PyTorch GRU uses ordered five-reading windows and all six axes. Verified Kaggle provenance/preparation and matching deployed model SHA-256 are recorded; ten model/contract tests passed on Ubuntu. | Perform a labelled live test for this model. Earlier Random Forest results do not measure PyTorch accuracy. |
 | Rigorous model testing | New PyTorch development OOF: 2219/2258 (98.27%). Untouched latest-two-day holdout: 1197/1300 (92.08%). Ten actual model/database/API tests passed. | Repeat a labelled live movement test after deployment. This dataset contains one participant; no population-accuracy claim is justified. |
 | Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. | Resolve the handout's conflicting chip/bus reference instructions. Actual CubeMX regeneration is also pending. |
 | AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. | Build with the local private configuration and flash the reviewed firmware, then collect new physical logs. The earlier custom-encoder PUBACKs are historical. |
@@ -38,6 +38,7 @@ See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 - [Machine-readable PyTorch training report](testing/pytorch_training_2026-10-26.json)
 - [New coreMQTT source/build checks and Linux TLS-test skips](testing/2026-10-26_coremqtt_port.md)
 - [Cloud cutover and physical validation instructions](DEPLOY_HANDOUT_UPDATES.md)
+- [Successful Ubuntu PyTorch deployment and local API result](testing/2026-10-26_pytorch_cloud_deployment.md)
 - [Earlier physical PUBACK report and full transcript](testing/2026-10-26_cubemx_puback.md)
 - [Earlier physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
 - [Earlier independently timed trial and raw-data audit](testing/2026-10-25_cubemx_walk_jog_trial.md)
@@ -56,10 +57,11 @@ does not separately require a resting class or specify a minimum score.
 
 ## Completion boundary
 
-Source changes are prepared and tested. No cloud cutover, board flashing,
-actual CubeMX regeneration or new PyTorch movement/phone validation occurred
-in this update. Strict completion remains pending those applicable actions
-and the hardware/toolchain clarification.
+Source changes are prepared and tested, and the user-supplied Ubuntu output
+now establishes the PyTorch cutover and new local API record. No coreMQTT
+firmware flashing, actual CubeMX regeneration or new PyTorch movement/phone
+validation is established by that deployment evidence. Strict completion
+remains pending those applicable actions and the hardware/toolchain clarification.
 
 The integration checklist includes additional engineering checks such as DHCP
 renewal, controlled interruptions and memory/polling measurements. Their

@@ -11,6 +11,12 @@ field, SQLite schema and Android API contract are preserved. The Random Forest
 checkpoint has been removed from the active tree; the previous working version
 remains in Git history at c23b596.
 
+The Ubuntu cutover reported PASS on October 26, 2026 at 04:08:05 UTC with a
+matching model startup hash and new prediction ID 5942, followed by local API
+ID 5943. See [the supplied deployment evidence](../../docs/testing/2026-10-26_pytorch_cloud_deployment.md).
+This establishes deployment progress, not live movement accuracy or a new
+physical-phone display check.
+
 ## Dataset and units
 
 Use the handout's dataset, Viktor Malyi's

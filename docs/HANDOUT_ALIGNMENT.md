@@ -21,10 +21,13 @@ GRU trained on the handout's verified Kaggle version-2 dataset. See
 [the model documentation](../cloud/classifier/README.md) for preparation,
 evaluation, artifact integrity and test results.
 
-The source and checkpoint have been prepared/tested here. **The Ubuntu service
-has not yet been updated.** Its previous live evidence describes the deployed
-Random Forest baseline until a model cutover is performed. New PyTorch
-predictions must receive their own live validation and movement trial.
+**The Ubuntu classifier has now been updated.** User-supplied terminal output
+reports a matching model startup hash and a new prediction ID 5942 at
+2026-10-26 04:08:05 UTC; the subsequent local API response returned ID 5943.
+Ten model/contract tests also passed on Ubuntu before cutover. See
+[the deployment evidence](testing/2026-10-26_pytorch_cloud_deployment.md).
+New physical-phone results and a labelled PyTorch movement trial remain
+pending. Earlier Random Forest observations retain their original attribution.
 
 Use [the Windows/Ubuntu deployment runbook](DEPLOY_HANDOUT_UPDATES.md).
 Its explicit-file bundle passed all ten actual model/database/API staging
@@ -76,6 +79,7 @@ generator run.
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-the project must not be presented as strictly complete while the new model
-is undeployed or the hardware/toolchain conflict remains unresolved.
+the project must not be presented as strictly complete while new-model phone
+and movement checks, coreMQTT physical verification, CubeMX regeneration or
+the hardware/toolchain conflict remain unresolved.
 Historical evidence is retained with its original implementation attribution.

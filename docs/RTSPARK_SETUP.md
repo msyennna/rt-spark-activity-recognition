@@ -2,8 +2,11 @@
 
 The active classifier source is now the handout's **PyTorch** framework, with
 a 450-parameter temporal model and a verified training checkpoint. The Ubuntu
-service has not yet been updated. See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md)
-and [the model guide](../cloud/classifier/README.md) before deployment. Earlier
+cutover reported PASS on October 26 at 04:08:05 UTC with a matching model hash
+and new ID 5942, followed by local API ID 5943. See
+[the deployment record](testing/2026-10-26_pytorch_cloud_deployment.md),
+[HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md) and
+[the model guide](../cloud/classifier/README.md). Earlier
 Random Forest live results below retain their original attribution.
 
 The `integration/stm32cubemx` branch combines Shanice's STM32Cube/HAL firmware
@@ -284,8 +287,9 @@ has been recovered and verified; its CSV stays excluded from Git.
 The new offline results are 98.27% development out-of-fold agreement and 92.08%
 on the untouched latest-two-day holdout, from one participant. The deployment
 checkpoint is refit afterward; neither result is a live board test. The prior
-98.1% six-trial result belongs to the Random Forest baseline, which is still
-running on the Ubuntu service until migration. These scores must stay separate.
+98.1% six-trial result belongs to the earlier Random Forest baseline.
+The Ubuntu service now runs PyTorch, but its fresh movement accuracy has not
+yet been measured. These scores must stay separate.
 
 Only WALKING and RUNNING are trained; a resting board can receive either label.
 Confidence is a per-prediction estimate. API timestamps are UTC, and Android
@@ -296,8 +300,10 @@ displays the device's timezone.
 The board-to-broker acknowledgement capture and physical-phone Live/API match
 are now recorded. See [LAB_COMPLETION.md](LAB_COMPLETION.md) for the handout
 comparison. The handout names TensorFlow/PyTorch; the active source now uses
-PyTorch. Cloud deployment and new live-model validation remain pending. Actual CubeMX regeneration and training-data reproducibility retain
-their documented status.
+PyTorch, and the Ubuntu cutover/local API check is now recorded. New-model
+phone/movement checks, coreMQTT physical verification and actual CubeMX
+regeneration remain pending. Training-data provenance and reproducibility are
+documented in the model guide; the handout hardware/toolchain conflict remains open.
 
 ## Git workflow
 

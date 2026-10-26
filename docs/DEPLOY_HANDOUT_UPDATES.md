@@ -1,7 +1,9 @@
 # Deploy the handout-alignment updates
 
-The new PyTorch model and AWS coreMQTT source have been built/tested, but are
-not yet deployed to the Ubuntu service or physical board. Follow the handout's
+The new PyTorch model and AWS coreMQTT source have been built/tested. The
+Ubuntu PyTorch cutover now has [a supplied PASS and local API result](testing/2026-10-26_pytorch_cloud_deployment.md).
+Do not repeat that successful deployment just to rerun this guide. The new
+coreMQTT firmware still needs physical verification. Follow the handout's
 cloud, firmware, then mobile order. Existing trial evidence remains historical.
 The handout's conflicting hardware/AC6 instructions still need correction;
 see [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
@@ -60,7 +62,6 @@ mosquitto_sub -h 127.0.0.1 -p 1883 -t activity/sensor -C 5 -W 15 -v
 After five current readings arrive, run:
 
 ```bash
-sudo -v
 "$HOME/rt-spark-activity-recognition/.venv/bin/python" \
   "$rtspark_stage/tools/provisioning/apply_pytorch_update.py" --apply
 ```
@@ -84,7 +85,10 @@ source/model files and restart the previous classifier. It leaves the added CPU
 PyTorch package installed. It does not replace the database, API, broker,
 Nginx, certificates or credentials, and does not delete the old deployed
 `activity_model.joblib`. This helper has passed local staged-model and simulated
-rollback/success tests; a live Ubuntu cutover has not yet been exercised.
+rollback/success tests; the October 26 Ubuntu cutover also reported PASS. A live
+rollback has not been exercised. The helper uses `sudo -n` for service/journal
+operations and reports an error if existing permissions do not allow them;
+the standalone `sudo -v` that failed in the supplied run is not a required step.
 
 On success, save the printed backup location and `deployment.json` from it.
 This audit identifies the model and first observed new ID. Existing SQLite

@@ -25,11 +25,13 @@ after source rollback. Success requires real sensor-driven database progress
 and the expected model hash from the service journal. It emits no synthetic
 MQTT readings and does not replace the database or API infrastructure.
 
-## Pending live evidence
+## Subsequent live deployment evidence
 
-The actual Ubuntu package installation, unit discovery, restart, journal check,
-live rollback and sensor-driven cutover have not run here. The user must run
-the [deployment instructions](../DEPLOY_HANDOUT_UPDATES.md) on their Ubuntu
-host with the board publishing, and preserve the resulting `deployment.json`.
+The later [Ubuntu deployment record](2026-10-26_pytorch_cloud_deployment.md)
+contains user-supplied output confirming CPU package installation, ten tests,
+actual unit discovery, and the helper's matching-model-hash/new-ID success gate.
+The cutover reported PASS with ID 5942; the subsequent local API returned 5943.
+The reviewer did not independently access the server or exercise a live rollback.
+The server's original `deployment.json` remains at the reported backup location.
 The current public checkpoint SHA-256 is
 `be60d75d699a6bc317806426c2ec7e47432c2e907e0ceafbab145ba16cce3331`.

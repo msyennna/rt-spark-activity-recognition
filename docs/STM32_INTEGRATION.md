@@ -1,8 +1,11 @@
 # STM32CubeMX integration milestones and verification
 
-Current handout alignment: the active classifier source/checkpoint now use
-PyTorch; the deployed cloud service and earlier hardware results remain the
-Random Forest baseline until cutover. See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
+Current handout alignment: the active classifier source/checkpoint and Ubuntu
+service now use PyTorch. User-supplied cutover output reports matching model
+hash and new ID 5942, followed by local API ID 5943. Earlier hardware/phone and
+movement results retain their Random Forest attribution. See
+[the deployment record](testing/2026-10-26_pytorch_cloud_deployment.md) and
+[HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
 native suites passed. This library version has not yet been flashed. Historical
 PUBACKs below belong to the previous custom-encoder firmware. The exact current
@@ -38,6 +41,7 @@ Completed commits pushed to `origin/integration/stm32cubemx`:
 | Stage | Status | Evidence and limits |
 | --- | --- | --- |
 | Import unchanged Shanice firmware | Complete | `pio run -d firmware` passed on October 23, 2026: RAM 27,560 bytes; flash 56,212 bytes. This establishes a clean build before porting. |
+| PyTorch cloud cutover | PASS in supplied Ubuntu output | CPU PyTorch 2.14.1+cpu installed; ten pre-cutover model/contract tests passed; `rtspark-classifier.service` restarted with the expected model hash; baseline ID 5941 advanced to observed ID 5942 at 04:08:05 UTC, then local API ID 5943 at 04:08:10 UTC. Public/phone checks for this new model remain pending. |
 | Handout AWS coreMQTT library integration | Source/build complete; physical check pending | Actual unmodified coreMQTT 2.3.1 low-level serializer/deserializer, default-config macro, five native suites and ARM build passed October 26. SRAM 66,756 bytes, separate CCM 57,344 bytes, flash 162,476 bytes. No new board runtime or CubeMX generation is claimed. |
 | Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, CubeMX guard passed, PLLQ corrected for RNG. Hardware/regeneration checks remain pending. |
 | Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; initial physical-board TLS/CONNACK and broker reception were observed on October 23, 2026; October 26 runtime output now includes 17 accepted PUBACKs, IDs 1482–1498. Measured cadence and extended recovery checks remain pending. |
