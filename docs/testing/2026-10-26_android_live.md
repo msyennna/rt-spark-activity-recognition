@@ -92,7 +92,11 @@ reviewer.
   independently instrumented.
 - Device type is confirmed by the user's follow-up: **Android Studio emulator**
   ("virtual phone inside android studio"). This completes device attribution for
-  the supplied Live screenshots. A physical Android-phone run is still pending.
+  the supplied Live screenshots. A later [physical-phone History photo and
+  device-selector image](2026-10-26_android_phone.md) show History on physical
+  hardware and Xiaomi 25028RN03A selected in Android Studio. The phone's Live
+  status and current API match remain pending; these emulator Live images retain
+  their original attribution.
 - Earlier power-cycle/stale-data recovery remains user-confirmed. These two
   Live images do not repeat a power interruption.
 - Local HTTP curl does not independently repeat public HTTPS certificate

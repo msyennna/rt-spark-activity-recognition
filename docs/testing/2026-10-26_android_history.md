@@ -114,7 +114,9 @@ intervening input were not independently instrumented by the still images.
 
 The user subsequently confirmed that this workflow uses the virtual phone
 inside Android Studio. These app observations are classified as emulator
-evidence; a physical Android-phone run is still pending.
+evidence. A subsequent [physical-phone History photograph](2026-10-26_android_phone.md)
+shows new IDs 5027–5023, with Xiaomi 25028RN03A selected in Android Studio.
+The phone's Live status and current API record match remain pending.
 
 Earlier power-cycle/stale-data recovery was confirmed by the user on October 23.
 This single History image is not a repeat of that recovery check. Firmware

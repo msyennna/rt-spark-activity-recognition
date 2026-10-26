@@ -10,8 +10,8 @@ received five sensor messages, and the local API returned current record 3136.
 The user subsequently reported a public service-checker pass and confirmed
 Android live/history and power-cycle recovery in the emulator workflow.
 See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the evidence and remaining
-PUBACK, measured cadence, physical-phone, network-interruption and regeneration
-checks. The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
+PUBACK, measured cadence, physical-phone Live/API, network-interruption and
+regeneration checks. The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
 offline tests. The October 25 six-trial result is now checked against the
 supplied raw files: 51/52 correct windows (98.1%). Independent time/ID selection,
 quality checks and exact helper replay agree; both originals are preserved
@@ -31,7 +31,9 @@ sensor acquisition timestamps and board acknowledgements remain separate
 checks. Later Android History and Live cards match supplied local API records
 4754 and 4877. Two Live images show LIVE with advancing prediction IDs,
 supporting the requested automatic-refresh check. The user confirms the target
-is the Android Studio emulator; a physical Android-phone run remains pending.
+is the Android Studio emulator. A later photo establishes physical-phone
+History display, with Xiaomi 25028RN03A selected in Android Studio. The phone's
+Live status and current API record match remain pending.
 
 The target path is ICM20608 on an STM32F407 RT-Spark board, direct RW007 Wi-Fi,
 MQTT over verified TLS, an Ubuntu classifier and SQLite database, an HTTPS API,
@@ -203,8 +205,11 @@ The local curl checks do not independently repeat public HTTPS trust verificatio
 
 The user explicitly confirms that the October 26 Live-check workflow runs on
 the virtual phone inside Android Studio. Together with the matching local API
-records, this establishes the emulator display workflow. A physical Android-phone
-run has not yet been established.
+records, this establishes the emulator display workflow. A subsequent
+[physical-phone photo and device-selector image](testing/2026-10-26_android_phone.md)
+show populated History on physical hardware and Xiaomi 25028RN03A selected in
+Android Studio. Visible phone records are 5027–5023, Walking at 67.5%, newest
+first. The phone's Live screen and current API record match remain pending.
 
 ### Run the same app on a physical Android phone
 
@@ -226,7 +231,10 @@ the lab API.
 5. If the phone is absent from the target list, use **Tools > Troubleshoot Device
    Connections**. Windows may need the phone manufacturer's ADB USB driver.
 
-These are deployment steps; a successful phone run has not yet been reported.
+The user has now supplied physical-phone History evidence. The remaining phone
+check is to open **Live activity**, confirm LIVE with an advancing prediction ID,
+and compare its displayed record with current API history. The installation
+steps above remain available for reproducing the setup.
 See the official Android instructions for
 [developer options](https://developer.android.com/studio/debug/dev-options) and
 [running on hardware](https://developer.android.com/studio/run/device).
