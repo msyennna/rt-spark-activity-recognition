@@ -121,14 +121,16 @@ The script downsamples the source data, builds five-reading windows, evaluates a
 
 ```text
 cloud/
-  api/app.py                    Flask API
-  classifier/
-    activity_model.joblib       Serialized trained model
-    predictor.py                Feature extraction and inference
-    train_model.py              Dataset preparation and model training
-  database/database.py          SQLite storage and queries
-  mqtt/mqtt_classifier.py       MQTT ingestion and classification
-requirements.txt                Python dependencies
+├── classifier/
+│   ├── train_model.py       # Model training, StratifiedGroupKFold, Joblib export
+│   ├── predictor.py         # Window buffering, 48-feature extractor, Predictor class
+│   └── model.joblib         # Serialized Random Forest model artifact
+├── database/
+│   └── database.py          # SQLite connection manager & CRUD queries
+├── mqtt/
+│   └── mqtt_classifier.py   # Paho-MQTT consumer daemon & pipeline bridge
+└── api/
+    └── app.py               # Flask RESTful API web server
 ```
 
 ## Scope and next steps
