@@ -1,5 +1,11 @@
 # RT-Spark activity recognition: STM32CubeMX integration setup
 
+The active classifier source is now the handout's **PyTorch** framework, with
+a 450-parameter temporal model and a verified training checkpoint. The Ubuntu
+service has not yet been updated. See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md)
+and [the model guide](../cloud/classifier/README.md) before deployment. Earlier
+Random Forest live results below retain their original attribution.
+
 The `integration/stm32cubemx` branch combines Shanice's STM32Cube/HAL firmware
 with the existing cloud, trained model, provisioning scripts, and Android app.
 The firmware uses PlatformIO and foreground lwIP networking. The unchanged
@@ -147,9 +153,9 @@ PlatformIO image. Flashing is a separate, explicit manual operation.
 ## Ubuntu services
 
 The working repository is `/home/ubuntu/rt-spark-activity-recognition`. Python
-dependencies and the trusted `activity_model.joblib` must be present in the
-environment used by the classifier and API. Do not load model files from unknown
-sources: joblib deserialization can execute code.
+dependencies and the trusted PyTorch checkpoint/metadata pair must be present in the
+environment used by the classifier and API. The loader verifies the model SHA-256 and uses
+weights-only state loading; deploy the checkpoint and metadata together.
 
 The deployed services are:
 
@@ -269,33 +275,28 @@ They do not verify the STM32CubeMX integration:
 
 ## Model limitations
 
-The October 25 reported 98.1% result covers 52 eligible windows from one
-participant holding the board in the right hand. It does not establish accuracy
-across people, placements or environments, and it does not replace training or
-held-out evaluation evidence. The supplied raw session passed local reanalysis;
-this is not a second independent physical test.
+The active PyTorch GRU consumes five ordered one-second readings, all six axes
+and two derived magnitudes. Timestamp-based preparation, rotation augmentation
+and recording-day splits are documented in
+[the model guide](../cloud/classifier/README.md). The handout's Kaggle dataset
+has been recovered and verified; its CSV stays excluded from Git.
 
-The saved model recognizes only WALKING and RUNNING. A resting board can receive
-either label because REST is not a trained class. The displayed confidence is
-the model's probability estimate, not a validated percentage accuracy.
+The new offline results are 98.27% development out-of-fold agreement and 92.08%
+on the untouched latest-two-day holdout, from one participant. The deployment
+checkpoint is refit afterward; neither result is a live board test. The prior
+98.1% six-trial result belongs to the Random Forest baseline, which is still
+running on the Ubuntu service until migration. These scores must stay separate.
 
-The classifier consumes five one-second readings per non-overlapping window.
-Training uses the same feature extraction and a downsampling factor of five for
-the original approximately 5 Hz data. The original `dataset/dataset.csv` is absent
-from the current project, so retraining requires recovering the correct dataset,
-its label meanings, units, sampling rate, and provenance. The existing trained
-artifact can be used for inference without the CSV.
-
-The API stores SQLite timestamps in UTC; Android displays the device's timezone.
-An emulator set to UTC will show a time eight hours behind Manila.
+Only WALKING and RUNNING are trained; a resting board can receive either label.
+Confidence is a per-prediction estimate. API timestamps are UTC, and Android
+displays the device's timezone.
 
 ## Completion review
 
 The board-to-broker acknowledgement capture and physical-phone Live/API match
 are now recorded. See [LAB_COMPLETION.md](LAB_COMPLETION.md) for the handout
-comparison. The handout names TensorFlow/PyTorch; the current classifier uses
-scikit-learn Random Forest, so acceptance of that framework choice remains
-unresolved. Actual CubeMX regeneration and training-data reproducibility retain
+comparison. The handout names TensorFlow/PyTorch; the active source now uses
+PyTorch. Cloud deployment and new live-model validation remain pending. Actual CubeMX regeneration and training-data reproducibility retain
 their documented status.
 
 ## Git workflow

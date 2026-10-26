@@ -1,4 +1,6 @@
 import json
+import math
+import time
 import sys
 from pathlib import Path
 
@@ -28,9 +30,13 @@ SENSOR_TOPIC = "activity/sensor"
 PREDICTION_TOPIC = "activity/prediction"
 
 sensor_buffer = []
+last_sensor_time = None
 
 
 def on_connect(client, userdata, flags, reason_code, properties):
+    global last_sensor_time
+    sensor_buffer.clear()
+    last_sensor_time = None
     if reason_code == 0:
         print("Connected to MQTT broker.")
         print(f"Listening on: {SENSOR_TOPIC}")
@@ -43,7 +49,7 @@ def on_connect(client, userdata, flags, reason_code, properties):
 
 
 def on_message(client, userdata, message):
-    global sensor_buffer
+    global sensor_buffer, last_sensor_time
 
     try:
         payload = json.loads(
@@ -57,14 +63,28 @@ def on_message(client, userdata, message):
         ]
 
         if missing:
+            sensor_buffer.clear()
+            last_sensor_time = None
             print(f"Invalid message. Missing: {missing}")
             return
+
+        if not isinstance(payload, dict):
+            raise ValueError("Sensor payload must be a JSON object.")
+        if any(isinstance(payload[field], bool) for field in SENSOR_COLUMNS):
+            raise ValueError("Sensor fields must be numbers, not booleans.")
 
         reading = {
             field: float(payload[field])
             for field in SENSOR_COLUMNS
         }
 
+        if not all(math.isfinite(value) for value in reading.values()):
+            raise ValueError("Sensor readings must be finite.")
+        now = time.monotonic()
+        if last_sensor_time is not None and now - last_sensor_time > 2.5:
+            sensor_buffer.clear()
+            print("Sensor delivery gap; starting a new temporal window.")
+        last_sensor_time = now
         sensor_buffer.append(reading)
 
         print(
@@ -74,7 +94,9 @@ def on_message(client, userdata, message):
 
         if len(sensor_buffer) == WINDOW_SIZE:
 
-            result = predict_activity(sensor_buffer)
+            window = sensor_buffer[:WINDOW_SIZE]
+            del sensor_buffer[:WINDOW_SIZE]
+            result = predict_activity(window)
 
             record_id = save_prediction(
                 result["activity_id"],
@@ -111,30 +133,40 @@ def on_message(client, userdata, message):
             )
 
     except json.JSONDecodeError:
+        sensor_buffer.clear()
+        last_sensor_time = None
         print("Invalid JSON received.")
 
     except (TypeError, ValueError) as error:
+        sensor_buffer.clear()
+        last_sensor_time = None
         print(f"Invalid sensor data: {error}")
 
     except Exception as error:
         print(f"Error: {error}")
 
 
-initialize_database()
 
-client = mqtt.Client(
-    callback_api_version=mqtt.CallbackAPIVersion.VERSION2
-)
+def main():
+    initialize_database()
 
-client.on_connect = on_connect
-client.on_message = on_message
+    client = mqtt.Client(
+        callback_api_version=mqtt.CallbackAPIVersion.VERSION2
+    )
 
-print("Starting MQTT activity classifier...")
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-client.connect(
-    BROKER,
-    PORT,
-    keepalive=60,
-)
+    print("Starting MQTT activity classifier...")
 
-client.loop_forever()
+    client.connect(
+        BROKER,
+        PORT,
+        keepalive=60,
+    )
+
+    client.loop_forever()
+
+
+if __name__ == "__main__":
+    main()

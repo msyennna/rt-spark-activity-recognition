@@ -6,6 +6,22 @@ The handout describes cloud/model, device firmware and mobile-app tasks.
 This review records functional evidence and remaining alignment issues; it
 does not certify a grade or replace the instructor's requirements.
 
+## Current strict-alignment work
+
+The user supplied Laboratory Activity 3 (3).docx and requires the listed
+suggestions. The active source now replaces Random Forest with a tested,
+trained PyTorch temporal classifier. Dataset recovery and offline evaluation
+are complete; the Ubuntu service has not yet been migrated. The original
+98.1% live trial remains a Random Forest baseline result.
+
+See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md) for the current status and
+the explicit RT-Spark versus LSM6DSL/ISM43362/SPI3/toolchain conflict. The
+framework-acceptance question in the earlier review below is superseded:
+PyTorch has been selected as the handout requires. coreMQTT migration and
+actual CubeMX regeneration remain separate work.
+
+The following review records the earlier implementation and its evidence.
+
 ## Demonstrated functional workflow
 
 | Area | Evidence | Status and limit |

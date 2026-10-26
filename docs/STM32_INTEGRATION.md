@@ -1,5 +1,9 @@
 # STM32CubeMX integration milestones and verification
 
+Current handout alignment: the active classifier source/checkpoint now use
+PyTorch; the deployed cloud service and earlier hardware results remain the
+Random Forest baseline until cutover. See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
+
 This branch integrates the reviewed Shanice firmware with Yena's existing cloud
 and Android baseline. Build evidence and physical-board evidence are recorded
 separately. No automatic flashing is part of this work.
