@@ -62,7 +62,9 @@ Official references: [PlatformIO ST-LINK configuration](https://docs.platformio.
 and [PlatformIO upload target](https://docs.platformio.org/en/latest/core/quickstart.html).
 The observed local build is recorded in
 [the Windows reconciliation report](../docs/testing/2026-10-27_windows_reconciled_build.md).
-Programming has not yet been established by supplied evidence.
+The later [user-supplied upload output](../docs/testing/2026-10-27_coremqtt_stlink_upload.md)
+reports successful programming and Verified OK in 12.62 seconds. Application
+startup and new coreMQTT runtime evidence remain pending.
 
 ## MQTT library and handout alignment
 

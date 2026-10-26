@@ -54,8 +54,11 @@ The custom MQTT encoder has been replaced by the actual AWS coreMQTT 2.3.1
 serializer/deserializer, with the handout's MQTT_DO_NOT_USE_CUSTOM_CONFIG
 definition applied to the library. Five native suites, an ARM firmware build,
 and the source guard passed. See [the exact build/test record](testing/2026-10-26_coremqtt_port.md).
-This firmware has not yet been flashed or observed on the physical board;
-earlier PUBACKs describe the previous custom-encoder implementation.
+The local reconciled image has now been programmed through ST-LINK, with
+OpenOCD Verified OK and SUCCESS in 12.62 seconds in the user's supplied output.
+See [the upload record](testing/2026-10-27_coremqtt_stlink_upload.md). New
+application startup and PUBACKs remain pending; earlier PUBACKs describe the
+previous custom-encoder implementation.
 
 The subsequent Windows build also passed in 16.75 seconds, with coreMQTT 2.3.1,
 66,756 bytes static SRAM and 162,788 bytes flash. The private-header existence
