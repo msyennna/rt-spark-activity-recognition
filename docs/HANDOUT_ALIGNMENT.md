@@ -26,6 +26,12 @@ has not yet been updated.** Its previous live evidence describes the deployed
 Random Forest baseline until a model cutover is performed. New PyTorch
 predictions must receive their own live validation and movement trial.
 
+Use [the Windows/Ubuntu deployment runbook](DEPLOY_HANDOUT_UPDATES.md).
+Its explicit-file bundle passed all ten actual model/database/API staging
+tests. Four helper tests cover service scope, restore after failure or
+interruption, and the fresh-ID/matching-model-hash success gate. These local
+tests do not claim a live server cutover.
+
 A deployment should preserve a backup of the current cloud/classifier and
 cloud/mqtt files and stop only the classifier service for the cutover. Install
 the CPU PyTorch dependency in the service's existing virtual environment,

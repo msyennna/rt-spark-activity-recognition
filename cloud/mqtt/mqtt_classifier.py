@@ -15,6 +15,7 @@ from cloud.classifier.predictor import (
     predict_activity,
     SENSOR_COLUMNS,
     WINDOW_SIZE,
+    MODEL_METADATA,
 )
 
 from cloud.database.database import (
@@ -157,7 +158,9 @@ def main():
     client.on_connect = on_connect
     client.on_message = on_message
 
-    print("Starting MQTT activity classifier...")
+    print("Starting MQTT activity classifier...", flush=True)
+    print(f"PyTorch model SHA256: {MODEL_METADATA['model_sha256']}; "
+          f"{MODEL_METADATA['trainable_parameters']} parameters", flush=True)
 
     client.connect(
         BROKER,

@@ -1,106 +1,67 @@
-# Laboratory Activity 3: completion review
+# Laboratory Activity 3: current completion review
 
-Reviewed October 26, 2026 (Asia/Manila), against the user-supplied
-`BCA180 ESP - Laboratory Activity 3 (2).docx` and integration source/evidence.
-The handout describes cloud/model, device firmware and mobile-app tasks.
-This review records functional evidence and remaining alignment issues; it
-does not certify a grade or replace the instructor's requirements.
+Reviewed October 26, 2026 (Asia/Manila), against all seven pages of the supplied
+`BCA180 ESP - Laboratory Activity 3 (3).docx`. Its SHA-256 is
+`8efc5cf8d9c75abff183d1f76581beaded74cc0c1460bce08006ef6a08ef6bc8`.
+This review distinguishes source/build results from deployment and physical
+evidence. The earlier working system does not establish that new code is live.
 
-## Current strict-alignment work
+## Current alignment
 
-The user supplied Laboratory Activity 3 (3).docx and requires the listed
-suggestions. The active source now replaces Random Forest with a tested,
-trained PyTorch temporal classifier. Dataset recovery and offline evaluation
-are complete; the Ubuntu service has not yet been migrated. The original
-98.1% live trial remains a Random Forest baseline result.
-
-See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md) for the current status and
-the explicit RT-Spark versus LSM6DSL/ISM43362/SPI3/toolchain conflict. The
-framework-acceptance question in the earlier review below is superseded:
-PyTorch has been selected as the handout requires. coreMQTT migration and
-actual CubeMX regeneration remain separate work.
-
-The following review records the earlier implementation and its evidence.
-
-## Demonstrated functional workflow
-
-| Area | Evidence | Status and limit |
+| Handout area | Current evidence | Remaining action |
 | --- | --- | --- |
-| Sensor readings and direct board networking | Physical-board ICM20608 startup/readings, Wi-Fi/DHCP, TLS and MQTT login observations; October 26 transcript with 17 accepted PUBACKs, IDs 1482–1498 | Board-to-broker operation observed. The untimed transcript does not measure the requested one-second cadence. |
-| Cloud broker, classifier, database and API | Earlier Mosquitto subscriber messages, audited stored prediction rows, and supplied current API responses | Working deployed pipeline observed. PUBACK and database completion remain distinct stages. |
-| Machine-learning inference and activity test | Saved model and training source; six independently timed walking/jogging trials with preserved raw data | Audited 51/52 agreement (98.1%) on this participant/placement. This is not population accuracy or reproduced training cross-validation. |
-| Android live display and history | Emulator record matches, physical Xiaomi target and History photo, physical-phone LIVE record 5167 matching the API | Main phone display functions observed. The phone timestamp correctly corresponds to UTC+08:00. Precise polling and a new phone outage/recovery experiment were not measured. |
-| Build/source verification | Previously recorded firmware builds, five native C suites, five actual-library TLS cases and CubeMX source guard | Previously passed checks remain recorded. Documentation-only milestones have not changed application code. |
+| Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. Earlier MQTT reception, saved rows and API responses establish the deployed baseline. | Deploy the new classifier and verify fresh rows and API output. |
+| TensorFlow or PyTorch; all axes, temporal learning, lightweight design | Random Forest has been replaced in the repository by a trained 450-parameter PyTorch GRU over ordered five-reading windows and all six axes. Verified Kaggle dataset provenance and timestamp-based preparation are recorded. | The Ubuntu service still has the earlier model until cutover. Use the deployment runbook. |
+| Rigorous model testing | New PyTorch development OOF: 2219/2258 (98.27%). Untouched latest-two-day holdout: 1197/1300 (92.08%). Ten actual model/database/API tests passed. | Repeat a labelled live movement test after deployment. This dataset contains one participant; no population-accuracy claim is justified. |
+| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. | Resolve the handout's conflicting chip/bus reference instructions. Actual CubeMX regeneration is also pending. |
+| AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. | Build with the local private configuration and flash the reviewed firmware, then collect new physical logs. The earlier custom-encoder PUBACKs are historical. |
+| One reading/message per second | Firmware schedules a nominal one-second publish interval. Earlier excerpt contains 17 accepted PUBACKs, IDs 1482–1498. | Obtain a timestamped capture to measure cadence. An untimed log cannot establish it. |
+| Android smartphone, live predictions and history | Kotlin, Android Studio and Volley match listed choices. Physical Xiaomi History was observed; phone Live record 5167 matches the supplied API by label, confidence and time conversion. | Verify fresh PyTorch predictions on the phone after cutover. Network work remains asynchronous; no UI rewrite is required by the handout. |
 
-Evidence:
+## Handout conflict requiring correction
 
-- [PUBACK report and transcript](testing/2026-10-26_cubemx_puback.md)
-- [Physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
-- [Audited movement trial](testing/2026-10-25_cubemx_walk_jog_trial.md)
-- [Integration verification record](STM32_INTEGRATION.md)
+Page 1 names RT-Spark and page 2 names VSCode PlatformIO. Later reference steps
+name LSM6DSL, ISM43362, SPI3, CMSIS driver packs, an AC6 `solution.yml` and a
+`WiFi_ISM43362_HW.c` reference file that was not supplied. These instructions
+do not consistently describe the demonstrated board/project.
 
-## Handout alignment to resolve
+Changing a driver name or enabling SPI3 cannot replace the installed
+ICM20608/RW007 hardware. Ask the instructor for the corrected instructions for
+RT-Spark, or confirmation that a different physical board is intended. This is
+an unresolved literal-alignment issue, not an assumed exception. The actual
+coreMQTT source integration does not itself run the pack/component-editor steps.
+See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 
-### Machine-learning framework
+## Evidence and model attribution
 
-The handout's software list names **TensorFlow, PyTorch** (page 2).
-The checked-in `cloud/classifier/train_model.py` imports scikit-learn and trains
-a 200-tree `RandomForestClassifier`. It is a working machine-learning classifier,
-but it is not a TensorFlow or PyTorch implementation.
+- [New PyTorch preparation, training, splits and checkpoint](../cloud/classifier/README.md)
+- [Machine-readable PyTorch training report](testing/pytorch_training_2026-10-26.json)
+- [New coreMQTT source/build checks and Linux TLS-test skips](testing/2026-10-26_coremqtt_port.md)
+- [Cloud cutover and physical validation instructions](DEPLOY_HANDOUT_UPDATES.md)
+- [Earlier physical PUBACK report and full transcript](testing/2026-10-26_cubemx_puback.md)
+- [Earlier physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
+- [Earlier independently timed trial and raw-data audit](testing/2026-10-25_cubemx_walk_jog_trial.md)
+- [Detailed integration history](STM32_INTEGRATION.md)
 
-Acceptance of an alternative framework has not been established in the
-supplied evidence. Resolve whether those named frameworks are required or
-alternatives are accepted before declaring every handout item complete. If a
-named framework is required, plan and validate the model change with the
-correct training dataset, retaining the current working model and results.
-This review does not silently replace the deployed classifier.
+The earlier 51/52 result (98.1%) came from six valid timed trials using
+**Random Forest**, with one participant holding the board in the right hand.
+It is retained unchanged and must not be attributed to the new PyTorch model.
+The PyTorch final deployment checkpoint was refitted on all available days
+only after holdout evaluation; the held-out score belongs to the earlier
+holdout-trained checkpoint, not a re-evaluation of the final refit.
 
-### CubeMX workflow
+Both models have WALKING/RUNNING classes only. Stationary input can still be
+classified as one of them. Confidence is not measured accuracy. The handout
+does not separately require a resting class or specify a minimum score.
 
-The repository contains the reviewed `.ioc`, STM32Cube/HAL sources, a passing
-PlatformIO build and source guard. Actual CubeMX regeneration during this
-integration has not been exercised. The active PlatformIO sources are
-`firmware/src` and `firmware/include`; generated `Core` files are separate.
+## Completion boundary
 
-To establish that workflow, follow the scratch-project procedure in
-[firmware/README.md](../firmware/README.md): seed the active USER CODE,
-regenerate with the installed CubeMX version, run the generated-code guard,
-review peripheral ownership/settings, then build reviewed changes. Record
-what actually ran. Do not count the existing source guard as a regeneration run.
+Source changes are prepared and tested. No cloud cutover, board flashing,
+actual CubeMX regeneration or new PyTorch movement/phone validation occurred
+in this update. Strict completion remains pending those applicable actions
+and the hardware/toolchain clarification.
 
-The handout's LSM6DSL/ISM43362/SPI3 examples differ from the physical
-ICM20608/RW007/SPI2 hardware. The hardware-specific substitutions are documented.
-The MQTT implementation is the reviewed foreground publisher rather than the
-handout's coreMQTT example. Keep these implementation choices explicit when
-presenting the project.
-
-## Model reproducibility and interpretation
-
-The training script expects `dataset/dataset.csv`; the user's earlier search
-reported it missing, and recovery has not been documented. It is intentionally
-excluded from Git, so repository absence alone is not a new local-file check.
-Recover the correct data privately, document its provenance, label meanings,
-units and sampling rate, and retain training/evaluation output if reproducing
-the saved model. Do not invent cross-validation results from source code.
-
-The model uses all six sensor axes and magnitude statistics over five-reading
-windows. Those aggregate features summarize time windows but are invariant to
-sample order; explicit temporal-correlation learning is not established. The
-handout encourages temporal information and robust generalization. Explain
-this limitation and the single-participant trial scope accurately.
-
-The 67.5% values shown in the later app captures are prediction
-confidence, not measured accuracy. The actual activity in those captures was
-not labelled, and the current model has WALKING/RUNNING classes only.
-
-## Scope of remaining engineering checks
-
-The integration checklist also records cadence measurement, DHCP renewal,
-controlled network interruption, board negative-certificate cases and memory/
-polling measurements. These are useful engineering checks; the handout does
-not individually prescribe every one as a separate grading test. Their
-pending status should not obscure the demonstrated core workflow, and they
-must not be reported as passed without evidence.
-
-No app reinstall, firmware reflash, cloud reprovisioning, retraining, merge to
-main or new movement trial was performed for this documentation milestone.
+The integration checklist includes additional engineering checks such as DHCP
+renewal, controlled interruptions and memory/polling measurements. Their
+pending status is recorded honestly; the handout does not prescribe every one
+as a separate grading requirement, nor a particular video/report format.
