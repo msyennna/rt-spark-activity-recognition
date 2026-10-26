@@ -7,14 +7,21 @@ This repository contains the cloud components only. It does not currently includ
 ## System flow
 
 ```text
-RT-Spark / sensor publisher
-        | MQTT: activity/sensor
-        v
-MQTT classifier --> activity model --> SQLite
-        |                               ^
-        + MQTT: activity/prediction     |
-                                        |
-Mobile or other API client --> Flask API
++----------------------------+
+| RT-Spark / Sensor Publisher|
++----------------------------+
+              |
+              | MQTT: activity/sensor
+              v
++----------------------------+       +-------------------+       +-----------------+
+|      MQTT Classifier       | ----> |  Activity Model   | ----> |     SQLite      |
++----------------------------+       +-------------------+       +-----------------+
+              |                                                           ^
+              | MQTT: activity/prediction                                 |
+              v                                                           |
++----------------------------+                                   +-----------------+
+| Mobile or other API Client | --------------------------------> |    Flask API    |
++----------------------------+                                   +-----------------+
 ```
 
 The classifier expects six numeric fields per sensor message:
@@ -114,18 +121,20 @@ The script downsamples the source data, builds five-reading windows, evaluates a
 
 ```text
 cloud/
-  api/app.py                    Flask API
-  classifier/
-    activity_model.joblib       Serialized trained model
-    predictor.py                Feature extraction and inference
-    train_model.py              Dataset preparation and model training
-  database/database.py          SQLite storage and queries
-  mqtt/mqtt_classifier.py       MQTT ingestion and classification
-requirements.txt                Python dependencies
+├── classifier/
+│   ├── train_model.py       # Model training, StratifiedGroupKFold, Joblib export
+│   ├── predictor.py         # Window buffering, 48-feature extractor, Predictor class
+│   └── model.joblib         # Serialized Random Forest model artifact
+├── database/
+│   └── database.py          # SQLite connection manager & CRUD queries
+├── mqtt/
+│   └── mqtt_classifier.py   # Paho-MQTT consumer daemon & pipeline bridge
+└── api/
+    └── app.py               # Flask RESTful API web server
 ```
 
 ## Scope and next steps
 
 The accompanying lab brief describes a complete IoT system, including RT-Spark firmware and a mobile client. Those components are outside this repository's current contents. To complete the end-to-end activity, add a device publisher that sends compatible sensor readings and a mobile app that consumes the API. Before reporting model performance, run the training/evaluation workflow with the intended dataset and validate it with the target hardware.
 
-For the detailed implementation status and evaluation notes, see [LABORATORY_REPORT.md](LABORATORY_REPORT.md). The assignment brief is [BCA180 ESP - Laboratory Activity 3.md](<BCA180 ESP - Laboratory Activity 3.md>).
+See the [Laboratory Report (Markdown)](laboratory_report_3_activity_recognition.md) or [Laboratory Report (PDF)](<Laboratory Report 3_ Activity Recognition.pdf>) for implementation details, results, and limitations.
