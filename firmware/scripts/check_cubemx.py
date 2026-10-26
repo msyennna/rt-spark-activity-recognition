@@ -43,9 +43,6 @@ def user_blocks(text, label):
 
 def check(generated=None):
     errors = []
-    ioc_text = (FIRMWARE / "activity_recognition/activity_recognition.ioc").read_text()
-    config = dict(line.split("=", 1) for line in ioc_text.splitlines()
-                  if "=" in line and not line.startswith("#"))
     expected = {
         "Mcu.CPN": "STM32F407ZGT6",
         "Mcu.ThirdPartyNb": "0",
@@ -66,13 +63,24 @@ def check(generated=None):
         "PG11.GPIO_ModeDefaultEXTI": "GPIO_MODE_IT_FALLING",
         "ProjectManager.KeepUserCode": "true",
     }
-    for key, value in expected.items():
-        if config.get(key) != value:
-            errors.append(f".ioc: {key} must be {value}")
-    if not config.get("NVIC.EXTI15_10_IRQn", "").startswith("false\\:"):
-        errors.append(".ioc: EXTI15_10 NVIC must stay disabled for foreground polling")
-    if "LSM6DSL" in ioc_text or "X-CUBE-MEMS1" in ioc_text:
-        errors.append(".ioc: stale LSM6DSL/MEMS pack selection must be removed")
+    configurations = [(FIRMWARE / "activity_recognition/activity_recognition.ioc", ".ioc")]
+    if generated is not None:
+        configurations.append((generated / "activity_recognition.ioc", "generated .ioc"))
+    for ioc_path, label in configurations:
+        try:
+            ioc_text = ioc_path.read_text()
+        except OSError as exc:
+            errors.append(f"{label}: could not read configuration: {exc}")
+            continue
+        config = dict(line.split("=", 1) for line in ioc_text.splitlines()
+                      if "=" in line and not line.startswith("#"))
+        for key, value in expected.items():
+            if config.get(key) != value:
+                errors.append(f"{label}: {key} must be {value}")
+        if not config.get("NVIC.EXTI15_10_IRQn", "").startswith("false\\:"):
+            errors.append(f"{label}: EXTI15_10 NVIC must stay disabled for foreground polling")
+        if "LSM6DSL" in ioc_text or "X-CUBE-MEMS1" in ioc_text:
+            errors.append(f"{label}: stale LSM6DSL/MEMS pack selection must be removed")
 
     main = (FIRMWARE / "src/main.c").read_text()
     for name, expected_value in (("PLLM", "4"), ("PLLN", "168"), ("PLLQ", "7")):
@@ -126,7 +134,7 @@ def main():
         return 1
     print("CubeMX configuration and active USER CODE blocks: OK")
     if args.generated:
-        print("Generated USER CODE retained. Review non-user peripheral changes manually; no files were copied.")
+        print("Candidate USER CODE retained. Review non-user peripheral changes manually; no files were copied.")
     else:
         print("PlatformIO compiles src/ and include/; ignored CubeMX Core/ output is not built.")
     return 0

@@ -57,6 +57,13 @@ and the source guard passed. See [the exact build/test record](testing/2026-10-2
 This firmware has not yet been flashed or observed on the physical board;
 earlier PUBACKs describe the previous custom-encoder implementation.
 
+The subsequent Windows build also passed in 16.75 seconds, with coreMQTT 2.3.1,
+66,756 bytes static SRAM and 162,788 bytes flash. The private-header existence
+check was True; its values were not inspected. See
+[the preserved build evidence](testing/2026-10-26_windows_coremqtt_build.md).
+The review-copy helper and candidate-configuration guard are now available;
+they do not count as an actual CubeMX generation run.
+
 The handout specifies RT-Spark on page 1 and VSCode PlatformIO on page 2,
 but its later reference steps name
 LSM6DSL, ISM43362, SPI3, CMSIS driver components, and an AC6 solution.yml.

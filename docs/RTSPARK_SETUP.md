@@ -149,8 +149,11 @@ the separate 64 KiB CCM bank; the C library uses an independently bounded 8 KiB
 heap in SRAM, and lwIP uses its own bounded SRAM heap. TLS allocation failures
 enter retry; C heap exhaustion returns `ENOMEM` with its bounds preserved.
 Final bank usage is recorded separately in the integration milestone table.
-The integrated ARM build passes with SRAM 66,756 bytes, separate CCM 57,344
-bytes and flash 160,860 bytes. The toolchain emits warnings about unused
+The earlier custom-encoder ARM build used SRAM 66,756 bytes, separate CCM
+57,344 bytes and flash 160,860 bytes. The later coreMQTT Windows build passed
+with static SRAM 66,756 bytes and flash 162,788 bytes; see
+[the supplied build log](testing/2026-10-26_windows_coremqtt_build.md).
+That Windows log does not separately report CCM. The toolchain emits warnings about unused
 libnosys system calls and the default RWX load segment; there are no build errors.
 
 Initial sensor output, Wi-Fi/DHCP, board TLS/login, broker reception and one local

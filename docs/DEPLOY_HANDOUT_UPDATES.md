@@ -130,6 +130,12 @@ aliases with plaintext in tracked headers. Follow the scratch-project CubeMX
 regeneration and review procedure in [firmware/README.md](../firmware/README.md).
 Record the actual installed CubeMX version and generation result.
 
+The user has now supplied a successful Windows build with the private header
+present; [the original log and metrics](testing/2026-10-26_windows_coremqtt_build.md)
+are preserved. Next prepare the public-file review project and run actual
+CubeMX generation as described in the firmware README. The preparation helper
+does not generate, flash or copy generated output into the active build.
+
 For the reviewed actual-board source, in Windows PowerShell:
 
 ```powershell

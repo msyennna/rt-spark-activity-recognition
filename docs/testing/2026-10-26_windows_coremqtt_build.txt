@@ -1,0 +1,326 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Yena> Set-Location "$env:USERPROFILE\rt-spark-activity-recognition\.worktrees\stm32cubemx"
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx>
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx> git pull --ff-only origin integration/stm32cubemx
+
+remote: Enumerating objects: 15, done.
+remote: Counting objects: 100% (15/15), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 8 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (8/8), 2.19 KiB | 86.00 KiB/s, done.
+From https://github.com/msyennna/rt-spark-activity-recognition
+ * branch            integration/stm32cubemx -> FETCH_HEAD
+   bff62a2..ceb55b3  integration/stm32cubemx -> origin/integration/stm32cubemx
+Updating bff62a2..ceb55b3
+Fast-forward
+ docs/DEPLOY_HANDOUT_UPDATES.md | 18 +++++++++++-------
+ docs/HANDOUT_ALIGNMENT.md      | 18 +++++++++++++-----
+ docs/LAB_COMPLETION.md         | 17 ++++++++++-------
+ firmware/README.md             |  6 ++++--
+ 4 files changed, 38 insertions(+), 21 deletions(-)
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx>
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx> Test-Path .\firmware\include\rtspark_private.h
+True
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx> python firmware\scripts\check_cubemx.py
+CubeMX configuration and active USER CODE blocks: OK
+PlatformIO compiles src/ and include/; ignored CubeMX Core/ output is not built.
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx> $env:PLATFORMIO_SETTING_ENABLE_TELEMETRY = "No"
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx>
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx> $rtsparkPio = "$env:USERPROFILE\.platformio\penv\Scripts\platformio.exe"
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx>
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx> if (Test-Path $rtsparkPio) {
+>>     & $rtsparkPio run -d firmware
+>> } else {
+>>     pio run -d firmware
+>> }
+Processing black_f407zg (platform: ststm32@20.0.0; board: black_f407zg; framework: stm32cube)
+------------------------------------------------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/ststm32/black_f407zg.html
+PLATFORM: ST STM32 (20.0.0) > Black STM32F407ZG
+HARDWARE: STM32F407ZGT6 168MHz, 128KB RAM, 1MB Flash
+DEBUG: Current (stlink) External (blackmagic, cmsis-dap, jlink, stlink)
+PACKAGES:
+ - framework-stm32cubef4 @ 1.28.3
+ - tool-ldscripts-ststm32 @ 0.3.0
+ - toolchain-gccarmnoneeabi @ 1.120301.0 (12.3.1)
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 60 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- coreMQTT @ 2.3.1
+Building in release mode
+Compiling .pio\build\black_f407zg\LwIP\core\altcp.o
+Compiling .pio\build\black_f407zg\LwIP\core\altcp_alloc.o
+Compiling .pio\build\black_f407zg\LwIP\core\altcp_tcp.o
+Compiling .pio\build\black_f407zg\LwIP\core\def.o
+Compiling .pio\build\black_f407zg\LwIP\core\dns.o
+Compiling .pio\build\black_f407zg\LwIP\core\inet_chksum.o
+Compiling .pio\build\black_f407zg\LwIP\core\init.o
+Compiling .pio\build\black_f407zg\LwIP\core\ip.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\autoip.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\dhcp.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\etharp.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\icmp.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\igmp.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\ip4.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\ip4_addr.o
+Compiling .pio\build\black_f407zg\LwIP\core\ipv4\ip4_frag.o
+Compiling .pio\build\black_f407zg\LwIP\core\mem.o
+Compiling .pio\build\black_f407zg\LwIP\core\memp.o
+Compiling .pio\build\black_f407zg\LwIP\core\netif.o
+Compiling .pio\build\black_f407zg\LwIP\core\pbuf.o
+Compiling .pio\build\black_f407zg\LwIP\core\raw.o
+Compiling .pio\build\black_f407zg\LwIP\core\stats.o
+Compiling .pio\build\black_f407zg\LwIP\core\sys.o
+Compiling .pio\build\black_f407zg\LwIP\core\tcp.o
+Compiling .pio\build\black_f407zg\LwIP\core\tcp_in.o
+Compiling .pio\build\black_f407zg\LwIP\core\tcp_out.o
+Compiling .pio\build\black_f407zg\LwIP\core\timeouts.o
+Compiling .pio\build\black_f407zg\LwIP\core\udp.o
+Compiling .pio\build\black_f407zg\LwIP\netif\ethernet.o
+Compiling .pio\build\black_f407zg\mbedTLS\aes.o
+Compiling .pio\build\black_f407zg\mbedTLS\aesce.o
+Compiling .pio\build\black_f407zg\mbedTLS\aesni.o
+Compiling .pio\build\black_f407zg\mbedTLS\aria.o
+Compiling .pio\build\black_f407zg\mbedTLS\asn1parse.o
+Compiling .pio\build\black_f407zg\mbedTLS\asn1write.o
+Compiling .pio\build\black_f407zg\mbedTLS\base64.o
+Compiling .pio\build\black_f407zg\mbedTLS\bignum.o
+Compiling .pio\build\black_f407zg\mbedTLS\bignum_core.o
+Compiling .pio\build\black_f407zg\mbedTLS\bignum_mod.o
+Compiling .pio\build\black_f407zg\mbedTLS\bignum_mod_raw.o
+Compiling .pio\build\black_f407zg\mbedTLS\block_cipher.o
+Compiling .pio\build\black_f407zg\mbedTLS\camellia.o
+Compiling .pio\build\black_f407zg\mbedTLS\ccm.o
+Compiling .pio\build\black_f407zg\mbedTLS\chacha20.o
+Compiling .pio\build\black_f407zg\mbedTLS\chachapoly.o
+Compiling .pio\build\black_f407zg\mbedTLS\cipher.o
+Compiling .pio\build\black_f407zg\mbedTLS\cipher_wrap.o
+Compiling .pio\build\black_f407zg\mbedTLS\cmac.o
+Compiling .pio\build\black_f407zg\mbedTLS\constant_time.o
+Compiling .pio\build\black_f407zg\mbedTLS\ctr_drbg.o
+Compiling .pio\build\black_f407zg\mbedTLS\debug.o
+Compiling .pio\build\black_f407zg\mbedTLS\des.o
+Compiling .pio\build\black_f407zg\mbedTLS\dhm.o
+Compiling .pio\build\black_f407zg\mbedTLS\ecdh.o
+Compiling .pio\build\black_f407zg\mbedTLS\ecdsa.o
+Compiling .pio\build\black_f407zg\mbedTLS\ecjpake.o
+Compiling .pio\build\black_f407zg\mbedTLS\ecp.o
+Compiling .pio\build\black_f407zg\mbedTLS\ecp_curves.o
+Compiling .pio\build\black_f407zg\mbedTLS\ecp_curves_new.o
+Compiling .pio\build\black_f407zg\mbedTLS\entropy.o
+Compiling .pio\build\black_f407zg\mbedTLS\entropy_poll.o
+Compiling .pio\build\black_f407zg\mbedTLS\error.o
+Compiling .pio\build\black_f407zg\mbedTLS\gcm.o
+Compiling .pio\build\black_f407zg\mbedTLS\hkdf.o
+Compiling .pio\build\black_f407zg\mbedTLS\hmac_drbg.o
+Compiling .pio\build\black_f407zg\mbedTLS\lmots.o
+Compiling .pio\build\black_f407zg\mbedTLS\lms.o
+Compiling .pio\build\black_f407zg\mbedTLS\md.o
+Compiling .pio\build\black_f407zg\mbedTLS\md5.o
+Compiling .pio\build\black_f407zg\mbedTLS\memory_buffer_alloc.o
+Compiling .pio\build\black_f407zg\mbedTLS\mps_reader.o
+Compiling .pio\build\black_f407zg\mbedTLS\mps_trace.o
+Compiling .pio\build\black_f407zg\mbedTLS\net_sockets.o
+Compiling .pio\build\black_f407zg\mbedTLS\nist_kw.o
+Compiling .pio\build\black_f407zg\mbedTLS\oid.o
+Compiling .pio\build\black_f407zg\mbedTLS\padlock.o
+Compiling .pio\build\black_f407zg\mbedTLS\pem.o
+Compiling .pio\build\black_f407zg\mbedTLS\pk.o
+Compiling .pio\build\black_f407zg\mbedTLS\pk_ecc.o
+Compiling .pio\build\black_f407zg\mbedTLS\pk_wrap.o
+Compiling .pio\build\black_f407zg\mbedTLS\pkcs12.o
+Compiling .pio\build\black_f407zg\mbedTLS\pkcs5.o
+Compiling .pio\build\black_f407zg\mbedTLS\pkcs7.o
+Compiling .pio\build\black_f407zg\mbedTLS\pkparse.o
+Compiling .pio\build\black_f407zg\mbedTLS\pkwrite.o
+Compiling .pio\build\black_f407zg\mbedTLS\platform.o
+Compiling .pio\build\black_f407zg\mbedTLS\platform_util.o
+Compiling .pio\build\black_f407zg\mbedTLS\poly1305.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_aead.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_cipher.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_client.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_driver_wrappers_no_static.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_ecp.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_ffdh.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_hash.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_mac.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_pake.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_random.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_rsa.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_se.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_slot_management.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_crypto_storage.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_its_file.o
+Compiling .pio\build\black_f407zg\mbedTLS\psa_util.o
+Compiling .pio\build\black_f407zg\mbedTLS\ripemd160.o
+Compiling .pio\build\black_f407zg\mbedTLS\rsa.o
+Compiling .pio\build\black_f407zg\mbedTLS\rsa_alt_helpers.o
+Compiling .pio\build\black_f407zg\mbedTLS\sha1.o
+Compiling .pio\build\black_f407zg\mbedTLS\sha256.o
+Compiling .pio\build\black_f407zg\mbedTLS\sha3.o
+Compiling .pio\build\black_f407zg\mbedTLS\sha512.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_cache.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_ciphersuites.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_client.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_cookie.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_debug_helpers_generated.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_msg.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_ticket.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls12_client.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls12_server.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls13_client.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls13_generic.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls13_keys.o
+Compiling .pio\build\black_f407zg\mbedTLS\ssl_tls13_server.o
+Compiling .pio\build\black_f407zg\mbedTLS\threading.o
+Compiling .pio\build\black_f407zg\mbedTLS\timing.o
+Compiling .pio\build\black_f407zg\mbedTLS\version.o
+Compiling .pio\build\black_f407zg\mbedTLS\version_features.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509_create.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509_crl.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509_crt.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509_csr.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509write.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509write_crt.o
+Compiling .pio\build\black_f407zg\mbedTLS\x509write_csr.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_adc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_adc_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_can.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_cec.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_cortex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_crc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_cryp.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_cryp_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dac.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dac_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dcmi.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dcmi_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dfsdm.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dma.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dma2d.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dma_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_dsi.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_eth.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_exti.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_flash.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_flash_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_flash_ramfunc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_fmpi2c.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_fmpi2c_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_fmpsmbus.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_fmpsmbus_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_gpio.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_hash.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_hash_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_hcd.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_i2c.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_i2c_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_i2s.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_i2s_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_irda.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_iwdg.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_lptim.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_ltdc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_ltdc_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_mmc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_nand.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_nor.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_pccard.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_pcd.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_pcd_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_pwr.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_pwr_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_qspi.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_rcc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_rcc_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_rng.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_rtc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_rtc_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_sai.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_sai_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_sd.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_sdram.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_smartcard.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_smbus.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_spdifrx.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_spi.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_sram.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_tim.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_tim_ex.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_uart.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_usart.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_hal_wwdg.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_adc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_crc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_dac.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_dma.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_dma2d.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_exti.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_fmc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_fmpi2c.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_fsmc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_gpio.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_i2c.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_lptim.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_pwr.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_rcc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_rng.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_rtc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_sdmmc.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_spi.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_tim.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_usart.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_usb.o
+Compiling .pio\build\black_f407zg\FrameworkHALDriver\Src\stm32f4xx_ll_utils.o
+Compiling .pio\build\black_f407zg\src\custom_bus.o
+Compiling .pio\build\black_f407zg\src\icm20608.o
+Compiling .pio\build\black_f407zg\src\lwip_port.o
+Compiling .pio\build\black_f407zg\src\main.o
+Compiling .pio\build\black_f407zg\src\rtspark_mqtt.o
+Compiling .pio\build\black_f407zg\src\rtspark_mqtt_packet.o
+Compiling .pio\build\black_f407zg\src\rtspark_platform.o
+Compiling .pio\build\black_f407zg\src\rtspark_syscalls.o
+Compiling .pio\build\black_f407zg\src\rw007_netif.o
+Compiling .pio\build\black_f407zg\src\stm32f4xx_hal_msp.o
+Compiling .pio\build\black_f407zg\src\stm32f4xx_it.o
+Compiling .pio\build\black_f407zg\lib7b4\coreMQTT\core_mqtt_serializer.o
+Compiling .pio\build\black_f407zg\FrameworkCMSISDevice\gcc\startup_stm32f407xx.o
+Compiling .pio\build\black_f407zg\FrameworkCMSISDevice\system_stm32f4xx.o
+Archiving .pio\build\black_f407zg\libFrameworkCMSISDevice.a
+Archiving .pio\build\black_f407zg\lib7b4\libcoreMQTT.a
+Linking .pio\build\black_f407zg\firmware.elf
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-closer.o): in function `_close_r':
+closer.c:(.text._close_r+0xc): warning: _close is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-fstatr.o): in function `_fstat_r':
+fstatr.c:(.text._fstat_r+0xe): warning: _fstat is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-signalr.o): in function `_getpid_r':
+signalr.c:(.text._getpid_r+0x0): warning: _getpid is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-isattyr.o): in function `_isatty_r':
+isattyr.c:(.text._isatty_r+0xc): warning: _isatty is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-signalr.o): in function `_kill_r':
+signalr.c:(.text._kill_r+0xe): warning: _kill is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-lseekr.o): in function `_lseek_r':
+lseekr.c:(.text._lseek_r+0x10): warning: _lseek is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-readr.o): in function `_read_r':
+readr.c:(.text._read_r+0x10): warning: _read is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(libc_a-writer.o): in function `_write_r':
+writer.c:(.text._write_r+0x10): warning: _write is not implemented and will always fail
+c:/users/yena/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: warning: .pio/build/black_f407zg/firmware.elf has a LOAD segment with RWX permissions
+Checking size .pio\build\black_f407zg\firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=====     ]  50.9% (used 66756 bytes from 131072 bytes)
+Flash: [==        ]  15.5% (used 162788 bytes from 1048576 bytes)
+Building .pio\build\black_f407zg\firmware.bin
+============================================= [SUCCESS] Took 16.75 seconds =============================================
+PS C:\Users\Yena\rt-spark-activity-recognition\.worktrees\stm32cubemx>

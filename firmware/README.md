@@ -63,19 +63,32 @@ reference. CubeMX generates ignored `activity_recognition/Core/`, `Drivers/`,
 and Makefile files. Those files are not PlatformIO's active sources. Regenerating
 the `.ioc` alone therefore does not update the compiled firmware.
 
-Before regeneration, preserve a clean commit and make a scratch copy of the
-CubeMX project. Seed its `Core/Src` with the active `main.c`,
-`stm32f4xx_hal_msp.c`, and `stm32f4xx_it.c`; seed `Core/Inc` with `main.h` and
-`stm32f4xx_it.h`. Keep **Keep User Code** enabled. Regenerate in that scratch
-project, then run:
+Before regeneration, preserve a clean commit. The preparation helper creates
+a **new** review directory outside the repository, copies the public `.ioc`,
+seeds `Core/Src` with active `main.c`, `stm32f4xx_hal_msp.c` and
+`stm32f4xx_it.c`, and seeds `Core/Inc` with `main.h` and `stm32f4xx_it.h`.
+It records source hashes and includes no credentials. In PowerShell:
 
 ```powershell
-python firmware/scripts/check_cubemx.py --generated path/to/scratch-project
+$rtsparkReview = Join-Path $env:USERPROFILE ("Downloads\rtspark-cubemx-review-" + (Get-Date -Format "yyyyMMdd-HHmmss") + "\activity_recognition")
+python firmware/scripts/prepare_cubemx_review.py --output "$rtsparkReview"
+```
+
+Open `$rtsparkReview\activity_recognition.ioc` in STM32CubeMX, keep user-code
+preservation enabled, and generate into that review project. Preparation is
+not generation. Keep this PowerShell window open so the variable is available.
+After actual generation, run:
+
+```powershell
+python firmware/scripts/check_cubemx.py --generated "$rtsparkReview"
 ```
 
 The read-only guard rejects malformed/duplicate USER CODE markers and any lost
 nonempty active USER CODE block. It also checks the reviewed clock, bus and
 interrupt settings. It never copies generated sources into the build.
+With `--generated`, both source and candidate `.ioc` settings are checked.
+The helper's four temporary-directory tests run with
+`python -m unittest discover -s tests -p test_cubemx_review.py -v`.
 
 Review generated code outside USER CODE blocks before accepting changes:
 
