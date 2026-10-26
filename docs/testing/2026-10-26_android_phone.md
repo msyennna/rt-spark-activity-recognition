@@ -109,6 +109,8 @@ movement trial's 51/52 agreement (98.1%). The model has WALKING/RUNNING labels
 and no resting class. The participant's actual activity is not established
 by the photograph.
 
-This milestone changes documentation only. Firmware PUBACK capture and actual
-CubeMX regeneration remain separate checks in
+This milestone changes documentation only. A later
+[firmware PUBACK transcript](2026-10-26_cubemx_puback.md) supplies accepted
+acknowledgement evidence independently of the phone images. Actual CubeMX
+regeneration remains a separate check in
 [STM32_INTEGRATION.md](../STM32_INTEGRATION.md).

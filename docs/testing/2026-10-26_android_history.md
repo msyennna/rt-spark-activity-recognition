@@ -123,8 +123,9 @@ images retain their emulator attribution.
 
 Earlier power-cycle/stale-data recovery was confirmed by the user on October 23.
 This single History image is not a repeat of that recovery check. Firmware
-PUBACK capture and CubeMX regeneration remain separate checks in
-[STM32_INTEGRATION.md](../STM32_INTEGRATION.md).
+[PUBACK capture](2026-10-26_cubemx_puback.md) has since been supplied and checked;
+it is separate from the images above. CubeMX regeneration remains a separate
+check in [STM32_INTEGRATION.md](../STM32_INTEGRATION.md).
 
 This milestone updates documentation only. It changes no Android, firmware,
 model or service source.

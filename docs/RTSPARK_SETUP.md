@@ -10,7 +10,7 @@ received five sensor messages, and the local API returned current record 3136.
 The user subsequently reported a public service-checker pass and confirmed
 Android live/history and power-cycle recovery in the emulator workflow.
 See [STM32_INTEGRATION.md](STM32_INTEGRATION.md) for the evidence and remaining
-PUBACK, measured cadence, network-interruption and regeneration checks. The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
+measured cadence, network-interruption and regeneration checks. The [timed movement helper](testing/TIMED_VALIDATION.md) passes its
 offline tests. The October 25 six-trial result is now checked against the
 supplied raw files: 51/52 correct windows (98.1%). Independent time/ID selection,
 quality checks and exact helper replay agree; both originals are preserved
@@ -26,8 +26,9 @@ unverified at that checkpoint. See the
 The subsequent timed trial provides 82 distinct current prediction rows across
 six valid intervals. Its 52 eligible windows and metrics are independently
 reproduced; eligible prediction completion gaps are 5–6 seconds. Individual
-sensor acquisition timestamps and board acknowledgements remain separate
-checks. Later Android History and Live cards match supplied local API records
+sensor acquisition timestamps remain unmeasured. An October 26 serial excerpt
+now records 17 accepted PUBACK messages, IDs 1482–1498; see the
+[PUBACK report](testing/2026-10-26_cubemx_puback.md). Later Android History and Live cards match supplied local API records
 4754 and 4877. Two Live images show LIVE with advancing prediction IDs,
 supporting the requested automatic-refresh check. The user confirms the target
 is the Android Studio emulator. A later photo establishes physical-phone
@@ -287,6 +288,15 @@ artifact can be used for inference without the CSV.
 
 The API stores SQLite timestamps in UTC; Android displays the device's timezone.
 An emulator set to UTC will show a time eight hours behind Manila.
+
+## Completion review
+
+The board-to-broker acknowledgement capture and physical-phone Live/API match
+are now recorded. See [LAB_COMPLETION.md](LAB_COMPLETION.md) for the handout
+comparison. The handout names TensorFlow/PyTorch; the current classifier uses
+scikit-learn Random Forest, so acceptance of that framework choice remains
+unresolved. Actual CubeMX regeneration and training-data reproducibility retain
+their documented status.
 
 ## Git workflow
 

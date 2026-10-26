@@ -102,8 +102,9 @@ reviewer.
   Live images do not repeat a power interruption.
 - Local HTTP curl does not independently repeat public HTTPS certificate
   verification. The reviewed app source uses the configured HTTPS endpoint.
-- Firmware PUBACK capture and actual CubeMX regeneration remain separate
-  integration checks; neither is established by these images.
+- A later [firmware PUBACK transcript](2026-10-26_cubemx_puback.md) supplies
+  acknowledgement evidence independently of these images. Actual CubeMX
+  regeneration remains a separate integration check.
 
 The 67.5% value is per-prediction confidence. It is separate from the audited
 movement trial's 51/52 agreement (98.1%). The model has no resting class, and
