@@ -3,6 +3,11 @@
 Current handout alignment: the active classifier source/checkpoint now use
 PyTorch; the deployed cloud service and earlier hardware results remain the
 Random Forest baseline until cutover. See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
+The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
+native suites passed. This library version has not yet been flashed. Historical
+PUBACKs below belong to the previous custom-encoder firmware. The exact current
+checks and Linux TLS-test skips are recorded in
+[the coreMQTT report](testing/2026-10-26_coremqtt_port.md).
 
 This branch integrates the reviewed Shanice firmware with Yena's existing cloud
 and Android baseline. Build evidence and physical-board evidence are recorded
@@ -33,6 +38,7 @@ Completed commits pushed to `origin/integration/stm32cubemx`:
 | Stage | Status | Evidence and limits |
 | --- | --- | --- |
 | Import unchanged Shanice firmware | Complete | `pio run -d firmware` passed on October 23, 2026: RAM 27,560 bytes; flash 56,212 bytes. This establishes a clean build before porting. |
+| Handout AWS coreMQTT library integration | Source/build complete; physical check pending | Actual unmodified coreMQTT 2.3.1 low-level serializer/deserializer, default-config macro, five native suites and ARM build passed October 26. SRAM 66,756 bytes, separate CCM 57,344 bytes, flash 162,476 bytes. No new board runtime or CubeMX generation is claimed. |
 | Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, CubeMX guard passed, PLLQ corrected for RNG. Hardware/regeneration checks remain pending. |
 | Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; initial physical-board TLS/CONNACK and broker reception were observed on October 23, 2026; October 26 runtime output now includes 17 accepted PUBACKs, IDs 1482–1498. Measured cadence and extended recovery checks remain pending. |
 | Native C host verification | Pass | Actual packet, platform, MQTT state, bounded heap and ICM20608 modules pass five mock-driven native suites; no physical networking or cryptographic handshake is claimed. |

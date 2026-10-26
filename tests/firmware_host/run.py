@@ -5,6 +5,8 @@ Set CC to a native GCC/Clang executable if one is not available on PATH.
 """
 
 import os
+import hashlib
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -13,6 +15,11 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
+UPSTREAM = ROOT / "firmware/lib/coreMQTT"
+manifest = json.loads((UPSTREAM / "UPSTREAM.json").read_text())
+for name, record in manifest["files"].items():
+    if hashlib.sha256((UPSTREAM / name).read_bytes()).hexdigest() != record["sha256"]:
+        raise SystemExit("Vendored coreMQTT source SHA-256 mismatch: " + name)
 compiler = os.environ.get("CC") or shutil.which("gcc") or shutil.which("clang")
 if compiler is None and Path(r"C:\msys64\ucrt64\bin\gcc.exe").is_file():
     compiler = r"C:\msys64\ucrt64\bin\gcc.exe"
@@ -30,8 +37,11 @@ with tempfile.TemporaryDirectory(prefix="rtspark-host-tests-") as directory:
         ("sensor", [HERE / "test_sensor.c", ROOT / "firmware/src/icm20608.c"]),
     ):
         executable = Path(directory) / (name + (".exe" if os.name == "nt" else ""))
+        if name in ("packets", "mqtt_state"):
+            sources.append(ROOT / "firmware/lib/coreMQTT/src/core_mqtt_serializer.c")
         subprocess.run(
-            [compiler, "-std=c99", "-Wall", "-Wextra", "-Werror", "-pedantic",
+            [compiler, "-std=c99", "-Wall", "-Wextra", "-Werror", "-pedantic", "-DMQTT_DO_NOT_USE_CUSTOM_CONFIG",
+             "-I", str(ROOT / "firmware/lib/coreMQTT/src"),
              "-I", str(HERE / "mocks"), "-I", str(ROOT / "firmware/include"),
              *map(str, sources), "-o", str(executable)],
             check=True, cwd=ROOT, env=environment,

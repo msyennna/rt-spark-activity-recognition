@@ -37,11 +37,15 @@ certificates, credentials, or the existing activity database for this change.
 
 ## Firmware requirements and a handout conflict
 
-The custom MQTT encoder needs replacement with the specified AWS coreMQTT
-library. That migration is a separate firmware milestone. The handout's
-MQTT_DO_NOT_USE_CUSTOM_CONFIG setting must apply to the actual library build.
+The custom MQTT encoder has been replaced by the actual AWS coreMQTT 2.3.1
+serializer/deserializer, with the handout's MQTT_DO_NOT_USE_CUSTOM_CONFIG
+definition applied to the library. Five native suites, an ARM firmware build,
+and the source guard passed. See [the exact build/test record](testing/2026-10-26_coremqtt_port.md).
+This firmware has not yet been flashed or observed on the physical board;
+earlier PUBACKs describe the previous custom-encoder implementation.
 
-The handout specifies RT-Spark on page 1, but its later reference steps name
+The handout specifies RT-Spark on page 1 and VSCode PlatformIO on page 2,
+but its later reference steps name
 LSM6DSL, ISM43362, SPI3, CMSIS driver components, and an AC6 solution.yml.
 The demonstrated board/project uses ICM20608, RW007, SPI2 and STM32Cube/HAL
 with PlatformIO. These are concrete hardware/toolchain differences.

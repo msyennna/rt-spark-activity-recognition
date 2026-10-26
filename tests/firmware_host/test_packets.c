@@ -76,6 +76,12 @@ int main(void)
         assert(!rtspark_packet_puback(puback, 0x1234));
         puback[i] ^= 1U;
     }
+    assert(rtspark_packet_ping(out, sizeof(out)) == 2);
+    assert(out[0] == 0xc0 && out[1] == 0);
+    assert(rtspark_packet_ping(out, 1) == -1);
+    assert(rtspark_packet_pingresp((const unsigned char[]){0xd0,0}));
+    assert(!rtspark_packet_pingresp((const unsigned char[]){0xd1,0}));
+    assert(!rtspark_packet_pingresp((const unsigned char[]){0xd0,1}));
     puts("PASS: actual MQTT CONNECT/PUBLISH encoding, bounds and strict acknowledgements");
     return 0;
 }

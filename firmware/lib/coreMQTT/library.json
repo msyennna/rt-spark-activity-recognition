@@ -1,0 +1,12 @@
+{
+  "name": "coreMQTT",
+  "version": "2.3.1",
+  "description": "Unmodified AWS coreMQTT serializer subset for MQTT 3.1.1",
+  "license": "MIT",
+  "frameworks": [
+    "stm32cube"
+  ],
+  "platforms": [
+    "ststm32"
+  ]
+}

@@ -88,6 +88,7 @@ static void fail(const char *step, int error)
 
 void rtspark_mqtt_init(void)
 {
+    LWIP_Port_Diag("[RTSpark] AWS coreMQTT " RTSPARK_COREMQTT_VERSION " (MQTT 3.1.1)\r\n");
     memset(&mqtt, 0, sizeof(mqtt));
     mbedtls_memory_buffer_alloc_init(tls_heap.bytes, sizeof(tls_heap.bytes));
     mbedtls_ecp_set_max_ops(128);
@@ -248,7 +249,7 @@ void rtspark_mqtt_poll(void)
             ++mqtt.deliveries;
             LWIP_Port_Diag("[RTSpark] MQTT PUBACK id=%u count=%lu\r\n",
                            (unsigned int)mqtt.packet_id, (unsigned long)mqtt.deliveries);
-        } else if (mqtt.reply[0] != 0xd0 || mqtt.reply[1] != 0) {
+        } else if (!rtspark_packet_pingresp(mqtt.reply)) {
             fail("MQTT PINGRESP invalid", -1);
             break;
         }
@@ -256,8 +257,9 @@ void rtspark_mqtt_poll(void)
         break;
     case ONLINE:
         if ((uint32_t)(now - mqtt.last_send) >= PING_INTERVAL_MS) {
-            mqtt.packet[0] = 0xc0; mqtt.packet[1] = 0;
-            mqtt.length = 2;
+            rc = rtspark_packet_ping(mqtt.packet, sizeof(mqtt.packet));
+            if (rc < 0) { fail("coreMQTT PINGREQ serialization", rc); break; }
+            mqtt.length = (size_t)rc;
             phase(PING_SEND);
         }
         break;

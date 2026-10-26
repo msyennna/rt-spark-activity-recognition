@@ -11,6 +11,7 @@ From the repository root:
 
 ```powershell
 python firmware/scripts/check_cubemx.py
+$env:PLATFORMIO_SETTING_ENABLE_TELEMETRY = "No"
 pio run -d firmware
 ```
 
@@ -18,6 +19,22 @@ The build command does not flash the board. See
 [`docs/RTSPARK_SETUP.md`](../docs/RTSPARK_SETUP.md) for local configuration and
 separate board/cloud/Android verification steps. Keep Wi-Fi and MQTT credentials
 in ignored local headers. Never copy those headers into CubeMX output or commits.
+
+## MQTT library and handout alignment
+
+The active firmware links AWS coreMQTT 2.3.1, using its upstream low-level
+serializer/deserializer for MQTT 3.1.1 packets and acknowledgements. The build
+defines `MQTT_DO_NOT_USE_CUSTOM_CONFIG`. See the
+[library provenance](lib/coreMQTT/README.md) and the
+[October 26 build/test record](../docs/testing/2026-10-26_coremqtt_port.md).
+The foreground application owns transport, timing and reconnects. No RT-Thread
+or FreeRTOS kernel is introduced by the library integration.
+
+The handout names RT-Spark and PlatformIO, but later describes different
+LSM6DSL/ISM43362/SPI3 hardware and an AC6/component-pack workflow. The actual
+board uses the settings below. The instructor needs to resolve this conflict
+before literal compliance with those reference steps can be claimed. See
+[HANDOUT_ALIGNMENT.md](../docs/HANDOUT_ALIGNMENT.md).
 
 ## Hardware settings
 
