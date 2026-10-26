@@ -94,9 +94,10 @@ reviewer.
   ("virtual phone inside android studio"). This completes device attribution for
   the supplied Live screenshots. A later [physical-phone History photo and
   device-selector image](2026-10-26_android_phone.md) show History on physical
-  hardware and Xiaomi 25028RN03A selected in Android Studio. The phone's Live
-  status and current API match remain pending; these emulator Live images retain
-  their original attribution.
+  hardware and Xiaomi 25028RN03A selected in Android Studio. A subsequent phone
+  Live image shows LIVE and record 5167, matching local API WALKING, 67.5%, and
+  02:08:39 UTC = 10:08:39 AM Asia/Manila. The physical-phone comparison is
+  complete; these emulator Live images retain their original attribution.
 - Earlier power-cycle/stale-data recovery remains user-confirmed. These two
   Live images do not repeat a power interruption.
 - Local HTTP curl does not independently repeat public HTTPS certificate

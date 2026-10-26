@@ -116,7 +116,10 @@ The user subsequently confirmed that this workflow uses the virtual phone
 inside Android Studio. These app observations are classified as emulator
 evidence. A subsequent [physical-phone History photograph](2026-10-26_android_phone.md)
 shows new IDs 5027–5023, with Xiaomi 25028RN03A selected in Android Studio.
-The phone's Live status and current API record match remain pending.
+A later phone Live image shows LIVE and record 5167, matching supplied local
+API WALKING, 67.5%, and 02:08:39 UTC = 10:08:39 AM Asia/Manila. The
+physical-phone display/record comparison is complete; these earlier History
+images retain their emulator attribution.
 
 Earlier power-cycle/stale-data recovery was confirmed by the user on October 23.
 This single History image is not a repeat of that recovery check. Firmware
