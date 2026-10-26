@@ -13,12 +13,12 @@ evidence. The earlier working system does not establish that new code is live.
 | Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. PyTorch cutover reported matching model hash/new ID 5942, followed by local API 5943. Later public MQTT TLS and both HTTPS checks passed with fresh ID 6060. | Public reachability and post-cutover record progress are evidenced; validate new firmware physically. |
 | TensorFlow or PyTorch; all axes, temporal learning, lightweight design | A trained 450-parameter PyTorch GRU uses ordered five-reading windows and all six axes. Verified Kaggle provenance/preparation and matching deployed model SHA-256 are recorded; ten model/contract tests passed on Ubuntu. | Perform a labelled live test for this model. Earlier Random Forest results do not measure PyTorch accuracy. |
 | Rigorous model testing | New PyTorch development OOF: 2219/2258 (98.27%). Untouched latest-two-day holdout: 1197/1300 (92.08%). Ten actual model/database/API tests passed. | Repeat a labelled live movement test after deployment. This dataset contains one participant; no population-accuracy claim is justified. |
-| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. | Resolve the handout's conflicting chip/bus reference instructions. Actual CubeMX regeneration is also pending. |
+| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. The user chose to continue with this hardware without an instructor reply. | Retain the reference-hardware difference in the record. Actual CubeMX regeneration and new coreMQTT physical checks remain pending. |
 | AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. | Build with the local private configuration and flash the reviewed firmware, then collect new physical logs. The earlier custom-encoder PUBACKs are historical. |
 | One reading/message per second | Firmware schedules a nominal one-second publish interval. Earlier excerpt contains 17 accepted PUBACKs, IDs 1482–1498. | Obtain a timestamped capture to measure cadence. An untimed log cannot establish it. |
 | Android smartphone, live predictions and history | Kotlin, Android Studio and Volley match listed choices. Earlier physical Xiaomi target and exact API match are preserved. Post-PyTorch screens show LIVE record 6067 and newest-first History 6068–6064, all at displayed 99.9% confidence. | Supplied display checks are complete. Actual movement accuracy and precise refresh/interaction timing are not measured by these screenshots. |
 
-## Handout conflict requiring correction
+## Hardware/toolchain reference differences
 
 Page 1 names RT-Spark and page 2 names VSCode PlatformIO. Later reference steps
 name LSM6DSL, ISM43362, SPI3, CMSIS driver packs, an AC6 `solution.yml` and a
@@ -26,10 +26,12 @@ name LSM6DSL, ISM43362, SPI3, CMSIS driver packs, an AC6 `solution.yml` and a
 do not consistently describe the demonstrated board/project.
 
 Changing a driver name or enabling SPI3 cannot replace the installed
-ICM20608/RW007 hardware. Ask the instructor for the corrected instructions for
-RT-Spark, or confirmation that a different physical board is intended. This is
-an unresolved literal-alignment issue, not an assumed exception. The actual
-coreMQTT source integration does not itself run the pack/component-editor steps.
+ICM20608/RW007 hardware. On October 26 the user stated that instructor
+clarification was not yet available and chose to continue with the actual
+board. This supports proceeding with its existing driver/bus configuration,
+not claiming instructor approval or literal execution of the different
+reference steps. The actual coreMQTT source integration does not itself run
+the pack/component-editor steps.
 See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 
 ## Evidence and model attribution
@@ -63,7 +65,8 @@ now establishes the PyTorch cutover and new local API record. Subsequent public
 checks passed and Android Live/History screens show later predictions. No
 coreMQTT firmware flashing, actual CubeMX regeneration or new labelled PyTorch
 movement validation is established. Strict completion remains pending those
-applicable actions and the hardware/toolchain clarification.
+applicable physical/generator actions. The hardware/toolchain differences
+remain explicitly recorded under the user's actual-board continuation choice.
 
 The integration checklist includes additional engineering checks such as DHCP
 renewal, controlled interruptions and memory/polling measurements. Their

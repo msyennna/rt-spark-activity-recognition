@@ -63,11 +63,18 @@ LSM6DSL, ISM43362, SPI3, CMSIS driver components, and an AC6 solution.yml.
 The demonstrated board/project uses ICM20608, RW007, SPI2 and STM32Cube/HAL
 with PlatformIO. These are concrete hardware/toolchain differences.
 
+On October 26 the user confirmed that no instructor clarification had arrived,
+but chose to continue with the installed RT-Spark hardware. The implementation
+therefore proceeds with ICM20608/I2C2, RW007/SPI2 and the existing STM32Cube/HAL
+PlatformIO project. This is the user's continuation decision, not instructor
+approval or evidence that the different reference hardware is installed.
+
 A driver name or SPI bus cannot be changed as a cosmetic edit: software for an
 absent chip will not operate the installed one. Strict literal conformance for
 those reference steps requires confirmation/correction of the intended board
-and driver/toolchain instructions. This conflict remains open; it is not
-silently waived or labelled complete. Do not configure SPI3 or select an
+and driver/toolchain instructions. That literal difference remains documented;
+it no longer blocks proceeding with the user's actual-board implementation.
+Do not configure SPI3 or select an
 ISM43362/LSM6DSL driver merely to match a screenshot on the existing wiring.
 
 The handout's cpackget/component-editor/AC6 steps also do not directly describe
@@ -83,7 +90,8 @@ generator run.
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-the project must not be presented as strictly complete while new-model
-movement checks, coreMQTT physical verification, CubeMX regeneration or
-the hardware/toolchain conflict remain unresolved.
+new-model movement checks, coreMQTT physical verification and CubeMX
+regeneration remain pending. The user has chosen to continue with the actual
+hardware; completion documentation must retain the hardware/toolchain
+differences rather than claim that every conflicting reference step was run.
 Historical evidence is retained with its original implementation attribution.

@@ -7,10 +7,12 @@ coreMQTT firmware still needs physical verification. Follow the handout's
 cloud, firmware, then mobile order. Existing trial evidence remains historical.
 The subsequent [public/Android check](testing/2026-10-26_pytorch_android_public.md)
 also passed public TLS/HTTPS and shows new Live/History records. Remaining
-work is firmware/regeneration, hardware-instruction clarification and a fresh
-labelled movement trial; another cloud cutover is not needed.
-The handout's conflicting hardware/AC6 instructions still need correction;
-see [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
+work is firmware/regeneration and a fresh labelled movement trial, retaining
+the hardware-instruction differences in the record. Another cloud cutover is
+not needed.
+The user has chosen to proceed with the installed RT-Spark hardware while
+retaining the handout's hardware/AC6 differences in
+[HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 
 ## 1. Get the committed source in Windows PowerShell
 
@@ -117,9 +119,11 @@ that records are fresh or identify their model. Keep the deployment audit.
 
 ## 4. Build and validate the firmware on the user's computer
 
-First resolve the instructor's RT-Spark versus LSM6DSL/ISM43362/SPI3/AC6
-instructions. The current actual-board port uses ICM20608/RW007 and includes
-AWS coreMQTT; it does not claim to have executed the contradictory pack steps.
+The user has chosen to continue with RT-Spark's installed ICM20608/RW007 and
+I2C2/SPI2 configuration before receiving instructor clarification. Use the
+reviewed actual-board port, including AWS coreMQTT. Retain the documented
+LSM6DSL/ISM43362/SPI3/AC6 reference differences; do not select drivers for absent
+chips or claim that those different pack steps were executed.
 
 Keep the existing ignored private configuration. Do not replace credential
 aliases with plaintext in tracked headers. Follow the scratch-project CubeMX

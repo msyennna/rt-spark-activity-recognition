@@ -32,8 +32,10 @@ or FreeRTOS kernel is introduced by the library integration.
 
 The handout names RT-Spark and PlatformIO, but later describes different
 LSM6DSL/ISM43362/SPI3 hardware and an AC6/component-pack workflow. The actual
-board uses the settings below. The instructor needs to resolve this conflict
-before literal compliance with those reference steps can be claimed. See
+board uses the settings below. On October 26 the user chose to continue with
+the actual hardware while instructor clarification remains unavailable. Keep
+that distinction in the completion record; literal compliance with different
+chip/pack steps is not established. See
 [HANDOUT_ALIGNMENT.md](../docs/HANDOUT_ALIGNMENT.md).
 
 ## Hardware settings
