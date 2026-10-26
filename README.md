@@ -7,14 +7,21 @@ This repository contains the cloud components only. It does not currently includ
 ## System flow
 
 ```text
-RT-Spark / sensor publisher
-        | MQTT: activity/sensor
-        v
-MQTT classifier --> activity model --> SQLite
-        |                               ^
-        + MQTT: activity/prediction     |
-                                        |
-Mobile or other API client --> Flask API
++----------------------------+
+| RT-Spark / Sensor Publisher|
++----------------------------+
+              |
+              | MQTT: activity/sensor
+              v
++----------------------------+       +-------------------+       +-----------------+
+|      MQTT Classifier       | ----> |  Activity Model   | ----> |     SQLite      |
++----------------------------+       +-------------------+       +-----------------+
+              |                                                           ^
+              | MQTT: activity/prediction                                 |
+              v                                                           |
++----------------------------+                                   +-----------------+
+| Mobile or other API Client | --------------------------------> |    Flask API    |
++----------------------------+                                   +-----------------+
 ```
 
 The classifier expects six numeric fields per sensor message:
