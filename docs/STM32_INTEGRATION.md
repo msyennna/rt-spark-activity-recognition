@@ -14,7 +14,10 @@ passed with static SRAM 66,756 bytes and flash 162,788 bytes. The private-header
 file was present. The subsequent user-supplied CubeMX 6.18.1 output has now
 been reviewed and reconciled into the active sources; see
 [the generation review](testing/2026-10-27_cubemx_generation_review.md).
-Flashing and new coreMQTT runtime checks remain pending.
+The subsequent [Windows rebuild](testing/2026-10-27_windows_reconciled_build.md)
+pulled `b44d2ba`, passed the guard and succeeded in 24.05 seconds: static SRAM
+66,756 bytes and flash 162,780 bytes. Flashing and new coreMQTT runtime checks
+remain pending.
 The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
 native suites passed. This library version has not yet been flashed. Historical
 PUBACKs below belong to the previous custom-encoder firmware. The exact current
@@ -54,6 +57,7 @@ Completed commits pushed to `origin/integration/stm32cubemx`:
 | Post-PyTorch public/Android checks | Public checks PASS; Live/History observed | At 04:18:02.877096 UTC all three public checks passed with ID 6060 created 04:17:56 UTC. Android LIVE shows 6067 at 12:18:36 local time; History shows 6068–6064 newest first at five-second recorded-time gaps, all displayed as Walking 99.9%. No exact server-row match for screen IDs or labelled movement accuracy is claimed. |
 | Handout AWS coreMQTT library integration | Source/build complete; physical check pending | Actual unmodified coreMQTT 2.3.1 low-level serializer/deserializer, default-config macro, five native suites and ARM build passed October 26. SRAM 66,756 bytes, separate CCM 57,344 bytes, flash 162,476 bytes. These software checks did not run CubeMX; the subsequent generator review is recorded separately. No new board runtime is claimed. |
 | User-computer coreMQTT build | Windows build PASS | Supplied transcript pulls `ceb55b3`, confirms private-header existence, passes source guard and links coreMQTT 2.3.1. SUCCESS in 16.75 s, static SRAM 66,756 / 131,072 bytes and flash 162,788 / 1,048,576 bytes. Linker warnings remain; no binary hash, generation or flashing is shown. |
+| Windows rebuild after CubeMX reconciliation | PASS in user-supplied transcript | Pull to `b44d2ba`, active guard PASS, coreMQTT 2.3.1 linked. SUCCESS in 24.05 s; static SRAM 66,756 bytes, flash 162,780 bytes. Existing linker warnings remain. No programming or runtime is shown. |
 | CubeMX 6.18.1 generation review | Generated output supplied; source reconciliation complete | All 17 nonempty application USER CODE blocks survived. Removed the generated I2C2 main/MSP duplicates, retained custom_bus ownership, accepted GPIO output-latch preloads and disabled-EXTI cleanup. The original public ZIP and per-file hashes are retained. See the October 27 review for tests and build status. |
 | Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, PLLQ corrected for RNG. CubeMX 6.18.1 output is now reviewed and reconciled; new firmware hardware checks remain pending. |
 | Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; initial physical-board TLS/CONNACK and broker reception were observed on October 23, 2026; October 26 runtime output now includes 17 accepted PUBACKs, IDs 1482–1498. Measured cadence and extended recovery checks remain pending. |

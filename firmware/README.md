@@ -20,6 +20,50 @@ The build command does not flash the board. See
 separate board/cloud/Android verification steps. Keep Wi-Fi and MQTT credentials
 in ignored local headers. Never copy those headers into CubeMX output or commits.
 
+## Program the local build
+
+The active project sets `upload_protocol = stlink`. Connect the intended
+RT-Spark through its ST-LINK/SWD programming connection and keep the board
+powered. Close active debugger/programmer sessions first. From the integration
+repository root in Windows PowerShell:
+
+```powershell
+$env:PLATFORMIO_SETTING_ENABLE_TELEMETRY = "No"
+& "$env:USERPROFILE\.platformio\penv\Scripts\platformio.exe" run -d firmware -e black_f407zg -t upload
+```
+
+This programs the locally built image. The pinned STM32 platform's upload
+implementation invokes OpenOCD with `program ... verify reset; shutdown;`.
+Inspect the output for successful programming and verification plus a successful
+upload result. An error or incomplete upload is not success, even if a reset
+message appears. The new firmware is not considered physically verified until
+its startup and downstream data are observed. No option-byte edits or mass erase
+command is part of this procedure.
+
+After upload succeeds, list serial ports and open the connected board's actual
+port; the `monitor_port = COM5` setting is historical and must not override the
+enumerated port:
+
+```powershell
+python -m serial.tools.list_ports
+# If the board enumerates as COM3:
+python -m serial.tools.miniterm COM3 115200 --eol CR
+```
+
+Reset the board once after opening the monitor to capture startup. Look for
+`[RTSpark] AWS coreMQTT 2.3.1 (MQTT 3.1.1)`, ICM20608 identity/init, a DHCP
+lease, verified TLS, MQTT CONNACK and new PUBACKs. Share the actual upload/runtime
+output for review. Review serial output before publishing it because existing
+RW007 diagnostics can include the configured SSID. Local private headers and
+compiled images stay outside Git. Retired RT-Thread flashing scripts target
+different images and do not apply here.
+
+Official references: [PlatformIO ST-LINK configuration](https://docs.platformio.org/en/latest/plus/debug-tools/stlink.html)
+and [PlatformIO upload target](https://docs.platformio.org/en/latest/core/quickstart.html).
+The observed local build is recorded in
+[the Windows reconciliation report](../docs/testing/2026-10-27_windows_reconciled_build.md).
+Programming has not yet been established by supplied evidence.
+
 ## MQTT library and handout alignment
 
 The active firmware links AWS coreMQTT 2.3.1, using its upstream low-level

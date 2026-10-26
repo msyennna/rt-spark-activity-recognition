@@ -1,0 +1,49 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "evidence_source": "User-pasted Windows PowerShell transcript in this conversation; metrics transcribed, not an original uploaded log file. Reviewer did not run this build on that computer.",
+  "reported_source_commit_after_pull": "b44d2ba1478a7596a8161eb38d3fcbc8cf561f03",
+  "reported_branch": "integration/stm32cubemx",
+  "fast_forward_pull": true,
+  "active_source_guard": "PASS",
+  "platform": "ststm32@20.0.0",
+  "board": "black_f407zg / STM32F407ZGT6 / 168 MHz",
+  "framework": "framework-stm32cubef4@1.28.3",
+  "compiler": "GCC 12.3.1",
+  "coremqtt_version": "2.3.1",
+  "telemetry_environment_setting": "No",
+  "build_result": "SUCCESS",
+  "build_seconds": 24.05,
+  "static_sram_used_bytes": 66756,
+  "static_sram_limit_bytes": 131072,
+  "flash_used_bytes": 162780,
+  "flash_limit_bytes": 1048576,
+  "rebuilt_modules": [
+    "lwip_port",
+    "main",
+    "rtspark_mqtt",
+    "rtspark_platform",
+    "stm32f4xx_hal_msp",
+    "stm32f4xx_it"
+  ],
+  "outputs_reported": [
+    "firmware.elf linked",
+    "firmware.bin built"
+  ],
+  "linker_warnings": [
+    "libnosys _close stub",
+    "libnosys _fstat stub",
+    "libnosys _getpid stub",
+    "libnosys _isatty stub",
+    "libnosys _kill stub",
+    "libnosys _lseek stub",
+    "libnosys _read stub",
+    "libnosys _write stub",
+    "RWX LOAD segment"
+  ],
+  "not_established": [
+    "Actual firmware programming, readback verification or reset.",
+    "Startup identity, sensor, Wi-Fi/DHCP, TLS/MQTT or new PUBACKs for this coreMQTT build.",
+    "Private-header values, firmware binary SHA-256 or separate CCM usage in this transcript.",
+    "Fresh PyTorch walking/jogging accuracy."
+  ]
+}
