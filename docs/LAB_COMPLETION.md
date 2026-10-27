@@ -10,11 +10,11 @@ evidence. The earlier working system does not establish that new code is live.
 
 | Handout area | Current evidence | Remaining action |
 | --- | --- | --- |
-| Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. PyTorch cutover reported matching model hash/new ID 5942, followed by local API 5943. Later public MQTT TLS and both HTTPS checks passed with fresh ID 6060. | Public reachability and post-cutover record progress are evidenced; validate new firmware physically. |
+| Cloud VM, broker, database and API | AWS EC2, Mosquitto, SQLite and Flask are listed choices. PyTorch cutover reported matching model hash/new ID 5942, followed by local API 5943. Later public MQTT TLS and both HTTPS checks passed with fresh ID 6060. | Post-upload sensor/TLS/PUBACK checks passed in supplied output. The Ubuntu subscriber then received five sensor messages and the local API returned newer record 6746 at October 27 01:32:41 UTC. Confirm the phone view and new labelled movement results. |
 | TensorFlow or PyTorch; all axes, temporal learning, lightweight design | A trained 450-parameter PyTorch GRU uses ordered five-reading windows and all six axes. Verified Kaggle provenance/preparation and matching deployed model SHA-256 are recorded; ten model/contract tests passed on Ubuntu. | Perform a labelled live test for this model. Earlier Random Forest results do not measure PyTorch accuracy. |
 | Rigorous model testing | New PyTorch development OOF: 2219/2258 (98.27%). Untouched latest-two-day holdout: 1197/1300 (92.08%). Ten actual model/database/API tests passed. | Repeat a labelled live movement test after deployment. This dataset contains one participant; no population-accuracy claim is justified. |
-| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. The user chose to continue with this hardware without an instructor reply. | CubeMX 6.18.1 output is now supplied, reviewed and reconciled with all application blocks retained. Post-upload logs now show sensor identity/init, Wi-Fi/DHCP, verified TLS and PUBACKs 1–7. Retain the reference-hardware difference and verify new downstream records. |
-| AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. After CubeMX reconciliation, the user's Windows rebuild at `b44d2ba` passed the guard and succeeded in 24.05 s, SRAM 66,756 bytes and flash 162,780 bytes. | CubeMX review, local build and ST-LINK programming/verification are complete in supplied output (Verified OK; SUCCESS in 12.62 s). Post-upload sensor/network/MQTT runtime now includes seven PUBACKs. Verify new broker/database/API/phone data and perform the labelled movement trial. The earlier custom-encoder PUBACKs are historical. |
+| Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. The user chose to continue with this hardware without an instructor reply. | CubeMX 6.18.1 output is now supplied, reviewed and reconciled with all application blocks retained. Post-upload logs now show sensor identity/init, Wi-Fi/DHCP, verified TLS and PUBACKs 1–7. The local Ubuntu subscriber and database-backed API are now checked after upload (five messages and record 6746). Retain the reference-hardware difference and confirm the phone view. |
+| AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. After CubeMX reconciliation, the user's Windows rebuild at `b44d2ba` passed the guard and succeeded in 24.05 s, SRAM 66,756 bytes and flash 162,780 bytes. | CubeMX review, local build and ST-LINK programming/verification are complete in supplied output (Verified OK; SUCCESS in 12.62 s). Post-upload sensor/network/MQTT runtime now includes seven PUBACKs. Post-upload Ubuntu broker/API readback now shows five messages and newer prediction 6746. Confirm new phone data and perform the labelled movement trial. The earlier custom-encoder PUBACKs are historical. |
 | One reading/message per second | Firmware schedules a nominal one-second publish interval. Post-upload logs now contain PUBACK IDs/counts 1–7; earlier custom-encoder logs contain 1482–1498. | Obtain a timestamped capture to measure cadence. An untimed log cannot establish it. |
 | Android smartphone, live predictions and history | Kotlin, Android Studio and Volley match listed choices. Earlier physical Xiaomi target and exact API match are preserved. Post-PyTorch screens show LIVE record 6067 and newest-first History 6068–6064, all at displayed 99.9% confidence. | Supplied display checks are complete. Actual movement accuracy and precise refresh/interaction timing are not measured by these screenshots. |
 
@@ -47,6 +47,7 @@ See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 - [Successful local Windows rebuild after source reconciliation](testing/2026-10-27_windows_reconciled_build.md)
 - [Successful ST-LINK programming and OpenOCD verification](testing/2026-10-27_coremqtt_stlink_upload.md)
 - [Post-upload sensor, DHCP, TLS and seven MQTT acknowledgements](testing/2026-10-27_coremqtt_runtime.md)
+- [Post-upload Ubuntu broker reception and API record 6746](testing/2026-10-27_coremqtt_cloud_check.md)
 - [Earlier physical PUBACK report and full transcript](testing/2026-10-26_cubemx_puback.md)
 - [Earlier physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
 - [Earlier independently timed trial and raw-data audit](testing/2026-10-25_cubemx_walk_jog_trial.md)
@@ -71,8 +72,10 @@ checks passed and Android Live/History screens show later predictions. Actual
 CubeMX 6.18.1 output is reviewed, the Windows rebuild passed, and the subsequent
 ST-LINK upload reports programming complete and Verified OK. The subsequent
 serial excerpt shows sensor initialization, a DHCP lease, verified TLS and
-PUBACKs 1–7. Fresh post-upload broker/database/API/phone checks and a labelled
-PyTorch movement trial remain pending. The excerpt omits the version banner
+PUBACKs 1–7. A subsequent Ubuntu subscriber received five messages and the
+local API returned newer database-backed record 6746 at October 27 01:32:41 UTC.
+Post-upload phone confirmation and a labelled PyTorch movement trial remain
+pending. The excerpt omits the version banner
 and does not measure cadence. Strict completion remains pending those
 applicable downstream and movement actions. The hardware/toolchain differences
 remain explicitly recorded under the user's actual-board continuation choice.

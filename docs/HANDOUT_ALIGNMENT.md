@@ -106,7 +106,10 @@ generator run or a physical test.
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-new-model movement checks and coreMQTT physical verification remain pending.
+new-model movement checks and post-upload Android confirmation remain pending.
+The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu
+subscriber messages and local API record 6746; see
+[the post-upload cloud check](testing/2026-10-27_coremqtt_cloud_check.md).
 CubeMX generation output is now reviewed and reconciled. The user has chosen to continue with the actual
 hardware; completion documentation must retain the hardware/toolchain
 differences rather than claim that every conflicting reference step was run.

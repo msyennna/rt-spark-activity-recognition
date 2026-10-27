@@ -65,8 +65,10 @@ The observed local build is recorded in
 The later [user-supplied upload output](../docs/testing/2026-10-27_coremqtt_stlink_upload.md)
 reports successful programming and Verified OK in 12.62 seconds. The later
 [runtime excerpt](../docs/testing/2026-10-27_coremqtt_runtime.md) shows sensor
-initialization, DHCP BOUND, verified TLS and PUBACKs 1–7. Independent Ubuntu
-subscriber, fresh database/API/phone and movement checks remain the next steps.
+initialization, DHCP BOUND, verified TLS and PUBACKs 1–7. The subsequent
+[user-supplied Ubuntu check](../docs/testing/2026-10-27_coremqtt_cloud_check.md)
+contains five subscriber messages and newer database-backed API record 6746.
+New phone confirmation and a labelled PyTorch movement test remain pending.
 
 ## MQTT library and handout alignment
 
