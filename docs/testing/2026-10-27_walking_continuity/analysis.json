@@ -1,0 +1,908 @@
+{
+  "schema_version": 1,
+  "review_date_local": "2026-10-27",
+  "review_timezone": "Asia/Manila",
+  "source": {
+    "type": "user-pasted Ubuntu terminal output",
+    "file": "receipt_times.transcribed.txt",
+    "sha256": "d23ecf7a77bae51bab80d3a31ef33b085ba0eb68f5bf9b4aff36f2fd1fc1d1c3",
+    "original_server_file_retrieved": false,
+    "scope": "All timestamp lines transcribed; command/prompt omitted. Output returns to prompt with no timeout/error shown."
+  },
+  "command": "mosquitto_sub -h 127.0.0.1 -p 1883 -t activity/sensor -R -F '%I %U' -C 70 -W 90",
+  "requested_message_count": 70,
+  "configured_timeout_seconds": 90,
+  "reported_outcome": "70 messages and shell prompt; no timeout/error shown",
+  "numeric_process_exit_code_supplied": false,
+  "message_count": 70,
+  "interval_count": 69,
+  "first_receipt_utc": "2026-10-27T04:19:25+0000",
+  "last_receipt_utc": "2026-10-27T04:20:37+0000",
+  "first_to_last_seconds": "72.341852470",
+  "minimum_interarrival_seconds": "0.988659792",
+  "median_interarrival_seconds": "1.001083763",
+  "mean_interarrival_seconds": "1.048432644492753623188405797",
+  "maximum_interarrival_seconds": "3.006398995",
+  "intervals_over_2_5_seconds": [
+    {
+      "previous_message": 36,
+      "next_message": 37,
+      "previous_receipt_utc": "2026-10-27T04:20:01+0000",
+      "next_receipt_utc": "2026-10-27T04:20:04+0000",
+      "seconds": "3.006398995"
+    }
+  ],
+  "interval_bucket_counts": {
+    "up_to_1_5_seconds": 67,
+    "over_1_5_up_to_2_5_seconds": 1,
+    "over_2_5_seconds": 1
+  },
+  "iso_unix_integer_seconds_agree": true,
+  "nonpositive_intervals": 0,
+  "continuity_result": "COUNT_COMPLETE_WITH_A_GAP_EXCEEDING_2_5_SECONDS",
+  "conditions": {
+    "requested": "Walk normally for about a minute in a small area near the router using the same power bank, Wi-Fi and securely seated cable.",
+    "power_bank_previously_reported": true,
+    "actual_motion_start_end_and_physical_conditions_independently_observed": false,
+    "user_separately_reconfirmed_each_condition": false
+  },
+  "comparison": {
+    "stationary_capture": "../2026-10-27_stationary_continuity/analysis.json",
+    "stationary_maximum_interarrival_seconds": "1.028009503",
+    "stationary_intervals_over_2_5_seconds": 0,
+    "interpretation": "The later intended walking run completed its message count but had one interval over the existing gap threshold. This does not identify movement, power, Wi-Fi or publisher behavior as the cause."
+  },
+  "limits": {
+    "receipt_timing_only": true,
+    "monotonic_receipt_clock_supplied": false,
+    "sensor_acquisition_cadence_verified": false,
+    "exact_sample_or_packet_loss_measured": false,
+    "simultaneous_classifier_journal_supplied": false,
+    "actual_classifier_reset_during_capture_verified": false,
+    "accuracy_evaluation": false,
+    "complete_valid_six_trial_pytorch_session": false
+  },
+  "next_step": {
+    "purpose": "Inspect existing logs for the same capture before more physical trials",
+    "command": "journalctl -u rtspark-classifier.service -u mosquitto.service --utc --since \"2026-10-27 04:19:20 UTC\" --until \"2026-10-27 04:20:45 UTC\" --no-pager",
+    "limits": "Mosquitto may log connections to a file rather than its journal; absence of journal connection entries is not proof of uninterrupted connectivity.",
+    "completed": false
+  },
+  "receipts": [
+    {
+      "message_number": 1,
+      "receipt_utc": "2026-10-27T04:19:25+0000",
+      "unix_seconds": "1793074765.385459720"
+    },
+    {
+      "message_number": 2,
+      "receipt_utc": "2026-10-27T04:19:26+0000",
+      "unix_seconds": "1793074766.383695414"
+    },
+    {
+      "message_number": 3,
+      "receipt_utc": "2026-10-27T04:19:27+0000",
+      "unix_seconds": "1793074767.404269844"
+    },
+    {
+      "message_number": 4,
+      "receipt_utc": "2026-10-27T04:19:28+0000",
+      "unix_seconds": "1793074768.395225077"
+    },
+    {
+      "message_number": 5,
+      "receipt_utc": "2026-10-27T04:19:29+0000",
+      "unix_seconds": "1793074769.412189832"
+    },
+    {
+      "message_number": 6,
+      "receipt_utc": "2026-10-27T04:19:30+0000",
+      "unix_seconds": "1793074770.403239954"
+    },
+    {
+      "message_number": 7,
+      "receipt_utc": "2026-10-27T04:19:31+0000",
+      "unix_seconds": "1793074771.425020246"
+    },
+    {
+      "message_number": 8,
+      "receipt_utc": "2026-10-27T04:19:33+0000",
+      "unix_seconds": "1793074773.428244567"
+    },
+    {
+      "message_number": 9,
+      "receipt_utc": "2026-10-27T04:19:34+0000",
+      "unix_seconds": "1793074774.424583137"
+    },
+    {
+      "message_number": 10,
+      "receipt_utc": "2026-10-27T04:19:35+0000",
+      "unix_seconds": "1793074775.443266744"
+    },
+    {
+      "message_number": 11,
+      "receipt_utc": "2026-10-27T04:19:36+0000",
+      "unix_seconds": "1793074776.435281710"
+    },
+    {
+      "message_number": 12,
+      "receipt_utc": "2026-10-27T04:19:37+0000",
+      "unix_seconds": "1793074777.454301679"
+    },
+    {
+      "message_number": 13,
+      "receipt_utc": "2026-10-27T04:19:38+0000",
+      "unix_seconds": "1793074778.445283789"
+    },
+    {
+      "message_number": 14,
+      "receipt_utc": "2026-10-27T04:19:39+0000",
+      "unix_seconds": "1793074779.465248264"
+    },
+    {
+      "message_number": 15,
+      "receipt_utc": "2026-10-27T04:19:40+0000",
+      "unix_seconds": "1793074780.457250990"
+    },
+    {
+      "message_number": 16,
+      "receipt_utc": "2026-10-27T04:19:41+0000",
+      "unix_seconds": "1793074781.477259422"
+    },
+    {
+      "message_number": 17,
+      "receipt_utc": "2026-10-27T04:19:42+0000",
+      "unix_seconds": "1793074782.467259271"
+    },
+    {
+      "message_number": 18,
+      "receipt_utc": "2026-10-27T04:19:43+0000",
+      "unix_seconds": "1793074783.488258312"
+    },
+    {
+      "message_number": 19,
+      "receipt_utc": "2026-10-27T04:19:44+0000",
+      "unix_seconds": "1793074784.489342075"
+    },
+    {
+      "message_number": 20,
+      "receipt_utc": "2026-10-27T04:19:45+0000",
+      "unix_seconds": "1793074785.485880929"
+    },
+    {
+      "message_number": 21,
+      "receipt_utc": "2026-10-27T04:19:46+0000",
+      "unix_seconds": "1793074786.496284829"
+    },
+    {
+      "message_number": 22,
+      "receipt_utc": "2026-10-27T04:19:47+0000",
+      "unix_seconds": "1793074787.492386538"
+    },
+    {
+      "message_number": 23,
+      "receipt_utc": "2026-10-27T04:19:48+0000",
+      "unix_seconds": "1793074788.512283262"
+    },
+    {
+      "message_number": 24,
+      "receipt_utc": "2026-10-27T04:19:49+0000",
+      "unix_seconds": "1793074789.513270198"
+    },
+    {
+      "message_number": 25,
+      "receipt_utc": "2026-10-27T04:19:50+0000",
+      "unix_seconds": "1793074790.509277173"
+    },
+    {
+      "message_number": 26,
+      "receipt_utc": "2026-10-27T04:19:51+0000",
+      "unix_seconds": "1793074791.529352878"
+    },
+    {
+      "message_number": 27,
+      "receipt_utc": "2026-10-27T04:19:52+0000",
+      "unix_seconds": "1793074792.520268595"
+    },
+    {
+      "message_number": 28,
+      "receipt_utc": "2026-10-27T04:19:53+0000",
+      "unix_seconds": "1793074793.540295271"
+    },
+    {
+      "message_number": 29,
+      "receipt_utc": "2026-10-27T04:19:54+0000",
+      "unix_seconds": "1793074794.528955063"
+    },
+    {
+      "message_number": 30,
+      "receipt_utc": "2026-10-27T04:19:55+0000",
+      "unix_seconds": "1793074795.549255126"
+    },
+    {
+      "message_number": 31,
+      "receipt_utc": "2026-10-27T04:19:56+0000",
+      "unix_seconds": "1793074796.543272849"
+    },
+    {
+      "message_number": 32,
+      "receipt_utc": "2026-10-27T04:19:57+0000",
+      "unix_seconds": "1793074797.560244882"
+    },
+    {
+      "message_number": 33,
+      "receipt_utc": "2026-10-27T04:19:58+0000",
+      "unix_seconds": "1793074798.551254445"
+    },
+    {
+      "message_number": 34,
+      "receipt_utc": "2026-10-27T04:19:59+0000",
+      "unix_seconds": "1793074799.571234248"
+    },
+    {
+      "message_number": 35,
+      "receipt_utc": "2026-10-27T04:20:00+0000",
+      "unix_seconds": "1793074800.560853430"
+    },
+    {
+      "message_number": 36,
+      "receipt_utc": "2026-10-27T04:20:01+0000",
+      "unix_seconds": "1793074801.589865449"
+    },
+    {
+      "message_number": 37,
+      "receipt_utc": "2026-10-27T04:20:04+0000",
+      "unix_seconds": "1793074804.596264444"
+    },
+    {
+      "message_number": 38,
+      "receipt_utc": "2026-10-27T04:20:05+0000",
+      "unix_seconds": "1793074805.585973377"
+    },
+    {
+      "message_number": 39,
+      "receipt_utc": "2026-10-27T04:20:06+0000",
+      "unix_seconds": "1793074806.604128506"
+    },
+    {
+      "message_number": 40,
+      "receipt_utc": "2026-10-27T04:20:07+0000",
+      "unix_seconds": "1793074807.597319618"
+    },
+    {
+      "message_number": 41,
+      "receipt_utc": "2026-10-27T04:20:08+0000",
+      "unix_seconds": "1793074808.598488762"
+    },
+    {
+      "message_number": 42,
+      "receipt_utc": "2026-10-27T04:20:09+0000",
+      "unix_seconds": "1793074809.618286701"
+    },
+    {
+      "message_number": 43,
+      "receipt_utc": "2026-10-27T04:20:10+0000",
+      "unix_seconds": "1793074810.609277416"
+    },
+    {
+      "message_number": 44,
+      "receipt_utc": "2026-10-27T04:20:11+0000",
+      "unix_seconds": "1793074811.629267586"
+    },
+    {
+      "message_number": 45,
+      "receipt_utc": "2026-10-27T04:20:12+0000",
+      "unix_seconds": "1793074812.620291322"
+    },
+    {
+      "message_number": 46,
+      "receipt_utc": "2026-10-27T04:20:13+0000",
+      "unix_seconds": "1793074813.641282588"
+    },
+    {
+      "message_number": 47,
+      "receipt_utc": "2026-10-27T04:20:14+0000",
+      "unix_seconds": "1793074814.633282947"
+    },
+    {
+      "message_number": 48,
+      "receipt_utc": "2026-10-27T04:20:15+0000",
+      "unix_seconds": "1793074815.651307421"
+    },
+    {
+      "message_number": 49,
+      "receipt_utc": "2026-10-27T04:20:16+0000",
+      "unix_seconds": "1793074816.642288976"
+    },
+    {
+      "message_number": 50,
+      "receipt_utc": "2026-10-27T04:20:17+0000",
+      "unix_seconds": "1793074817.662399806"
+    },
+    {
+      "message_number": 51,
+      "receipt_utc": "2026-10-27T04:20:18+0000",
+      "unix_seconds": "1793074818.656242852"
+    },
+    {
+      "message_number": 52,
+      "receipt_utc": "2026-10-27T04:20:19+0000",
+      "unix_seconds": "1793074819.673305745"
+    },
+    {
+      "message_number": 53,
+      "receipt_utc": "2026-10-27T04:20:20+0000",
+      "unix_seconds": "1793074820.664286632"
+    },
+    {
+      "message_number": 54,
+      "receipt_utc": "2026-10-27T04:20:21+0000",
+      "unix_seconds": "1793074821.682403331"
+    },
+    {
+      "message_number": 55,
+      "receipt_utc": "2026-10-27T04:20:22+0000",
+      "unix_seconds": "1793074822.679286321"
+    },
+    {
+      "message_number": 56,
+      "receipt_utc": "2026-10-27T04:20:23+0000",
+      "unix_seconds": "1793074823.699282668"
+    },
+    {
+      "message_number": 57,
+      "receipt_utc": "2026-10-27T04:20:24+0000",
+      "unix_seconds": "1793074824.691243326"
+    },
+    {
+      "message_number": 58,
+      "receipt_utc": "2026-10-27T04:20:25+0000",
+      "unix_seconds": "1793074825.700251229"
+    },
+    {
+      "message_number": 59,
+      "receipt_utc": "2026-10-27T04:20:26+0000",
+      "unix_seconds": "1793074826.707251716"
+    },
+    {
+      "message_number": 60,
+      "receipt_utc": "2026-10-27T04:20:27+0000",
+      "unix_seconds": "1793074827.708277307"
+    },
+    {
+      "message_number": 61,
+      "receipt_utc": "2026-10-27T04:20:28+0000",
+      "unix_seconds": "1793074828.702281474"
+    },
+    {
+      "message_number": 62,
+      "receipt_utc": "2026-10-27T04:20:29+0000",
+      "unix_seconds": "1793074829.707423702"
+    },
+    {
+      "message_number": 63,
+      "receipt_utc": "2026-10-27T04:20:30+0000",
+      "unix_seconds": "1793074830.728392794"
+    },
+    {
+      "message_number": 64,
+      "receipt_utc": "2026-10-27T04:20:31+0000",
+      "unix_seconds": "1793074831.728299767"
+    },
+    {
+      "message_number": 65,
+      "receipt_utc": "2026-10-27T04:20:32+0000",
+      "unix_seconds": "1793074832.728236818"
+    },
+    {
+      "message_number": 66,
+      "receipt_utc": "2026-10-27T04:20:33+0000",
+      "unix_seconds": "1793074833.734265982"
+    },
+    {
+      "message_number": 67,
+      "receipt_utc": "2026-10-27T04:20:34+0000",
+      "unix_seconds": "1793074834.732624963"
+    },
+    {
+      "message_number": 68,
+      "receipt_utc": "2026-10-27T04:20:35+0000",
+      "unix_seconds": "1793074835.725300380"
+    },
+    {
+      "message_number": 69,
+      "receipt_utc": "2026-10-27T04:20:36+0000",
+      "unix_seconds": "1793074836.726405188"
+    },
+    {
+      "message_number": 70,
+      "receipt_utc": "2026-10-27T04:20:37+0000",
+      "unix_seconds": "1793074837.727312190"
+    }
+  ],
+  "interarrival_intervals": [
+    {
+      "previous_message": 1,
+      "next_message": 2,
+      "previous_receipt_utc": "2026-10-27T04:19:25+0000",
+      "next_receipt_utc": "2026-10-27T04:19:26+0000",
+      "seconds": "0.998235694"
+    },
+    {
+      "previous_message": 2,
+      "next_message": 3,
+      "previous_receipt_utc": "2026-10-27T04:19:26+0000",
+      "next_receipt_utc": "2026-10-27T04:19:27+0000",
+      "seconds": "1.020574430"
+    },
+    {
+      "previous_message": 3,
+      "next_message": 4,
+      "previous_receipt_utc": "2026-10-27T04:19:27+0000",
+      "next_receipt_utc": "2026-10-27T04:19:28+0000",
+      "seconds": "0.990955233"
+    },
+    {
+      "previous_message": 4,
+      "next_message": 5,
+      "previous_receipt_utc": "2026-10-27T04:19:28+0000",
+      "next_receipt_utc": "2026-10-27T04:19:29+0000",
+      "seconds": "1.016964755"
+    },
+    {
+      "previous_message": 5,
+      "next_message": 6,
+      "previous_receipt_utc": "2026-10-27T04:19:29+0000",
+      "next_receipt_utc": "2026-10-27T04:19:30+0000",
+      "seconds": "0.991050122"
+    },
+    {
+      "previous_message": 6,
+      "next_message": 7,
+      "previous_receipt_utc": "2026-10-27T04:19:30+0000",
+      "next_receipt_utc": "2026-10-27T04:19:31+0000",
+      "seconds": "1.021780292"
+    },
+    {
+      "previous_message": 7,
+      "next_message": 8,
+      "previous_receipt_utc": "2026-10-27T04:19:31+0000",
+      "next_receipt_utc": "2026-10-27T04:19:33+0000",
+      "seconds": "2.003224321"
+    },
+    {
+      "previous_message": 8,
+      "next_message": 9,
+      "previous_receipt_utc": "2026-10-27T04:19:33+0000",
+      "next_receipt_utc": "2026-10-27T04:19:34+0000",
+      "seconds": "0.996338570"
+    },
+    {
+      "previous_message": 9,
+      "next_message": 10,
+      "previous_receipt_utc": "2026-10-27T04:19:34+0000",
+      "next_receipt_utc": "2026-10-27T04:19:35+0000",
+      "seconds": "1.018683607"
+    },
+    {
+      "previous_message": 10,
+      "next_message": 11,
+      "previous_receipt_utc": "2026-10-27T04:19:35+0000",
+      "next_receipt_utc": "2026-10-27T04:19:36+0000",
+      "seconds": "0.992014966"
+    },
+    {
+      "previous_message": 11,
+      "next_message": 12,
+      "previous_receipt_utc": "2026-10-27T04:19:36+0000",
+      "next_receipt_utc": "2026-10-27T04:19:37+0000",
+      "seconds": "1.019019969"
+    },
+    {
+      "previous_message": 12,
+      "next_message": 13,
+      "previous_receipt_utc": "2026-10-27T04:19:37+0000",
+      "next_receipt_utc": "2026-10-27T04:19:38+0000",
+      "seconds": "0.990982110"
+    },
+    {
+      "previous_message": 13,
+      "next_message": 14,
+      "previous_receipt_utc": "2026-10-27T04:19:38+0000",
+      "next_receipt_utc": "2026-10-27T04:19:39+0000",
+      "seconds": "1.019964475"
+    },
+    {
+      "previous_message": 14,
+      "next_message": 15,
+      "previous_receipt_utc": "2026-10-27T04:19:39+0000",
+      "next_receipt_utc": "2026-10-27T04:19:40+0000",
+      "seconds": "0.992002726"
+    },
+    {
+      "previous_message": 15,
+      "next_message": 16,
+      "previous_receipt_utc": "2026-10-27T04:19:40+0000",
+      "next_receipt_utc": "2026-10-27T04:19:41+0000",
+      "seconds": "1.020008432"
+    },
+    {
+      "previous_message": 16,
+      "next_message": 17,
+      "previous_receipt_utc": "2026-10-27T04:19:41+0000",
+      "next_receipt_utc": "2026-10-27T04:19:42+0000",
+      "seconds": "0.989999849"
+    },
+    {
+      "previous_message": 17,
+      "next_message": 18,
+      "previous_receipt_utc": "2026-10-27T04:19:42+0000",
+      "next_receipt_utc": "2026-10-27T04:19:43+0000",
+      "seconds": "1.020999041"
+    },
+    {
+      "previous_message": 18,
+      "next_message": 19,
+      "previous_receipt_utc": "2026-10-27T04:19:43+0000",
+      "next_receipt_utc": "2026-10-27T04:19:44+0000",
+      "seconds": "1.001083763"
+    },
+    {
+      "previous_message": 19,
+      "next_message": 20,
+      "previous_receipt_utc": "2026-10-27T04:19:44+0000",
+      "next_receipt_utc": "2026-10-27T04:19:45+0000",
+      "seconds": "0.996538854"
+    },
+    {
+      "previous_message": 20,
+      "next_message": 21,
+      "previous_receipt_utc": "2026-10-27T04:19:45+0000",
+      "next_receipt_utc": "2026-10-27T04:19:46+0000",
+      "seconds": "1.010403900"
+    },
+    {
+      "previous_message": 21,
+      "next_message": 22,
+      "previous_receipt_utc": "2026-10-27T04:19:46+0000",
+      "next_receipt_utc": "2026-10-27T04:19:47+0000",
+      "seconds": "0.996101709"
+    },
+    {
+      "previous_message": 22,
+      "next_message": 23,
+      "previous_receipt_utc": "2026-10-27T04:19:47+0000",
+      "next_receipt_utc": "2026-10-27T04:19:48+0000",
+      "seconds": "1.019896724"
+    },
+    {
+      "previous_message": 23,
+      "next_message": 24,
+      "previous_receipt_utc": "2026-10-27T04:19:48+0000",
+      "next_receipt_utc": "2026-10-27T04:19:49+0000",
+      "seconds": "1.000986936"
+    },
+    {
+      "previous_message": 24,
+      "next_message": 25,
+      "previous_receipt_utc": "2026-10-27T04:19:49+0000",
+      "next_receipt_utc": "2026-10-27T04:19:50+0000",
+      "seconds": "0.996006975"
+    },
+    {
+      "previous_message": 25,
+      "next_message": 26,
+      "previous_receipt_utc": "2026-10-27T04:19:50+0000",
+      "next_receipt_utc": "2026-10-27T04:19:51+0000",
+      "seconds": "1.020075705"
+    },
+    {
+      "previous_message": 26,
+      "next_message": 27,
+      "previous_receipt_utc": "2026-10-27T04:19:51+0000",
+      "next_receipt_utc": "2026-10-27T04:19:52+0000",
+      "seconds": "0.990915717"
+    },
+    {
+      "previous_message": 27,
+      "next_message": 28,
+      "previous_receipt_utc": "2026-10-27T04:19:52+0000",
+      "next_receipt_utc": "2026-10-27T04:19:53+0000",
+      "seconds": "1.020026676"
+    },
+    {
+      "previous_message": 28,
+      "next_message": 29,
+      "previous_receipt_utc": "2026-10-27T04:19:53+0000",
+      "next_receipt_utc": "2026-10-27T04:19:54+0000",
+      "seconds": "0.988659792"
+    },
+    {
+      "previous_message": 29,
+      "next_message": 30,
+      "previous_receipt_utc": "2026-10-27T04:19:54+0000",
+      "next_receipt_utc": "2026-10-27T04:19:55+0000",
+      "seconds": "1.020300063"
+    },
+    {
+      "previous_message": 30,
+      "next_message": 31,
+      "previous_receipt_utc": "2026-10-27T04:19:55+0000",
+      "next_receipt_utc": "2026-10-27T04:19:56+0000",
+      "seconds": "0.994017723"
+    },
+    {
+      "previous_message": 31,
+      "next_message": 32,
+      "previous_receipt_utc": "2026-10-27T04:19:56+0000",
+      "next_receipt_utc": "2026-10-27T04:19:57+0000",
+      "seconds": "1.016972033"
+    },
+    {
+      "previous_message": 32,
+      "next_message": 33,
+      "previous_receipt_utc": "2026-10-27T04:19:57+0000",
+      "next_receipt_utc": "2026-10-27T04:19:58+0000",
+      "seconds": "0.991009563"
+    },
+    {
+      "previous_message": 33,
+      "next_message": 34,
+      "previous_receipt_utc": "2026-10-27T04:19:58+0000",
+      "next_receipt_utc": "2026-10-27T04:19:59+0000",
+      "seconds": "1.019979803"
+    },
+    {
+      "previous_message": 34,
+      "next_message": 35,
+      "previous_receipt_utc": "2026-10-27T04:19:59+0000",
+      "next_receipt_utc": "2026-10-27T04:20:00+0000",
+      "seconds": "0.989619182"
+    },
+    {
+      "previous_message": 35,
+      "next_message": 36,
+      "previous_receipt_utc": "2026-10-27T04:20:00+0000",
+      "next_receipt_utc": "2026-10-27T04:20:01+0000",
+      "seconds": "1.029012019"
+    },
+    {
+      "previous_message": 36,
+      "next_message": 37,
+      "previous_receipt_utc": "2026-10-27T04:20:01+0000",
+      "next_receipt_utc": "2026-10-27T04:20:04+0000",
+      "seconds": "3.006398995"
+    },
+    {
+      "previous_message": 37,
+      "next_message": 38,
+      "previous_receipt_utc": "2026-10-27T04:20:04+0000",
+      "next_receipt_utc": "2026-10-27T04:20:05+0000",
+      "seconds": "0.989708933"
+    },
+    {
+      "previous_message": 38,
+      "next_message": 39,
+      "previous_receipt_utc": "2026-10-27T04:20:05+0000",
+      "next_receipt_utc": "2026-10-27T04:20:06+0000",
+      "seconds": "1.018155129"
+    },
+    {
+      "previous_message": 39,
+      "next_message": 40,
+      "previous_receipt_utc": "2026-10-27T04:20:06+0000",
+      "next_receipt_utc": "2026-10-27T04:20:07+0000",
+      "seconds": "0.993191112"
+    },
+    {
+      "previous_message": 40,
+      "next_message": 41,
+      "previous_receipt_utc": "2026-10-27T04:20:07+0000",
+      "next_receipt_utc": "2026-10-27T04:20:08+0000",
+      "seconds": "1.001169144"
+    },
+    {
+      "previous_message": 41,
+      "next_message": 42,
+      "previous_receipt_utc": "2026-10-27T04:20:08+0000",
+      "next_receipt_utc": "2026-10-27T04:20:09+0000",
+      "seconds": "1.019797939"
+    },
+    {
+      "previous_message": 42,
+      "next_message": 43,
+      "previous_receipt_utc": "2026-10-27T04:20:09+0000",
+      "next_receipt_utc": "2026-10-27T04:20:10+0000",
+      "seconds": "0.990990715"
+    },
+    {
+      "previous_message": 43,
+      "next_message": 44,
+      "previous_receipt_utc": "2026-10-27T04:20:10+0000",
+      "next_receipt_utc": "2026-10-27T04:20:11+0000",
+      "seconds": "1.019990170"
+    },
+    {
+      "previous_message": 44,
+      "next_message": 45,
+      "previous_receipt_utc": "2026-10-27T04:20:11+0000",
+      "next_receipt_utc": "2026-10-27T04:20:12+0000",
+      "seconds": "0.991023736"
+    },
+    {
+      "previous_message": 45,
+      "next_message": 46,
+      "previous_receipt_utc": "2026-10-27T04:20:12+0000",
+      "next_receipt_utc": "2026-10-27T04:20:13+0000",
+      "seconds": "1.020991266"
+    },
+    {
+      "previous_message": 46,
+      "next_message": 47,
+      "previous_receipt_utc": "2026-10-27T04:20:13+0000",
+      "next_receipt_utc": "2026-10-27T04:20:14+0000",
+      "seconds": "0.992000359"
+    },
+    {
+      "previous_message": 47,
+      "next_message": 48,
+      "previous_receipt_utc": "2026-10-27T04:20:14+0000",
+      "next_receipt_utc": "2026-10-27T04:20:15+0000",
+      "seconds": "1.018024474"
+    },
+    {
+      "previous_message": 48,
+      "next_message": 49,
+      "previous_receipt_utc": "2026-10-27T04:20:15+0000",
+      "next_receipt_utc": "2026-10-27T04:20:16+0000",
+      "seconds": "0.990981555"
+    },
+    {
+      "previous_message": 49,
+      "next_message": 50,
+      "previous_receipt_utc": "2026-10-27T04:20:16+0000",
+      "next_receipt_utc": "2026-10-27T04:20:17+0000",
+      "seconds": "1.020110830"
+    },
+    {
+      "previous_message": 50,
+      "next_message": 51,
+      "previous_receipt_utc": "2026-10-27T04:20:17+0000",
+      "next_receipt_utc": "2026-10-27T04:20:18+0000",
+      "seconds": "0.993843046"
+    },
+    {
+      "previous_message": 51,
+      "next_message": 52,
+      "previous_receipt_utc": "2026-10-27T04:20:18+0000",
+      "next_receipt_utc": "2026-10-27T04:20:19+0000",
+      "seconds": "1.017062893"
+    },
+    {
+      "previous_message": 52,
+      "next_message": 53,
+      "previous_receipt_utc": "2026-10-27T04:20:19+0000",
+      "next_receipt_utc": "2026-10-27T04:20:20+0000",
+      "seconds": "0.990980887"
+    },
+    {
+      "previous_message": 53,
+      "next_message": 54,
+      "previous_receipt_utc": "2026-10-27T04:20:20+0000",
+      "next_receipt_utc": "2026-10-27T04:20:21+0000",
+      "seconds": "1.018116699"
+    },
+    {
+      "previous_message": 54,
+      "next_message": 55,
+      "previous_receipt_utc": "2026-10-27T04:20:21+0000",
+      "next_receipt_utc": "2026-10-27T04:20:22+0000",
+      "seconds": "0.996882990"
+    },
+    {
+      "previous_message": 55,
+      "next_message": 56,
+      "previous_receipt_utc": "2026-10-27T04:20:22+0000",
+      "next_receipt_utc": "2026-10-27T04:20:23+0000",
+      "seconds": "1.019996347"
+    },
+    {
+      "previous_message": 56,
+      "next_message": 57,
+      "previous_receipt_utc": "2026-10-27T04:20:23+0000",
+      "next_receipt_utc": "2026-10-27T04:20:24+0000",
+      "seconds": "0.991960658"
+    },
+    {
+      "previous_message": 57,
+      "next_message": 58,
+      "previous_receipt_utc": "2026-10-27T04:20:24+0000",
+      "next_receipt_utc": "2026-10-27T04:20:25+0000",
+      "seconds": "1.009007903"
+    },
+    {
+      "previous_message": 58,
+      "next_message": 59,
+      "previous_receipt_utc": "2026-10-27T04:20:25+0000",
+      "next_receipt_utc": "2026-10-27T04:20:26+0000",
+      "seconds": "1.007000487"
+    },
+    {
+      "previous_message": 59,
+      "next_message": 60,
+      "previous_receipt_utc": "2026-10-27T04:20:26+0000",
+      "next_receipt_utc": "2026-10-27T04:20:27+0000",
+      "seconds": "1.001025591"
+    },
+    {
+      "previous_message": 60,
+      "next_message": 61,
+      "previous_receipt_utc": "2026-10-27T04:20:27+0000",
+      "next_receipt_utc": "2026-10-27T04:20:28+0000",
+      "seconds": "0.994004167"
+    },
+    {
+      "previous_message": 61,
+      "next_message": 62,
+      "previous_receipt_utc": "2026-10-27T04:20:28+0000",
+      "next_receipt_utc": "2026-10-27T04:20:29+0000",
+      "seconds": "1.005142228"
+    },
+    {
+      "previous_message": 62,
+      "next_message": 63,
+      "previous_receipt_utc": "2026-10-27T04:20:29+0000",
+      "next_receipt_utc": "2026-10-27T04:20:30+0000",
+      "seconds": "1.020969092"
+    },
+    {
+      "previous_message": 63,
+      "next_message": 64,
+      "previous_receipt_utc": "2026-10-27T04:20:30+0000",
+      "next_receipt_utc": "2026-10-27T04:20:31+0000",
+      "seconds": "0.999906973"
+    },
+    {
+      "previous_message": 64,
+      "next_message": 65,
+      "previous_receipt_utc": "2026-10-27T04:20:31+0000",
+      "next_receipt_utc": "2026-10-27T04:20:32+0000",
+      "seconds": "0.999937051"
+    },
+    {
+      "previous_message": 65,
+      "next_message": 66,
+      "previous_receipt_utc": "2026-10-27T04:20:32+0000",
+      "next_receipt_utc": "2026-10-27T04:20:33+0000",
+      "seconds": "1.006029164"
+    },
+    {
+      "previous_message": 66,
+      "next_message": 67,
+      "previous_receipt_utc": "2026-10-27T04:20:33+0000",
+      "next_receipt_utc": "2026-10-27T04:20:34+0000",
+      "seconds": "0.998358981"
+    },
+    {
+      "previous_message": 67,
+      "next_message": 68,
+      "previous_receipt_utc": "2026-10-27T04:20:34+0000",
+      "next_receipt_utc": "2026-10-27T04:20:35+0000",
+      "seconds": "0.992675417"
+    },
+    {
+      "previous_message": 68,
+      "next_message": 69,
+      "previous_receipt_utc": "2026-10-27T04:20:35+0000",
+      "next_receipt_utc": "2026-10-27T04:20:36+0000",
+      "seconds": "1.001104808"
+    },
+    {
+      "previous_message": 69,
+      "next_message": 70,
+      "previous_receipt_utc": "2026-10-27T04:20:36+0000",
+      "next_receipt_utc": "2026-10-27T04:20:37+0000",
+      "seconds": "1.000907002"
+    }
+  ]
+}

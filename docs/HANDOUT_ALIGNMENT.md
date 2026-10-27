@@ -119,9 +119,11 @@ source of those gaps remains open. The subsequent
 also timed out (61 messages, three gaps over 2.5 seconds, longest 16.020 seconds).
 The [later intended stationary check](testing/2026-10-27_stationary_continuity/review.md)
 received 70/70 messages with all intervals between 0.977 and 1.028 seconds,
-no timeout/error shown and no gaps over 2.5 seconds. A short walking check
-near the router with the same power connection precedes the next full trial;
-the intermittent cause remains unconfirmed. Post-upload Android
+no timeout/error shown and no gaps over 2.5 seconds. The subsequent
+[intended walking check](testing/2026-10-27_walking_continuity/review.md)
+also returned 70 messages, but includes a 3.006-second gap. Inspect the
+same-period service logs before the next full trial; the intermittent cause
+remains unconfirmed. Post-upload Android
 operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu

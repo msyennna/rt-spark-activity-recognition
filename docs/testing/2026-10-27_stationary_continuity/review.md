@@ -74,3 +74,11 @@ serial/connection diagnostics rather than treating stationary success as a fix.
 The stopped PyTorch session remains preserved and unscorable. The complete
 six-trial PyTorch evaluation remains pending. No firmware, classifier,
 model, service, Android, credentials, temporal guard or scoring rules changed.
+
+## Follow-up walking capture
+
+The requested [walking comparison](../2026-10-27_walking_continuity/review.md)
+is now supplied. It returned all 70 messages without a timeout/error, but
+includes a 3.006398995-second receipt gap at 04:20:01–04:20:04 UTC. Inspect
+the classifier/broker journal from that period before another full trial;
+the short stationary success does not establish a repaired movement connection.

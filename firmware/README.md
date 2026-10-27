@@ -81,8 +81,10 @@ receipt continuity with the intended power setup before a new trial. The
 also timed out after 61 messages, with three gaps over 2.5 seconds and a
 maximum of 16.020 seconds. The [later intended stationary baseline](../docs/testing/2026-10-27_stationary_continuity/review.md)
 returned all 70 messages at 0.977–1.028-second intervals, with no timeout/error
-shown. Check a short walking comparison near the router with the same power
-connection before the full protocol. The underlying interruption remains unconfirmed; no firmware
+shown. The [subsequent intended walking capture](../docs/testing/2026-10-27_walking_continuity/review.md)
+also returned 70 messages but includes a 3.006-second receipt gap. Inspect
+the same-period service logs before the full protocol. The underlying
+interruption remains unconfirmed; no firmware
 change is justified by receipt timing alone. Retain the stopped folder.
 
 ## MQTT library and handout alignment
