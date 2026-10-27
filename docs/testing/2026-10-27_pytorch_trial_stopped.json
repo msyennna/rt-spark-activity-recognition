@@ -1,0 +1,51 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "evidence_source": "User-pasted Ubuntu timed-test output; transcribed summary and checkpoint hash only. Original session.json and summary.md have not yet been supplied for raw audit.",
+  "session_id": "timed_walk_jog_20261027T020953Z_8619c6",
+  "reported_results_folder": "/home/ubuntu/rt-spark-activity-recognition/docs/testing/timed_walk_jog_20261027T020953Z_8619c6",
+  "reported_model_checkpoint_sha256": "be60d75d699a6bc317806426c2ec7e47432c2e907e0ceafbab145ba16cce3331",
+  "matches_previously_deployed_checkpoint": true,
+  "hash_scope": "On-disk checkpoint hash printed immediately before timer invocation; not an independent inspection of the running classifier process.",
+  "tool_version": "1.0",
+  "protocol": {
+    "planned_trials": 6,
+    "seconds_per_trial": 60,
+    "activity_order": [
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING"
+    ]
+  },
+  "board_placement": "held in right hand",
+  "reported_status": "STOPPED",
+  "reported_trials": [
+    {
+      "number": 1,
+      "requested_activity": "WALKING",
+      "participant_confirmed": true,
+      "eligible_windows": 0,
+      "matching_predictions": 0,
+      "quality_issue": "Prediction count does not cover the expected interval at the nominal five-second rate."
+    }
+  ],
+  "second_trial_start": "The RUNNING readiness prompt was shown; the fresh-record preflight stopped the session before its countdown/start cue.",
+  "window_accuracy_percent": null,
+  "reported_confusion_matrix": {
+    "WALKING": {
+      "WALKING": 0,
+      "RUNNING": 0
+    },
+    "RUNNING": {
+      "WALKING": 0,
+      "RUNNING": 0
+    }
+  },
+  "stop_reason": "ValueError: Latest prediction is older than 15 seconds. Power the board and wait for fresh predictions.",
+  "raw_session_reviewed": false,
+  "root_cause": "Undetermined. Need current broker receipt, classifier status/logs, raw trial timing/rows, and board power/serial observations.",
+  "interpretation": "Incomplete protocol with invalid prediction coverage; zero eligible windows is not a 0% model-accuracy result and does not establish that no raw rows existed outside the eligible interval.",
+  "remediation_status": "No classifier/model/firmware changes, quality-rule relaxation, restart or repeat movement trial performed by the reviewer."
+}

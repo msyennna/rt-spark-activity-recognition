@@ -26,7 +26,10 @@ returned five sensor messages and database-backed API record 6746, WALKING,
 confidence 0.9989190101623535, created October 27 at 01:32:41 UTC. The user
 then [confirmed Android is working](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact displayed ID was supplied. The new labelled
-PyTorch movement trial remains pending.
+PyTorch trial was attempted, but [stopped for missing prediction coverage](testing/2026-10-27_pytorch_trial_stopped.md):
+first WALKING interval had zero eligible windows, then the next preflight
+reported the latest prediction older than 15 seconds. No score is available;
+raw-session and stream-health diagnostics remain pending.
 The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
 native suites passed. Its local image has now been programmed and verified
 through ST-LINK in the supplied output, followed by positive sensor/network
@@ -74,6 +77,7 @@ Completed commits pushed to `origin/integration/stm32cubemx`:
 | Post-upload sensor/TLS/MQTT runtime | Positive path observed | WHO_AM_I 0xAF and sensor init success; Wi-Fi connected and DHCP BOUND at 192.168.1.17; DNS/TCP and UTC ready; TLSv1.2 verified; MQTT CONNACK accepted; PUBACK IDs/counts 1–7. No timestamps or independent version banner are present; new Ubuntu/DB/API/phone checks remain pending. |
 | Post-upload Ubuntu broker and API | Five messages and newer record observed | Local subscriber returned five six-field sensor objects. Local HTTP latest returned 6746, WALKING, confidence 0.9989190101623535, October 27 01:32:41 UTC (09:32:41 Manila). This is database-backed API evidence, not a direct SQLite query, exact sensor-window association, measured response age or new public HTTPS check. Phone confirmation and labelled PyTorch trial remain pending. |
 | Post-upload Android operation | User-confirmed | After being asked to check Live and History, the user replied that it is working. No new screenshot, displayed ID, timing measurement or exact API-row match was supplied. Confirmation is accepted to continue to the new PyTorch trial. |
+| New PyTorch movement attempt | STOPPED; not scorable | Session `timed_walk_jog_20261027T020953Z_8619c6`, matching on-disk checkpoint hash, placement held in right hand. One confirmed 60-second WALKING interval has zero eligible windows/insufficient coverage; trial 2 preflight rejected a prediction older than 15 seconds. Raw session not yet reviewed; root cause is undetermined. Preserve this attempt and diagnose the stream before repeating. |
 | CubeMX 6.18.1 generation review | Generated output supplied; source reconciliation complete | All 17 nonempty application USER CODE blocks survived. Removed the generated I2C2 main/MSP duplicates, retained custom_bus ownership, accepted GPIO output-latch preloads and disabled-EXTI cleanup. The original public ZIP and per-file hashes are retained. See the October 27 review for tests and build status. |
 | Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, PLLQ corrected for RNG. CubeMX 6.18.1 output is now reviewed and reconciled; new firmware hardware checks remain pending. |
 | Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; initial physical-board TLS/CONNACK and broker reception were observed on October 23, 2026; October 26 runtime output now includes 17 accepted PUBACKs, IDs 1482–1498. Measured cadence and extended recovery checks remain pending. |

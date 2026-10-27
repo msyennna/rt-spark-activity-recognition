@@ -69,7 +69,10 @@ initialization, DHCP BOUND, verified TLS and PUBACKs 1–7. The subsequent
 [user-supplied Ubuntu check](../docs/testing/2026-10-27_coremqtt_cloud_check.md)
 contains five subscriber messages and newer database-backed API record 6746.
 Post-upload Android operation is now [user-confirmed](../docs/testing/2026-10-27_android_confirmation.md).
-The new labelled PyTorch movement test remains pending.
+The [new PyTorch movement attempt stopped](../docs/testing/2026-10-27_pytorch_trial_stopped.md)
+for insufficient prediction coverage and a stale-record preflight. The root
+cause is not established; collect broker/service/serial evidence before a new
+trial. Retain the stopped results folder.
 
 ## MQTT library and handout alignment
 

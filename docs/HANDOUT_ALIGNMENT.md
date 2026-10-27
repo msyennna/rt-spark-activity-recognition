@@ -106,7 +106,10 @@ generator run or a physical test.
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-the new labelled PyTorch movement test remains pending. Post-upload Android
+a complete, valid PyTorch movement test remains pending. The
+[first attempt stopped](testing/2026-10-27_pytorch_trial_stopped.md) because
+prediction coverage was insufficient and the next record-freshness check failed;
+no model-accuracy score is available. Post-upload Android
 operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu
