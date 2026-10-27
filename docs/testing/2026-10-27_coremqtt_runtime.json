@@ -1,0 +1,144 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "evidence_source": "User-pasted serial output following the successful ST-LINK upload; selected observations/readings transcribed from the conversation, not an independent capture or a byte-exact log file.",
+  "context": {
+    "preceding_upload_record": "docs/testing/2026-10-27_coremqtt_stlink_upload.json",
+    "firmware_source_commit": "b44d2ba1478a7596a8161eb38d3fcbc8cf561f03",
+    "source_version_banner_in_excerpt": false,
+    "version_attribution": "Follows user-reported upload of the build that linked coreMQTT 2.3.1; the excerpt begins during JOIN and does not independently display the library-version banner."
+  },
+  "wifi": {
+    "connected_reported": true,
+    "link_up_reported": true,
+    "dhcp_start_result": 0,
+    "dhcp_bound_reported": true,
+    "ip": "192.168.1.17",
+    "netmask": "255.255.255.0",
+    "gateway": "192.168.1.1"
+  },
+  "sensor": {
+    "who_am_i": "0xAF",
+    "initialization_success_reported": true,
+    "six_finite_fields_in_each_selected_reading": true
+  },
+  "transport": {
+    "dns_tcp_connected_utc_ready_reported": true,
+    "tls_verification_success_reported": true,
+    "tls_version": "TLSv1.2",
+    "mqtt_connack": "accepted",
+    "topic": "activity/sensor",
+    "qos": 1,
+    "puback_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "delivery_counts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "selected_readings_and_following_acknowledgements": [
+    {
+      "following_puback_id": 1,
+      "following_delivery_count": 1,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.13855,
+        "acceleration_y": -0.001526,
+        "acceleration_z": 1.001038,
+        "gyro_x": -0.051427,
+        "gyro_y": -0.0004,
+        "gyro_z": -0.002132
+      }
+    },
+    {
+      "following_puback_id": 2,
+      "following_delivery_count": 2,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.137573,
+        "acceleration_y": -0.003784,
+        "acceleration_z": 0.998779,
+        "gyro_x": -0.051694,
+        "gyro_y": 0.001066,
+        "gyro_z": -0.003464
+      }
+    },
+    {
+      "following_puback_id": 3,
+      "following_delivery_count": 3,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.137817,
+        "acceleration_y": -0.000732,
+        "acceleration_z": 1.000916,
+        "gyro_x": -0.05236,
+        "gyro_y": 0.0004,
+        "gyro_z": -0.001732
+      }
+    },
+    {
+      "following_puback_id": 4,
+      "following_delivery_count": 4,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.138855,
+        "acceleration_y": -0.002686,
+        "acceleration_z": 0.999939,
+        "gyro_x": -0.051694,
+        "gyro_y": 0.000799,
+        "gyro_z": -0.002798
+      }
+    },
+    {
+      "following_puback_id": 5,
+      "following_delivery_count": 5,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.138611,
+        "acceleration_y": -0.002991,
+        "acceleration_z": 0.99939,
+        "gyro_x": -0.050361,
+        "gyro_y": 0.0,
+        "gyro_z": -0.002265
+      }
+    },
+    {
+      "following_puback_id": 6,
+      "following_delivery_count": 6,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.138611,
+        "acceleration_y": -0.004089,
+        "acceleration_z": 1.000305,
+        "gyro_x": -0.05236,
+        "gyro_y": 0.000799,
+        "gyro_z": -0.003864
+      }
+    },
+    {
+      "following_puback_id": 7,
+      "following_delivery_count": 7,
+      "preceding_printed_reading": {
+        "acceleration_x": 0.136902,
+        "acceleration_y": -0.00177,
+        "acceleration_z": 1.003235,
+        "gyro_x": -0.050894,
+        "gyro_y": 0.001466,
+        "gyro_z": -0.002265
+      }
+    }
+  ],
+  "cadence_measured": false,
+  "not_established": [
+    "Per-line timestamps, measured one-second acquisition/publication cadence, long-running stability or controlled interruption recovery.",
+    "Raw broker payload receipt from a separate Ubuntu subscriber after this upload.",
+    "Fresh database/API row or matching Android display after this upload.",
+    "New independently labelled PyTorch walking/jogging accuracy.",
+    "An independently captured runtime version banner, firmware binary hash or full network trace."
+  ]
+}

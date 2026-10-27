@@ -56,9 +56,11 @@ definition applied to the library. Five native suites, an ARM firmware build,
 and the source guard passed. See [the exact build/test record](testing/2026-10-26_coremqtt_port.md).
 The local reconciled image has now been programmed through ST-LINK, with
 OpenOCD Verified OK and SUCCESS in 12.62 seconds in the user's supplied output.
-See [the upload record](testing/2026-10-27_coremqtt_stlink_upload.md). New
-application startup and PUBACKs remain pending; earlier PUBACKs describe the
-previous custom-encoder implementation.
+See [the upload record](testing/2026-10-27_coremqtt_stlink_upload.md). The
+subsequent [runtime excerpt](testing/2026-10-27_coremqtt_runtime.md) shows sensor
+initialization, DHCP BOUND, verified TLS and seven PUBACKs. The version banner
+is outside the excerpt; attribution follows the build/upload sequence. Earlier
+PUBACKs retain their previous custom-encoder attribution.
 
 The subsequent Windows build also passed in 16.75 seconds, with coreMQTT 2.3.1,
 66,756 bytes static SRAM and 162,788 bytes flash. The private-header existence

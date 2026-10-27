@@ -18,12 +18,16 @@ The subsequent [Windows rebuild](testing/2026-10-27_windows_reconciled_build.md)
 pulled `b44d2ba`, passed the guard and succeeded in 24.05 seconds: static SRAM
 66,756 bytes and flash 162,780 bytes. The subsequent
 [ST-LINK upload](testing/2026-10-27_coremqtt_stlink_upload.md) reports programming
-finished, Verified OK, target reset and SUCCESS in 12.62 seconds. Startup and
-new coreMQTT runtime checks remain pending.
+finished, Verified OK, target reset and SUCCESS in 12.62 seconds. The subsequent
+[post-upload runtime](testing/2026-10-27_coremqtt_runtime.md) shows ICM20608
+identity 0xAF, DHCP BOUND, verified TLSv1.2, accepted MQTT login and PUBACKs
+1–7. Fresh downstream database/API/phone checks remain pending.
 The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
 native suites passed. Its local image has now been programmed and verified
-through ST-LINK in the supplied output; application startup has not yet been
-captured. Historical PUBACKs below belong to the previous custom-encoder firmware. The exact current
+through ST-LINK in the supplied output, followed by positive sensor/network
+runtime and seven PUBACKs. The excerpt omits the library-version banner;
+attribution follows the build/upload sequence. Historical PUBACKs below retain
+their previous custom-encoder attribution. The exact current
 checks and Linux TLS-test skips are recorded in
 [the coreMQTT report](testing/2026-10-26_coremqtt_port.md).
 
@@ -58,10 +62,11 @@ Completed commits pushed to `origin/integration/stm32cubemx`:
 | Import unchanged Shanice firmware | Complete | `pio run -d firmware` passed on October 23, 2026: RAM 27,560 bytes; flash 56,212 bytes. This establishes a clean build before porting. |
 | PyTorch cloud cutover | PASS in supplied Ubuntu output | CPU PyTorch 2.14.1+cpu installed; ten pre-cutover model/contract tests passed; `rtspark-classifier.service` restarted with the expected model hash; baseline ID 5941 advanced to observed ID 5942 at 04:08:05 UTC, then local API ID 5943 at 04:08:10 UTC. |
 | Post-PyTorch public/Android checks | Public checks PASS; Live/History observed | At 04:18:02.877096 UTC all three public checks passed with ID 6060 created 04:17:56 UTC. Android LIVE shows 6067 at 12:18:36 local time; History shows 6068–6064 newest first at five-second recorded-time gaps, all displayed as Walking 99.9%. No exact server-row match for screen IDs or labelled movement accuracy is claimed. |
-| Handout AWS coreMQTT library integration | Source/build complete; physical check pending | Actual unmodified coreMQTT 2.3.1 low-level serializer/deserializer, default-config macro, five native suites and ARM build passed October 26. SRAM 66,756 bytes, separate CCM 57,344 bytes, flash 162,476 bytes. These software checks did not run CubeMX; the subsequent generator review is recorded separately. No new board runtime is claimed. |
+| Handout AWS coreMQTT library integration | Source/build complete; positive post-upload runtime observed | Actual unmodified coreMQTT 2.3.1 low-level serializer/deserializer, default-config macro, five native suites and ARM build passed October 26. SRAM 66,756 bytes, separate CCM 57,344 bytes, flash 162,476 bytes. These software checks did not run CubeMX; the subsequent generator review is recorded separately. No new board runtime is claimed. |
 | User-computer coreMQTT build | Windows build PASS | Supplied transcript pulls `ceb55b3`, confirms private-header existence, passes source guard and links coreMQTT 2.3.1. SUCCESS in 16.75 s, static SRAM 66,756 / 131,072 bytes and flash 162,788 / 1,048,576 bytes. Linker warnings remain; no binary hash, generation or flashing is shown. |
 | Windows rebuild after CubeMX reconciliation | PASS in user-supplied transcript | Pull to `b44d2ba`, active guard PASS, coreMQTT 2.3.1 linked. SUCCESS in 24.05 s; static SRAM 66,756 bytes, flash 162,780 bytes. Existing linker warnings remain. No programming or runtime is shown. |
-| coreMQTT ST-LINK programming | Programming and verification PASS in supplied output | Pull to documentation commit `341d360`; firmware source remains `b44d2ba`. OpenOCD reports programming finished, Verified OK, reset and SUCCESS in 12.62 s. Startup, current sensor/network data and new coreMQTT PUBACKs remain pending. |
+| coreMQTT ST-LINK programming | Programming and verification PASS in supplied output | Pull to documentation commit `341d360`; firmware source remains `b44d2ba`. OpenOCD reports programming finished, Verified OK, reset and SUCCESS in 12.62 s. This upload transcript alone does not show application networking; subsequent runtime is recorded separately. |
+| Post-upload sensor/TLS/MQTT runtime | Positive path observed | WHO_AM_I 0xAF and sensor init success; Wi-Fi connected and DHCP BOUND at 192.168.1.17; DNS/TCP and UTC ready; TLSv1.2 verified; MQTT CONNACK accepted; PUBACK IDs/counts 1–7. No timestamps or independent version banner are present; new Ubuntu/DB/API/phone checks remain pending. |
 | CubeMX 6.18.1 generation review | Generated output supplied; source reconciliation complete | All 17 nonempty application USER CODE blocks survived. Removed the generated I2C2 main/MSP duplicates, retained custom_bus ownership, accepted GPIO output-latch preloads and disabled-EXTI cleanup. The original public ZIP and per-file hashes are retained. See the October 27 review for tests and build status. |
 | Review network MAC and CubeMX/ICM20608 differences | Source complete; build passed | Module-reported station MAC replaces the shared constant; stale LSM6DSL selection removed, PLLQ corrected for RNG. CubeMX 6.18.1 output is now reviewed and reconciled; new firmware hardware checks remain pending. |
 | Direct MQTT/TLS port with foreground polling | Source complete; build passed | `pio run -d firmware` passed on October 23, 2026: SRAM 66,756 / 131,072 bytes; separate CCM 57,344 / 65,536 bytes; flash 160,860 / 1,048,576 bytes. TCP, DNS, UTC, RNG, verified TLS and QoS 1 acknowledgement are implemented; initial physical-board TLS/CONNACK and broker reception were observed on October 23, 2026; October 26 runtime output now includes 17 accepted PUBACKs, IDs 1482–1498. Measured cadence and extended recovery checks remain pending. |

@@ -63,8 +63,10 @@ and [PlatformIO upload target](https://docs.platformio.org/en/latest/core/quicks
 The observed local build is recorded in
 [the Windows reconciliation report](../docs/testing/2026-10-27_windows_reconciled_build.md).
 The later [user-supplied upload output](../docs/testing/2026-10-27_coremqtt_stlink_upload.md)
-reports successful programming and Verified OK in 12.62 seconds. Application
-startup and new coreMQTT runtime evidence remain pending.
+reports successful programming and Verified OK in 12.62 seconds. The later
+[runtime excerpt](../docs/testing/2026-10-27_coremqtt_runtime.md) shows sensor
+initialization, DHCP BOUND, verified TLS and PUBACKs 1–7. Independent Ubuntu
+subscriber, fresh database/API/phone and movement checks remain the next steps.
 
 ## MQTT library and handout alignment
 
