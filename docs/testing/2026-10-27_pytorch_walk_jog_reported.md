@@ -11,11 +11,12 @@ and marked valid. Board placement was held in the right hand. Activity order
 was fixed before predictions were inspected, and predictions remained hidden
 until the session ended. The freshness preflight passed.
 
-The trial and confusion-matrix totals below agree arithmetically. The original
-`session.json` has not yet been obtained or independently replayed, so interval
-selection, timing and quality flags remain reported rather than independently
-audited. A new model hash was not supplied with this run; attribution to the
-active PyTorch deployment follows the preceding deployment history.
+The original `session.json` was subsequently uploaded and independently
+replayed. All six saved trial analyses and aggregate metrics match the
+reconstruction, confirming the totals below. The follow-up [original-session
+audit](2026-10-27_pytorch_walk_jog_audit.md) closes the earlier pending review.
+A new model hash was not supplied with this run; attribution to the active
+PyTorch deployment follows the preceding deployment history.
 
 ## Reported results
 
@@ -49,7 +50,8 @@ accuracy across people or environments.
 
 The timing tool selects windows by recorded time and coverage, not predicted
 class or confidence. Incorrect predictions remain in the totals. Confidence
-values are absent from this console summary and cannot be analyzed here.
+values were absent from the original console summary; aggregate confidence
+findings from the subsequent uploaded file are recorded in the follow-up audit.
 Prediction-completion timestamps do not directly measure sensor acquisition
 or network delay.
 
@@ -65,13 +67,13 @@ holdout result belongs to a separate dataset evaluation. Neither substitutes
 for the 54.7% live result reported here. The model has only WALKING/RUNNING
 classes; this test supplies no resting-class evaluation.
 
-## Next step
+## Completed follow-up
 
-Preserve this completed session and the earlier stopped attempt. Obtain the
-original `session.json` to independently verify all six durations, participant
-confirmations, eligible windows, quality checks and aggregate metrics. Record
-this result and its limits in the laboratory report; do not discard the
-misclassified jogging intervals or change scoring rules to improve the score.
+The original file audit is complete. All six durations, participant
+confirmations, eligible windows, quality checks and aggregate metrics match.
+Preserve this completed baseline and the earlier stopped attempt. Present
+the actual result and limitations in the class submission, retaining incorrect
+eligible predictions and the existing scoring rules.
 
 No firmware, model, credentials, thresholds or scoring rules were changed for
 this review. No immediate repeat trial is needed merely to replace a weak

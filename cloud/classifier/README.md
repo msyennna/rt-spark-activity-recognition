@@ -99,7 +99,9 @@ It remains preserved as historical evidence and must not be claimed for this
 PyTorch model. A later participant-reported six-trial live PyTorch test completed
 with all trials marked valid: **29/53 correct windows (54.7%)**, comprising
 Walking **26/26** and jogging/Running **3/27**. This shows weak live jogging
-recognition under that participant's test conditions. Original-session replay
-is pending; see the [reported result and evidence limits](../../docs/testing/2026-10-27_pytorch_walk_jog_reported.md).
-No model or scoring change follows from this summary alone. There is no
-resting class.
+recognition under that participant's test conditions. Independent replay of the
+uploaded original session now confirms all six valid trials and the 29/53
+result; see the [original-session audit and evidence limits](../../docs/testing/2026-10-27_pytorch_walk_jog_audit.md).
+The planned live evaluation is complete. Model generalization remains a
+limitation, and no weights or scoring rules were changed for the audit.
+There is no resting class.

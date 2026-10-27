@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "evidence_type": "participant_provided_console_summary",
+  "evidence_type": "console_summary_verified_against_uploaded_original_session_json",
   "reviewed_on": "2026-10-27",
   "review_timezone": "Asia/Manila",
   "reported_session_status": "COMPLETE",
-  "original_session_json_reviewed": false,
+  "original_session_json_reviewed": true,
   "model_attribution": {
     "framework": "PyTorch",
     "basis": "Previously reported deployment; no new checkpoint hash or service startup evidence supplied with this session.",
@@ -97,11 +97,19 @@
     "balanced_accuracy_percent": 55.55555555555556
   },
   "limitations": [
-    "Counts reconciled from the pasted summary, not independently selected from original prediction rows.",
+    "All six trial analyses, interval selection and aggregate metrics were independently verified against the uploaded original session.json.",
     "Single participant, one placement, fixed activity order and clustered windows; no population-accuracy claim.",
     "Prediction-completion timestamps approximate window timing and do not measure sensor acquisition or network delay.",
-    "No confidence values, raw six-axis motion samples or checkpoint hash were supplied with this summary.",
+    "Confidence aggregates are available in the follow-up audit; raw six-axis motion samples and a checkpoint hash are not embedded in this session.",
     "The older Random Forest live score and dataset holdout score do not describe this live result."
   ],
-  "next_step": "Obtain the original session.json and verify interval eligibility, quality checks and metric reconstruction without dropping incorrect predictions."
+  "next_step": "Original-session audit complete. Present the verified result and limitations using the class submission instructions; keep any model-improvement evaluation separate.",
+  "followup_audit": {
+    "status": "PASS",
+    "original_prediction_rows_reviewed": 83,
+    "unique_eligible_windows": 53,
+    "all_saved_analyses_match": true,
+    "all_saved_metrics_match": true,
+    "reference": "2026-10-27_pytorch_walk_jog_audit.json"
+  }
 }
