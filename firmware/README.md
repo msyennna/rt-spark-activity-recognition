@@ -71,8 +71,10 @@ contains five subscriber messages and newer database-backed API record 6746.
 Post-upload Android operation is now [user-confirmed](../docs/testing/2026-10-27_android_confirmation.md).
 The [new PyTorch movement attempt stopped](../docs/testing/2026-10-27_pytorch_trial_stopped.md)
 for insufficient prediction coverage and a stale-record preflight. The root
-cause is not established; collect broker/service/serial evidence before a new
-trial. Retain the stopped results folder.
+cause is not established. The later [session-data audit](../docs/testing/timed_walk_jog_20261027T020953Z_8619c6/review.md)
+confirms no eligible prediction; later reception and predictions are working.
+Inspect journal entries from the failed trial interval and verify continuity
+with the intended power setup before a new trial. Retain the stopped folder.
 
 ## MQTT library and handout alignment
 

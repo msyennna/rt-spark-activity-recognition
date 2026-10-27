@@ -50,6 +50,7 @@ See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 - [Post-upload Ubuntu broker reception and API record 6746](testing/2026-10-27_coremqtt_cloud_check.md)
 - [Post-upload Android operation confirmed by the user](testing/2026-10-27_android_confirmation.md)
 - [Stopped PyTorch movement attempt and required stream diagnostics](testing/2026-10-27_pytorch_trial_stopped.md)
+- [Stopped-session data audit and later recovered reception/prediction](testing/timed_walk_jog_20261027T020953Z_8619c6/review.md)
 - [Earlier physical PUBACK report and full transcript](testing/2026-10-26_cubemx_puback.md)
 - [Earlier physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
 - [Earlier independently timed trial and raw-data audit](testing/2026-10-25_cubemx_walk_jog_trial.md)
@@ -78,8 +79,10 @@ PUBACKs 1–7. A subsequent Ubuntu subscriber received five messages and the
 local API returned newer database-backed record 6746 at October 27 01:32:41 UTC.
 Post-upload Android operation is now user-confirmed, without new images or
 exact displayed IDs. The first PyTorch movement attempt stopped after invalid prediction coverage
-and a stale-record preflight; no accuracy is available. Diagnose the stream and
-complete a new valid protocol while preserving the stopped attempt. The excerpt omits the version banner
+and a stale-record preflight; no accuracy is available. The later complete
+session transcription confirms only a pre-start row. Later broker receipt and
+five-second predictions are working again; inspect the trial-time logs and
+verify continuity under the intended power setup before a new valid protocol. The excerpt omits the version banner
 and does not measure cadence. Strict completion remains pending those
 applicable downstream and movement actions. The hardware/toolchain differences
 remain explicitly recorded under the user's actual-board continuation choice.

@@ -1,0 +1,111 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "evidence_source": "Complete session JSON and later service/subscriber/journal output pasted by the user in the conversation. The session object is preserved as a transcription; original server-file bytes and original summary.md were not downloaded.",
+  "session_id": "timed_walk_jog_20261027T020953Z_8619c6",
+  "session_transcription": "session.transcribed.json",
+  "transcription_file_sha256": "239ae0c0fa407b2a98153e51e452602537fe8d0f518946c0cc98416aa7419648",
+  "transcription_is_original_download": false,
+  "session_semantics_reviewed": true,
+  "raw_records_in_captured_trial": 1,
+  "baseline_latest_record_id": 7169,
+  "captured_record_id": 7170,
+  "captured_record_time_utc": "2026-10-27T02:10:08Z",
+  "trial_start_utc": "2026-10-27T02:10:09.969793Z",
+  "trial_end_utc": "2026-10-27T02:11:09.969927Z",
+  "record_precedes_start_seconds": 1.969793,
+  "prediction_completions_during_trial_in_saved_rows": 0,
+  "eligible_record_ids_independent_selection": [],
+  "minimum_expected_eligible_windows": 8,
+  "utc_elapsed_seconds": 60.000134,
+  "monotonic_elapsed_seconds": 60.00016801094171,
+  "absolute_clock_disagreement_seconds": 3.401094170385477e-05,
+  "analysis_recomputed_matches": true,
+  "aggregate_recomputed_matches": true,
+  "session_json_semantic_replay_matches": true,
+  "replayed_summary_status": "STOPPED",
+  "accuracy_percent": null,
+  "power_source_reported_by_user": "power bank",
+  "later_service_status": {
+    "active": "active (running)",
+    "active_since_utc": "2026-10-26T04:07:58Z",
+    "main_pid": 131672,
+    "memory_current_mib_reported": 154.2,
+    "memory_peak_mib_reported": 172.3,
+    "exec": "/home/ubuntu/rt-spark-activity-recognition/.venv/bin/python -u cloud/mqtt/mqtt_classifier.py",
+    "restart_during_trial_indicated": false,
+    "scope": "Later service status is not a continuous health trace of the trial."
+  },
+  "later_journal_predictions": [
+    {
+      "id": 7429,
+      "created_at_utc": "2026-10-27T02:33:06Z"
+    },
+    {
+      "id": 7430,
+      "created_at_utc": "2026-10-27T02:33:11Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.89
+    },
+    {
+      "id": 7431,
+      "created_at_utc": "2026-10-27T02:33:16Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.88
+    }
+  ],
+  "later_prediction_completion_gaps_seconds": [
+    5,
+    5
+  ],
+  "later_subscriber_readings": [
+    {
+      "acceleration_x": -0.006897,
+      "acceleration_y": 0.009521,
+      "acceleration_z": 1.010559,
+      "gyro_x": -0.052493,
+      "gyro_y": 0.002531,
+      "gyro_z": -0.002798
+    },
+    {
+      "acceleration_x": -0.005005,
+      "acceleration_y": 0.01062,
+      "acceleration_z": 1.010315,
+      "gyro_x": -0.053825,
+      "gyro_y": 0.001599,
+      "gyro_z": -0.003064
+    },
+    {
+      "acceleration_x": -0.006836,
+      "acceleration_y": 0.008911,
+      "acceleration_z": 1.01178,
+      "gyro_x": -0.054492,
+      "gyro_y": 0.002531,
+      "gyro_z": -0.002665
+    },
+    {
+      "acceleration_x": -0.005371,
+      "acceleration_y": 0.010254,
+      "acceleration_z": 1.011719,
+      "gyro_x": -0.053426,
+      "gyro_y": 0.002398,
+      "gyro_z": -0.001732
+    },
+    {
+      "acceleration_x": -0.005493,
+      "acceleration_y": 0.008118,
+      "acceleration_z": 1.01123,
+      "gyro_x": -0.053559,
+      "gyro_y": 0.001332,
+      "gyro_z": -0.002931
+    }
+  ],
+  "later_receiving_and_predicting_observed": true,
+  "root_cause": "Undetermined. Later logs show recovery; they are from 02:33 UTC, not the failed 02:10\u201302:11 interval. Power-bank use alone does not prove a supply fault.",
+  "next_read_only_log_interval_utc": {
+    "since": "2026-10-27 02:09:45 UTC",
+    "until": "2026-10-27 02:11:30 UTC"
+  },
+  "original_server_folder_unchanged_by_reviewer": true,
+  "firmware_model_classifier_or_quality_rule_changes": false,
+  "independent_protocol_time_bounds_match": true
+}

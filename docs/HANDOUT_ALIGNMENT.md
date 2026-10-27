@@ -109,7 +109,10 @@ The existing end-to-end baseline works. Handout alignment is in progress;
 a complete, valid PyTorch movement test remains pending. The
 [first attempt stopped](testing/2026-10-27_pytorch_trial_stopped.md) because
 prediction coverage was insufficient and the next record-freshness check failed;
-no model-accuracy score is available. Post-upload Android
+no model-accuracy score is available. A subsequent
+[session-data audit](testing/timed_walk_jog_20261027T020953Z_8619c6/review.md)
+confirms the empty scoring interval, while later journal entries show recovered
+five-second predictions. The cause during the trial remains open. Post-upload Android
 operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu

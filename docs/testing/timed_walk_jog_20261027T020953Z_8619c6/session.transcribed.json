@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "tool_version": "1.0",
+  "session_id": "timed_walk_jog_20261027T020953Z_8619c6",
+  "status": "STOPPED",
+  "board_placement": "held in right hand",
+  "protocol": {
+    "rounds": 3,
+    "trial_seconds": 60,
+    "warmup_seconds": 10,
+    "nominal_window_seconds": 5,
+    "edge_margin_seconds": 1,
+    "planned_activities": [
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING"
+    ]
+  },
+  "created_utc": "2026-10-27T02:09:53.762911Z",
+  "trials": [
+    {
+      "trial_number": 1,
+      "requested_activity": "WALKING",
+      "start_utc": "2026-10-27T02:10:09.969793Z",
+      "planned_end_utc": "2026-10-27T02:11:09.969793Z",
+      "baseline_latest_record_id": 7169,
+      "completed_requested_activity": true,
+      "records": [
+        {
+          "id": 7170,
+          "activity_id": 0,
+          "activity": "WALKING",
+          "confidence": 0.9988270401954651,
+          "created_at": "2026-10-27 02:10:08"
+        }
+      ],
+      "end_utc": "2026-10-27T02:11:09.969927Z",
+      "elapsed_monotonic_seconds": 60.00016801094171,
+      "analysis": {
+        "selection_method": "Independent timed interval; selection never uses predicted class or confidence.",
+        "earliest_eligible_prediction_end_utc": "2026-10-27T02:10:25.969793Z",
+        "latest_eligible_prediction_end_utc": "2026-10-27T02:11:08.969927Z",
+        "eligible_record_ids": [],
+        "eligible_count": 0,
+        "matching_predictions": 0,
+        "quality_issues": [
+          "Prediction count does not cover the expected interval at the nominal five-second rate."
+        ],
+        "valid_for_scoring": false
+      }
+    }
+  ],
+  "metrics": {
+    "confusion_matrix_rows_actual_columns_predicted": {
+      "WALKING": {
+        "WALKING": 0,
+        "RUNNING": 0
+      },
+      "RUNNING": {
+        "WALKING": 0,
+        "RUNNING": 0
+      }
+    },
+    "valid_trial_count": 0,
+    "scored_windows": 0,
+    "correct_windows": 0,
+    "support_by_actual_activity": {
+      "WALKING": 0,
+      "RUNNING": 0
+    },
+    "window_accuracy_percent": null,
+    "correct_identification_percent_by_activity": {
+      "WALKING": null,
+      "RUNNING": null
+    }
+  },
+  "stop_reason": "ValueError: Latest prediction is older than 15 seconds. Power the board and wait for fresh predictions.",
+  "finished_utc": "2026-10-27T02:11:16.799096Z"
+}

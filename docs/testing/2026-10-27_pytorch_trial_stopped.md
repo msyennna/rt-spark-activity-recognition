@@ -70,3 +70,12 @@ No source fix or repeat trial is claimed here. Keep the predeclared quality
 rules and all incorrect/low-confidence predictions. Once the data stream is
 stable, a repeat creates a new unique results folder, leaving this attempt
 intact. The earlier Random Forest score remains historical evidence.
+
+## Subsequent session-data review
+
+The user later supplied complete session JSON and recovery logs. The
+[follow-up audit](timed_walk_jog_20261027T020953Z_8619c6/review.md) reproduces the
+saved analysis/metrics: only record 7170 was saved, about two seconds before
+walking START, with zero eligible windows. Later reception/prediction is
+working at 02:33 UTC; the trial-time cause remains undetermined. The separate
+transcription is not an original server-file download.
