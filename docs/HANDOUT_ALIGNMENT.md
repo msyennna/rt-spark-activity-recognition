@@ -106,7 +106,9 @@ generator run or a physical test.
 ## Completion claim
 
 The existing end-to-end baseline works. Handout alignment is in progress;
-new-model movement checks and post-upload Android confirmation remain pending.
+the new labelled PyTorch movement test remains pending. Post-upload Android
+operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
+no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu
 subscriber messages and local API record 6746; see
 [the post-upload cloud check](testing/2026-10-27_coremqtt_cloud_check.md).

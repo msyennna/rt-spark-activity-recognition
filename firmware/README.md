@@ -68,7 +68,8 @@ reports successful programming and Verified OK in 12.62 seconds. The later
 initialization, DHCP BOUND, verified TLS and PUBACKs 1–7. The subsequent
 [user-supplied Ubuntu check](../docs/testing/2026-10-27_coremqtt_cloud_check.md)
 contains five subscriber messages and newer database-backed API record 6746.
-New phone confirmation and a labelled PyTorch movement test remain pending.
+Post-upload Android operation is now [user-confirmed](../docs/testing/2026-10-27_android_confirmation.md).
+The new labelled PyTorch movement test remains pending.
 
 ## MQTT library and handout alignment
 
