@@ -88,3 +88,12 @@ the intervals and classifier freshness as well.
 The six-trial PyTorch evaluation remains pending. Keep its fixed protocol and
 the classifier gap guard unchanged. No firmware, model, service, Android,
 credentials or scoring changes were made for this review.
+
+## Follow-up stationary result
+
+The requested [later stationary-baseline capture](../2026-10-27_stationary_continuity/review.md)
+is now supplied: all 70 messages arrived, all 69 receipt intervals are between
+0.976881122 and 1.028009503 seconds, and no timeout/error is shown. This passes
+the short receipt check. The earlier interrupted capture remains valid
+evidence; the physical cause is not identified. A short walking comparison
+near the router with the same power connection precedes the full protocol.

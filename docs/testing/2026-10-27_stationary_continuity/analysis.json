@@ -1,0 +1,758 @@
+{
+  "schema_version": 1,
+  "review_date_local": "2026-10-27",
+  "review_timezone": "Asia/Manila",
+  "source": {
+    "type": "user-pasted Ubuntu terminal output",
+    "file": "receipt_times.transcribed.txt",
+    "sha256": "70b20165521a2a56b50e26fce1bb59cbdb7e305088c77055f4bc3fd24ca200ca",
+    "original_server_file_retrieved": false,
+    "scope": "All 70 timestamp lines transcribed; login/banner/prompts omitted. The supplied prompt returns without a timeout or error."
+  },
+  "command": "mosquitto_sub -h 127.0.0.1 -p 1883 -t activity/sensor -R -F '%I %U' -C 70 -W 90",
+  "requested_message_count": 70,
+  "configured_timeout_seconds": 90,
+  "reported_outcome": "70 receipt lines and return to shell prompt; no timeout/error shown",
+  "numeric_process_exit_code_supplied": false,
+  "message_count": 70,
+  "interval_count": 69,
+  "first_receipt_utc": "2026-10-27T04:10:30+0000",
+  "last_receipt_utc": "2026-10-27T04:11:40+0000",
+  "first_to_last_seconds": "69.096153875",
+  "minimum_interarrival_seconds": "0.976881122",
+  "median_interarrival_seconds": "1.000012837",
+  "mean_interarrival_seconds": "1.001393534420289855072463768",
+  "maximum_interarrival_seconds": "1.028009503",
+  "intervals_over_2_5_seconds": [],
+  "intervals_within_0_95_to_1_05_seconds": 69,
+  "nonpositive_intervals": 0,
+  "iso_unix_integer_seconds_agree": true,
+  "continuity_result": "PASS_FOR_THIS_SHORT_RECEIPT_CAPTURE",
+  "conditions": {
+    "requested": "Keep the same power bank and Wi-Fi; board motionless near the router after LIVE readiness.",
+    "power_bank_previously_reported": true,
+    "condition_independently_observed": false,
+    "user_separately_reconfirmed_each_condition": false
+  },
+  "comparison": {
+    "previous_capture": "../2026-10-27_broker_continuity/analysis.json",
+    "previous_message_count": 61,
+    "previous_timeout": "Timed out",
+    "previous_maximum_interarrival_seconds": "16.020381773",
+    "previous_intervals_over_2_5_seconds": 3,
+    "interpretation": "The later intended stationary capture is steady; the earlier capture had interruptions. Different times and uninstrumented conditions prevent identifying movement, distance, power or cable as the cause."
+  },
+  "limits": {
+    "subscriber_receipt_timing_only": true,
+    "sensor_acquisition_cadence_verified": false,
+    "simultaneous_classifier_journal_supplied": false,
+    "underlying_cause_fixed_verified": false,
+    "scored_activity_trial": false,
+    "full_pytorch_six_trial_protocol_complete": false,
+    "monotonic_receipt_clock_available": false
+  },
+  "next_check": {
+    "purpose": "Short walking continuity comparison before spending another six-trial session",
+    "instructions": "Keep the same Wi-Fi, power bank and seated cable; walk in a small area near the router while repeating the identical receipt command. Then inspect intervals and classifier freshness before starting the unchanged full protocol.",
+    "completed": false
+  },
+  "receipts": [
+    {
+      "message_number": 1,
+      "receipt_utc": "2026-10-27T04:10:30+0000",
+      "unix_seconds": "1793074230.975721090"
+    },
+    {
+      "message_number": 2,
+      "receipt_utc": "2026-10-27T04:10:31+0000",
+      "unix_seconds": "1793074231.967732683"
+    },
+    {
+      "message_number": 3,
+      "receipt_utc": "2026-10-27T04:10:32+0000",
+      "unix_seconds": "1793074232.981728977"
+    },
+    {
+      "message_number": 4,
+      "receipt_utc": "2026-10-27T04:10:33+0000",
+      "unix_seconds": "1793074233.982714161"
+    },
+    {
+      "message_number": 5,
+      "receipt_utc": "2026-10-27T04:10:34+0000",
+      "unix_seconds": "1793074234.984672003"
+    },
+    {
+      "message_number": 6,
+      "receipt_utc": "2026-10-27T04:10:35+0000",
+      "unix_seconds": "1793074235.972820131"
+    },
+    {
+      "message_number": 7,
+      "receipt_utc": "2026-10-27T04:10:36+0000",
+      "unix_seconds": "1793074236.986686876"
+    },
+    {
+      "message_number": 8,
+      "receipt_utc": "2026-10-27T04:10:37+0000",
+      "unix_seconds": "1793074237.987770018"
+    },
+    {
+      "message_number": 9,
+      "receipt_utc": "2026-10-27T04:10:38+0000",
+      "unix_seconds": "1793074238.987756431"
+    },
+    {
+      "message_number": 10,
+      "receipt_utc": "2026-10-27T04:10:39+0000",
+      "unix_seconds": "1793074239.985479256"
+    },
+    {
+      "message_number": 11,
+      "receipt_utc": "2026-10-27T04:10:40+0000",
+      "unix_seconds": "1793074240.985474591"
+    },
+    {
+      "message_number": 12,
+      "receipt_utc": "2026-10-27T04:10:41+0000",
+      "unix_seconds": "1793074241.987673654"
+    },
+    {
+      "message_number": 13,
+      "receipt_utc": "2026-10-27T04:10:42+0000",
+      "unix_seconds": "1793074242.977690892"
+    },
+    {
+      "message_number": 14,
+      "receipt_utc": "2026-10-27T04:10:43+0000",
+      "unix_seconds": "1793074243.991678961"
+    },
+    {
+      "message_number": 15,
+      "receipt_utc": "2026-10-27T04:10:44+0000",
+      "unix_seconds": "1793074244.986754148"
+    },
+    {
+      "message_number": 16,
+      "receipt_utc": "2026-10-27T04:10:46+0000",
+      "unix_seconds": "1793074246.002863072"
+    },
+    {
+      "message_number": 17,
+      "receipt_utc": "2026-10-27T04:10:47+0000",
+      "unix_seconds": "1793074247.001674719"
+    },
+    {
+      "message_number": 18,
+      "receipt_utc": "2026-10-27T04:10:48+0000",
+      "unix_seconds": "1793074248.003671064"
+    },
+    {
+      "message_number": 19,
+      "receipt_utc": "2026-10-27T04:10:49+0000",
+      "unix_seconds": "1793074249.010701403"
+    },
+    {
+      "message_number": 20,
+      "receipt_utc": "2026-10-27T04:10:49+0000",
+      "unix_seconds": "1793074249.995691334"
+    },
+    {
+      "message_number": 21,
+      "receipt_utc": "2026-10-27T04:10:51+0000",
+      "unix_seconds": "1793074251.004809967"
+    },
+    {
+      "message_number": 22,
+      "receipt_utc": "2026-10-27T04:10:51+0000",
+      "unix_seconds": "1793074251.994806693"
+    },
+    {
+      "message_number": 23,
+      "receipt_utc": "2026-10-27T04:10:53+0000",
+      "unix_seconds": "1793074253.008693606"
+    },
+    {
+      "message_number": 24,
+      "receipt_utc": "2026-10-27T04:10:54+0000",
+      "unix_seconds": "1793074254.009714725"
+    },
+    {
+      "message_number": 25,
+      "receipt_utc": "2026-10-27T04:10:55+0000",
+      "unix_seconds": "1793074255.009689339"
+    },
+    {
+      "message_number": 26,
+      "receipt_utc": "2026-10-27T04:10:56+0000",
+      "unix_seconds": "1793074256.009702176"
+    },
+    {
+      "message_number": 27,
+      "receipt_utc": "2026-10-27T04:10:57+0000",
+      "unix_seconds": "1793074257.009693184"
+    },
+    {
+      "message_number": 28,
+      "receipt_utc": "2026-10-27T04:10:58+0000",
+      "unix_seconds": "1793074258.009789910"
+    },
+    {
+      "message_number": 29,
+      "receipt_utc": "2026-10-27T04:10:58+0000",
+      "unix_seconds": "1793074258.999868544"
+    },
+    {
+      "message_number": 30,
+      "receipt_utc": "2026-10-27T04:11:00+0000",
+      "unix_seconds": "1793074260.027878047"
+    },
+    {
+      "message_number": 31,
+      "receipt_utc": "2026-10-27T04:11:01+0000",
+      "unix_seconds": "1793074261.004759169"
+    },
+    {
+      "message_number": 32,
+      "receipt_utc": "2026-10-27T04:11:02+0000",
+      "unix_seconds": "1793074262.019721293"
+    },
+    {
+      "message_number": 33,
+      "receipt_utc": "2026-10-27T04:11:03+0000",
+      "unix_seconds": "1793074263.010863117"
+    },
+    {
+      "message_number": 34,
+      "receipt_utc": "2026-10-27T04:11:04+0000",
+      "unix_seconds": "1793074264.023871210"
+    },
+    {
+      "message_number": 35,
+      "receipt_utc": "2026-10-27T04:11:05+0000",
+      "unix_seconds": "1793074265.014725646"
+    },
+    {
+      "message_number": 36,
+      "receipt_utc": "2026-10-27T04:11:06+0000",
+      "unix_seconds": "1793074266.028715037"
+    },
+    {
+      "message_number": 37,
+      "receipt_utc": "2026-10-27T04:11:07+0000",
+      "unix_seconds": "1793074267.019728207"
+    },
+    {
+      "message_number": 38,
+      "receipt_utc": "2026-10-27T04:11:08+0000",
+      "unix_seconds": "1793074268.033880682"
+    },
+    {
+      "message_number": 39,
+      "receipt_utc": "2026-10-27T04:11:09+0000",
+      "unix_seconds": "1793074269.025691860"
+    },
+    {
+      "message_number": 40,
+      "receipt_utc": "2026-10-27T04:11:10+0000",
+      "unix_seconds": "1793074270.039740840"
+    },
+    {
+      "message_number": 41,
+      "receipt_utc": "2026-10-27T04:11:11+0000",
+      "unix_seconds": "1793074271.040763672"
+    },
+    {
+      "message_number": 42,
+      "receipt_utc": "2026-10-27T04:11:12+0000",
+      "unix_seconds": "1793074272.039737919"
+    },
+    {
+      "message_number": 43,
+      "receipt_utc": "2026-10-27T04:11:13+0000",
+      "unix_seconds": "1793074273.038330771"
+    },
+    {
+      "message_number": 44,
+      "receipt_utc": "2026-10-27T04:11:14+0000",
+      "unix_seconds": "1793074274.040877431"
+    },
+    {
+      "message_number": 45,
+      "receipt_utc": "2026-10-27T04:11:15+0000",
+      "unix_seconds": "1793074275.030739337"
+    },
+    {
+      "message_number": 46,
+      "receipt_utc": "2026-10-27T04:11:16+0000",
+      "unix_seconds": "1793074276.044903028"
+    },
+    {
+      "message_number": 47,
+      "receipt_utc": "2026-10-27T04:11:17+0000",
+      "unix_seconds": "1793074277.033826270"
+    },
+    {
+      "message_number": 48,
+      "receipt_utc": "2026-10-27T04:11:18+0000",
+      "unix_seconds": "1793074278.047744281"
+    },
+    {
+      "message_number": 49,
+      "receipt_utc": "2026-10-27T04:11:19+0000",
+      "unix_seconds": "1793074279.038177443"
+    },
+    {
+      "message_number": 50,
+      "receipt_utc": "2026-10-27T04:11:20+0000",
+      "unix_seconds": "1793074280.052216829"
+    },
+    {
+      "message_number": 51,
+      "receipt_utc": "2026-10-27T04:11:21+0000",
+      "unix_seconds": "1793074281.044848768"
+    },
+    {
+      "message_number": 52,
+      "receipt_utc": "2026-10-27T04:11:22+0000",
+      "unix_seconds": "1793074282.059739655"
+    },
+    {
+      "message_number": 53,
+      "receipt_utc": "2026-10-27T04:11:23+0000",
+      "unix_seconds": "1793074283.050726824"
+    },
+    {
+      "message_number": 54,
+      "receipt_utc": "2026-10-27T04:11:24+0000",
+      "unix_seconds": "1793074284.064888929"
+    },
+    {
+      "message_number": 55,
+      "receipt_utc": "2026-10-27T04:11:25+0000",
+      "unix_seconds": "1793074285.055762850"
+    },
+    {
+      "message_number": 56,
+      "receipt_utc": "2026-10-27T04:11:26+0000",
+      "unix_seconds": "1793074286.074732033"
+    },
+    {
+      "message_number": 57,
+      "receipt_utc": "2026-10-27T04:11:27+0000",
+      "unix_seconds": "1793074287.058337995"
+    },
+    {
+      "message_number": 58,
+      "receipt_utc": "2026-10-27T04:11:28+0000",
+      "unix_seconds": "1793074288.070432266"
+    },
+    {
+      "message_number": 59,
+      "receipt_utc": "2026-10-27T04:11:29+0000",
+      "unix_seconds": "1793074289.073732945"
+    },
+    {
+      "message_number": 60,
+      "receipt_utc": "2026-10-27T04:11:30+0000",
+      "unix_seconds": "1793074290.073869568"
+    },
+    {
+      "message_number": 61,
+      "receipt_utc": "2026-10-27T04:11:31+0000",
+      "unix_seconds": "1793074291.073880044"
+    },
+    {
+      "message_number": 62,
+      "receipt_utc": "2026-10-27T04:11:32+0000",
+      "unix_seconds": "1793074292.073681560"
+    },
+    {
+      "message_number": 63,
+      "receipt_utc": "2026-10-27T04:11:33+0000",
+      "unix_seconds": "1793074293.071550329"
+    },
+    {
+      "message_number": 64,
+      "receipt_utc": "2026-10-27T04:11:34+0000",
+      "unix_seconds": "1793074294.062326955"
+    },
+    {
+      "message_number": 65,
+      "receipt_utc": "2026-10-27T04:11:35+0000",
+      "unix_seconds": "1793074295.077882690"
+    },
+    {
+      "message_number": 66,
+      "receipt_utc": "2026-10-27T04:11:36+0000",
+      "unix_seconds": "1793074296.068848834"
+    },
+    {
+      "message_number": 67,
+      "receipt_utc": "2026-10-27T04:11:37+0000",
+      "unix_seconds": "1793074297.082670033"
+    },
+    {
+      "message_number": 68,
+      "receipt_utc": "2026-10-27T04:11:38+0000",
+      "unix_seconds": "1793074298.083763264"
+    },
+    {
+      "message_number": 69,
+      "receipt_utc": "2026-10-27T04:11:39+0000",
+      "unix_seconds": "1793074299.081572904"
+    },
+    {
+      "message_number": 70,
+      "receipt_utc": "2026-10-27T04:11:40+0000",
+      "unix_seconds": "1793074300.071874965"
+    }
+  ],
+  "interarrival_intervals": [
+    {
+      "previous_message": 1,
+      "next_message": 2,
+      "seconds": "0.992011593"
+    },
+    {
+      "previous_message": 2,
+      "next_message": 3,
+      "seconds": "1.013996294"
+    },
+    {
+      "previous_message": 3,
+      "next_message": 4,
+      "seconds": "1.000985184"
+    },
+    {
+      "previous_message": 4,
+      "next_message": 5,
+      "seconds": "1.001957842"
+    },
+    {
+      "previous_message": 5,
+      "next_message": 6,
+      "seconds": "0.988148128"
+    },
+    {
+      "previous_message": 6,
+      "next_message": 7,
+      "seconds": "1.013866745"
+    },
+    {
+      "previous_message": 7,
+      "next_message": 8,
+      "seconds": "1.001083142"
+    },
+    {
+      "previous_message": 8,
+      "next_message": 9,
+      "seconds": "0.999986413"
+    },
+    {
+      "previous_message": 9,
+      "next_message": 10,
+      "seconds": "0.997722825"
+    },
+    {
+      "previous_message": 10,
+      "next_message": 11,
+      "seconds": "0.999995335"
+    },
+    {
+      "previous_message": 11,
+      "next_message": 12,
+      "seconds": "1.002199063"
+    },
+    {
+      "previous_message": 12,
+      "next_message": 13,
+      "seconds": "0.990017238"
+    },
+    {
+      "previous_message": 13,
+      "next_message": 14,
+      "seconds": "1.013988069"
+    },
+    {
+      "previous_message": 14,
+      "next_message": 15,
+      "seconds": "0.995075187"
+    },
+    {
+      "previous_message": 15,
+      "next_message": 16,
+      "seconds": "1.016108924"
+    },
+    {
+      "previous_message": 16,
+      "next_message": 17,
+      "seconds": "0.998811647"
+    },
+    {
+      "previous_message": 17,
+      "next_message": 18,
+      "seconds": "1.001996345"
+    },
+    {
+      "previous_message": 18,
+      "next_message": 19,
+      "seconds": "1.007030339"
+    },
+    {
+      "previous_message": 19,
+      "next_message": 20,
+      "seconds": "0.984989931"
+    },
+    {
+      "previous_message": 20,
+      "next_message": 21,
+      "seconds": "1.009118633"
+    },
+    {
+      "previous_message": 21,
+      "next_message": 22,
+      "seconds": "0.989996726"
+    },
+    {
+      "previous_message": 22,
+      "next_message": 23,
+      "seconds": "1.013886913"
+    },
+    {
+      "previous_message": 23,
+      "next_message": 24,
+      "seconds": "1.001021119"
+    },
+    {
+      "previous_message": 24,
+      "next_message": 25,
+      "seconds": "0.999974614"
+    },
+    {
+      "previous_message": 25,
+      "next_message": 26,
+      "seconds": "1.000012837"
+    },
+    {
+      "previous_message": 26,
+      "next_message": 27,
+      "seconds": "0.999991008"
+    },
+    {
+      "previous_message": 27,
+      "next_message": 28,
+      "seconds": "1.000096726"
+    },
+    {
+      "previous_message": 28,
+      "next_message": 29,
+      "seconds": "0.990078634"
+    },
+    {
+      "previous_message": 29,
+      "next_message": 30,
+      "seconds": "1.028009503"
+    },
+    {
+      "previous_message": 30,
+      "next_message": 31,
+      "seconds": "0.976881122"
+    },
+    {
+      "previous_message": 31,
+      "next_message": 32,
+      "seconds": "1.014962124"
+    },
+    {
+      "previous_message": 32,
+      "next_message": 33,
+      "seconds": "0.991141824"
+    },
+    {
+      "previous_message": 33,
+      "next_message": 34,
+      "seconds": "1.013008093"
+    },
+    {
+      "previous_message": 34,
+      "next_message": 35,
+      "seconds": "0.990854436"
+    },
+    {
+      "previous_message": 35,
+      "next_message": 36,
+      "seconds": "1.013989391"
+    },
+    {
+      "previous_message": 36,
+      "next_message": 37,
+      "seconds": "0.991013170"
+    },
+    {
+      "previous_message": 37,
+      "next_message": 38,
+      "seconds": "1.014152475"
+    },
+    {
+      "previous_message": 38,
+      "next_message": 39,
+      "seconds": "0.991811178"
+    },
+    {
+      "previous_message": 39,
+      "next_message": 40,
+      "seconds": "1.014048980"
+    },
+    {
+      "previous_message": 40,
+      "next_message": 41,
+      "seconds": "1.001022832"
+    },
+    {
+      "previous_message": 41,
+      "next_message": 42,
+      "seconds": "0.998974247"
+    },
+    {
+      "previous_message": 42,
+      "next_message": 43,
+      "seconds": "0.998592852"
+    },
+    {
+      "previous_message": 43,
+      "next_message": 44,
+      "seconds": "1.002546660"
+    },
+    {
+      "previous_message": 44,
+      "next_message": 45,
+      "seconds": "0.989861906"
+    },
+    {
+      "previous_message": 45,
+      "next_message": 46,
+      "seconds": "1.014163691"
+    },
+    {
+      "previous_message": 46,
+      "next_message": 47,
+      "seconds": "0.988923242"
+    },
+    {
+      "previous_message": 47,
+      "next_message": 48,
+      "seconds": "1.013918011"
+    },
+    {
+      "previous_message": 48,
+      "next_message": 49,
+      "seconds": "0.990433162"
+    },
+    {
+      "previous_message": 49,
+      "next_message": 50,
+      "seconds": "1.014039386"
+    },
+    {
+      "previous_message": 50,
+      "next_message": 51,
+      "seconds": "0.992631939"
+    },
+    {
+      "previous_message": 51,
+      "next_message": 52,
+      "seconds": "1.014890887"
+    },
+    {
+      "previous_message": 52,
+      "next_message": 53,
+      "seconds": "0.990987169"
+    },
+    {
+      "previous_message": 53,
+      "next_message": 54,
+      "seconds": "1.014162105"
+    },
+    {
+      "previous_message": 54,
+      "next_message": 55,
+      "seconds": "0.990873921"
+    },
+    {
+      "previous_message": 55,
+      "next_message": 56,
+      "seconds": "1.018969183"
+    },
+    {
+      "previous_message": 56,
+      "next_message": 57,
+      "seconds": "0.983605962"
+    },
+    {
+      "previous_message": 57,
+      "next_message": 58,
+      "seconds": "1.012094271"
+    },
+    {
+      "previous_message": 58,
+      "next_message": 59,
+      "seconds": "1.003300679"
+    },
+    {
+      "previous_message": 59,
+      "next_message": 60,
+      "seconds": "1.000136623"
+    },
+    {
+      "previous_message": 60,
+      "next_message": 61,
+      "seconds": "1.000010476"
+    },
+    {
+      "previous_message": 61,
+      "next_message": 62,
+      "seconds": "0.999801516"
+    },
+    {
+      "previous_message": 62,
+      "next_message": 63,
+      "seconds": "0.997868769"
+    },
+    {
+      "previous_message": 63,
+      "next_message": 64,
+      "seconds": "0.990776626"
+    },
+    {
+      "previous_message": 64,
+      "next_message": 65,
+      "seconds": "1.015555735"
+    },
+    {
+      "previous_message": 65,
+      "next_message": 66,
+      "seconds": "0.990966144"
+    },
+    {
+      "previous_message": 66,
+      "next_message": 67,
+      "seconds": "1.013821199"
+    },
+    {
+      "previous_message": 67,
+      "next_message": 68,
+      "seconds": "1.001093231"
+    },
+    {
+      "previous_message": 68,
+      "next_message": 69,
+      "seconds": "0.997809640"
+    },
+    {
+      "previous_message": 69,
+      "next_message": 70,
+      "seconds": "0.990302061"
+    }
+  ]
+}

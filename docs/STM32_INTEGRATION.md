@@ -38,8 +38,11 @@ shows six gap resets, a 44-second receipt pause and 79 seconds between
 predictions 7170 and 7171. Irregular delivery prevented complete windows.
 The subsequent [independent receipt check](testing/2026-10-27_broker_continuity/review.md)
 also timed out after 61 messages: three gaps exceed 2.5 seconds and the
-maximum is 16.020 seconds. Compare a stationary baseline using the same power
-bank and Wi-Fi; the underlying power/link/transport reason remains open.
+maximum is 16.020 seconds. The [later intended stationary baseline](testing/2026-10-27_stationary_continuity/review.md)
+returned all 70 messages without a timeout/error, with intervals of
+0.977–1.028 seconds and none over 2.5 seconds. A short walking comparison
+near the router with the same power connection is next; the underlying
+power/link/transport reason remains open.
 The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
 native suites passed. Its local image has now been programmed and verified
 through ST-LINK in the supplied output, followed by positive sensor/network

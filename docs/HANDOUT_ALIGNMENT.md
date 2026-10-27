@@ -117,8 +117,11 @@ now confirms delivery gaps repeatedly resetting partial windows; the underlying
 source of those gaps remains open. The subsequent
 [independent broker receipt capture](testing/2026-10-27_broker_continuity/review.md)
 also timed out (61 messages, three gaps over 2.5 seconds, longest 16.020 seconds).
-Compare a stationary baseline using the same power bank and Wi-Fi before
-the next full trial. Post-upload Android
+The [later intended stationary check](testing/2026-10-27_stationary_continuity/review.md)
+received 70/70 messages with all intervals between 0.977 and 1.028 seconds,
+no timeout/error shown and no gaps over 2.5 seconds. A short walking check
+near the router with the same power connection precedes the next full trial;
+the intermittent cause remains unconfirmed. Post-upload Android
 operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu
