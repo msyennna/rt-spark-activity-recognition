@@ -76,8 +76,12 @@ confirms no eligible prediction; later reception and predictions are working.
 The [subsequent trial-time journal](../docs/testing/timed_walk_jog_20261027T020953Z_8619c6/delivery_review.md)
 confirms repeated delivery-gap resets, a 44-second receipt pause and 79 seconds
 between predictions. Keep the temporal guard unchanged and verify broker
-receipt continuity with the intended power setup before a new trial. Retain
-the stopped folder.
+receipt continuity with the intended power setup before a new trial. The
+[subsequent independent subscriber capture](../docs/testing/2026-10-27_broker_continuity/review.md)
+also timed out after 61 messages, with three gaps over 2.5 seconds and a
+maximum of 16.020 seconds. A stationary baseline using the same power bank
+and Wi-Fi is next. The underlying interruption remains unconfirmed; no firmware
+change is justified by receipt timing alone. Retain the stopped folder.
 
 ## MQTT library and handout alignment
 

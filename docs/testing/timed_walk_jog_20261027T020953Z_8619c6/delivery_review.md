@@ -77,3 +77,13 @@ focus on publisher/link/power evidence, using serial logs or a controlled power
 comparison. Do not relax the guard to score data across long interruptions.
 A complete repeat of the fixed six-trial protocol follows only after continuity
 is established, and the stopped session remains preserved.
+
+## Follow-up receipt capture
+
+The requested [independent subscriber check](../2026-10-27_broker_continuity/review.md)
+is now supplied. It returned 61 of the requested 70 messages and timed out.
+Three interarrival intervals exceed 2.5 seconds, with a maximum of
+16.020381773 seconds. The symptom is reproduced outside the classifier's
+buffer handling. The physical/transport cause is still unconfirmed; a
+stationary check using the same power bank and Wi-Fi is next. No simultaneous
+classifier reset log or completed movement evaluation is claimed for this capture.

@@ -15,7 +15,7 @@ evidence. The earlier working system does not establish that new code is live.
 | Rigorous model testing | New PyTorch development OOF: 2219/2258 (98.27%). Untouched latest-two-day holdout: 1197/1300 (92.08%). Ten actual model/database/API tests passed. | Repeat a labelled live movement test after deployment. This dataset contains one participant; no population-accuracy claim is justified. |
 | Sensor and Wi-Fi firmware | The demonstrated RT-Spark has ICM20608 and RW007 on I2C2/SPI2. Earlier physical logs show sensor identity, networking, TLS, accepted MQTT login and PUBACKs. The user chose to continue with this hardware without an instructor reply. | CubeMX 6.18.1 output is now supplied, reviewed and reconciled with all application blocks retained. Post-upload logs now show sensor identity/init, Wi-Fi/DHCP, verified TLS and PUBACKs 1–7. The local Ubuntu subscriber and database-backed API are now checked after upload (five messages and record 6746). Android is now user-confirmed working. Retain the reference-hardware difference and complete the new movement test. |
 | AWS coreMQTT and default-config define | Actual unmodified coreMQTT 2.3.1 low-level API now replaces the custom packet encoder/parser. `MQTT_DO_NOT_USE_CUSTOM_CONFIG` is defined. ARM build, five native suites and source guard passed. After CubeMX reconciliation, the user's Windows rebuild at `b44d2ba` passed the guard and succeeded in 24.05 s, SRAM 66,756 bytes and flash 162,780 bytes. | CubeMX review, local build and ST-LINK programming/verification are complete in supplied output (Verified OK; SUCCESS in 12.62 s). Post-upload sensor/network/MQTT runtime now includes seven PUBACKs. Post-upload Ubuntu broker/API readback now shows five messages and newer prediction 6746. Android operation is now user-confirmed; perform the labelled movement trial. The earlier custom-encoder PUBACKs are historical. |
-| One reading/message per second | Firmware schedules a nominal one-second publish interval. Post-upload logs now contain PUBACK IDs/counts 1–7; earlier custom-encoder logs contain 1482–1498. | Obtain a timestamped capture to measure cadence. An untimed log cannot establish it. |
+| One reading/message per second | Firmware schedules a nominal one-second publish interval. A subsequent independent subscriber capture received 61/70 requested messages before timeout; its median receipt interval is 1.001 s, but three gaps exceed 2.5 s and the maximum is 16.020 s. | Receipt continuity is not steady. Compare a stationary baseline using the same power bank and Wi-Fi, then isolate the interruption. Receipt timestamps do not measure sensor acquisition cadence. |
 | Android smartphone, live predictions and history | Kotlin, Android Studio and Volley match listed choices. Earlier physical Xiaomi target and exact API match are preserved. Post-PyTorch screens show LIVE record 6067 and newest-first History 6068–6064, all at displayed 99.9% confidence. | Earlier supplied display checks are preserved; after the new upload/cloud check, the user confirmed Android is working without new screenshots or exact IDs. Proceed to movement validation; no new measured refresh timing is claimed. |
 
 ## Hardware/toolchain reference differences
@@ -52,6 +52,7 @@ See [HANDOUT_ALIGNMENT.md](HANDOUT_ALIGNMENT.md).
 - [Stopped PyTorch movement attempt and required stream diagnostics](testing/2026-10-27_pytorch_trial_stopped.md)
 - [Stopped-session data audit and later recovered reception/prediction](testing/timed_walk_jog_20261027T020953Z_8619c6/review.md)
 - [Trial-time delivery-gap diagnosis and short continuity check](testing/timed_walk_jog_20261027T020953Z_8619c6/delivery_review.md)
+- [Independent broker receipt check: interruptions reproduced](testing/2026-10-27_broker_continuity/review.md)
 - [Earlier physical PUBACK report and full transcript](testing/2026-10-26_cubemx_puback.md)
 - [Earlier physical-phone History and Live/API report](testing/2026-10-26_android_phone.md)
 - [Earlier independently timed trial and raw-data audit](testing/2026-10-25_cubemx_walk_jog_trial.md)
@@ -84,9 +85,11 @@ and a stale-record preflight; no accuracy is available. The later complete
 session transcription confirms only a pre-start row. Later broker receipt and
 five-second predictions are working again. The trial-time journal now
 confirms six delivery-gap resets, including a 44-second receipt pause and
-79 seconds between predictions. Check continuity under the intended power
-setup before a new valid protocol; the underlying interruption remains unproven. The excerpt omits the version banner
-and does not measure cadence. Strict completion remains pending those
+79 seconds between predictions. The subsequent independent subscriber check
+also timed out after 61 messages and includes a 16.020-second gap. A stationary
+baseline with the same power bank and Wi-Fi is next; the underlying cause
+remains unconfirmed. The serial excerpt omits the version banner, and the
+subscriber capture measures receipt timing only. Strict completion remains pending those
 applicable downstream and movement actions. The hardware/toolchain differences
 remain explicitly recorded under the user's actual-board continuation choice.
 

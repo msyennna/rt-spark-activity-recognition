@@ -35,8 +35,11 @@ before walking START. The user used a power bank. Current reception and
 five-second predictions have resumed. The subsequently supplied
 [trial-time journal](testing/timed_walk_jog_20261027T020953Z_8619c6/delivery_review.md)
 shows six gap resets, a 44-second receipt pause and 79 seconds between
-predictions 7170 and 7171. Irregular delivery prevented complete windows;
-the underlying power/link/transport reason remains open.
+predictions 7170 and 7171. Irregular delivery prevented complete windows.
+The subsequent [independent receipt check](testing/2026-10-27_broker_continuity/review.md)
+also timed out after 61 messages: three gaps exceed 2.5 seconds and the
+maximum is 16.020 seconds. Compare a stationary baseline using the same power
+bank and Wi-Fi; the underlying power/link/transport reason remains open.
 The firmware source now links actual AWS coreMQTT 2.3.1; its ARM build and five
 native suites passed. Its local image has now been programmed and verified
 through ST-LINK in the supplied output, followed by positive sensor/network

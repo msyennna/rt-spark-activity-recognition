@@ -114,7 +114,11 @@ no model-accuracy score is available. A subsequent
 confirms the empty scoring interval, while later journal entries show recovered
 five-second predictions. The [targeted journal](testing/timed_walk_jog_20261027T020953Z_8619c6/delivery_review.md)
 now confirms delivery gaps repeatedly resetting partial windows; the underlying
-source of those gaps remains open. A continuity check precedes the next trial. Post-upload Android
+source of those gaps remains open. The subsequent
+[independent broker receipt capture](testing/2026-10-27_broker_continuity/review.md)
+also timed out (61 messages, three gaps over 2.5 seconds, longest 16.020 seconds).
+Compare a stationary baseline using the same power bank and Wi-Fi before
+the next full trial. Post-upload Android
 operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu
