@@ -112,7 +112,9 @@ prediction coverage was insufficient and the next record-freshness check failed;
 no model-accuracy score is available. A subsequent
 [session-data audit](testing/timed_walk_jog_20261027T020953Z_8619c6/review.md)
 confirms the empty scoring interval, while later journal entries show recovered
-five-second predictions. The cause during the trial remains open. Post-upload Android
+five-second predictions. The [targeted journal](testing/timed_walk_jog_20261027T020953Z_8619c6/delivery_review.md)
+now confirms delivery gaps repeatedly resetting partial windows; the underlying
+source of those gaps remains open. A continuity check precedes the next trial. Post-upload Android
 operation is now [user-confirmed](testing/2026-10-27_android_confirmation.md);
 no new screenshot or exact API/display match is claimed.
 The supplied coreMQTT upload/runtime evidence is now followed by five Ubuntu

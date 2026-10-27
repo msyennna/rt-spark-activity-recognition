@@ -68,3 +68,12 @@ Then verify continuous reception under the intended power/placement arrangement
 before a new movement session. Preserve this stopped attempt. A future repeat
 must create a new session and retain incorrect predictions and predeclared
 exclusions; it cannot turn this incomplete attempt into a model-accuracy result.
+
+## Follow-up: requested trial-time journal supplied
+
+The subsequent [delivery review](delivery_review.md) records six explicit gap
+resets, including a 44-second displayed receipt gap. Prediction 7171 appears
+79 seconds after 7170, after this session stopped. This identifies repeated
+partial-window resets as the immediate cause; the underlying power/link or
+transport cause remains unproven. The next step is a short timestamped receipt
+check with the intended power setup already connected.

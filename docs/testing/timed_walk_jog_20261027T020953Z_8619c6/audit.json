@@ -100,12 +100,16 @@
     }
   ],
   "later_receiving_and_predicting_observed": true,
-  "root_cause": "Undetermined. Later logs show recovery; they are from 02:33 UTC, not the failed 02:10\u201302:11 interval. Power-bank use alone does not prove a supply fault.",
+  "root_cause": "Immediate cause established by trial-time journal: interarrival gaps repeatedly reset partial five-reading windows. The underlying source of those delivery gaps remains undetermined; no model/classifier/firmware/quality-rule change has been made.",
   "next_read_only_log_interval_utc": {
     "since": "2026-10-27 02:09:45 UTC",
     "until": "2026-10-27 02:11:30 UTC"
   },
   "original_server_folder_unchanged_by_reviewer": true,
   "firmware_model_classifier_or_quality_rule_changes": false,
-  "independent_protocol_time_bounds_match": true
+  "independent_protocol_time_bounds_match": true,
+  "follow_up_trial_time_journal": "journal.transcribed.json",
+  "trial_time_gap_resets_observed": 6,
+  "trial_time_maximum_displayed_receipt_gap_seconds": 44,
+  "prediction_7170_to_7171_gap_seconds": 79
 }
