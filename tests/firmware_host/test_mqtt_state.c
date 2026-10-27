@@ -12,11 +12,13 @@ static int operations, close_count, connect_count, handshake_result, handshake_d
 static int seed_result, parse_result, setup_result, hostname_result, tls_freed;
 static uint32_t verify_result;
 static int auth_mode, min_version, max_version, hostname_checked, ca_configured, rng_configured;
-static int write_result=99999, read_chunk=99999, read_error;
+static int write_result=99999, read_chunk=99999, read_error, read_zero;
 static unsigned char received_bytes[8], written_bytes[2048];
 static size_t received_size, received_offset, written_size;
 static const unsigned char *retry_pointer;
 static size_t retry_length;
+static char diagnostics[4096];
+static size_t diagnostics_size;
 
 uint32_t HAL_GetTick(void) { return now; }
 int RW007_Network_Ready(void) { return network_ok; }
@@ -32,7 +34,16 @@ int rtspark_tcp_send(void *context, const unsigned char *out, size_t length)
 { (void)context; (void)out; (void)length; return -1; }
 int rtspark_tcp_recv(void *context, unsigned char *out, size_t length)
 { (void)context; (void)out; (void)length; return -1; }
-void LWIP_Port_Diag(const char *format, ...) { (void)format; }
+void LWIP_Port_Diag(const char *format, ...)
+{
+    va_list args;
+    int length;
+    va_start(args,format);
+    length=vsnprintf(diagnostics+diagnostics_size,sizeof(diagnostics)-diagnostics_size,format,args);
+    va_end(args);
+    assert(length>=0 && (size_t)length<sizeof(diagnostics)-diagnostics_size);
+    diagnostics_size+=(size_t)length;
+}
 void mbedtls_memory_buffer_alloc_init(unsigned char *buffer, size_t size)
 { assert(buffer!=NULL && size>=48U*1024U); }
 void mbedtls_ecp_set_max_ops(unsigned int ops) { assert(ops>0 && ops<=128); }
@@ -94,6 +105,7 @@ int mbedtls_ssl_read(mbedtls_ssl_context *ssl, unsigned char *out, size_t length
     size_t count;
     (void)ssl; ++operations;
     if (read_error) return read_error;
+    if (read_zero) return 0;
     count=received_size-received_offset;
     if (count>length) count=length;
     if (count>(size_t)read_chunk) count=(size_t)read_chunk;
@@ -116,9 +128,10 @@ static void reset(void)
     seed_result=parse_result=setup_result=hostname_result=tls_freed=0;
     verify_result=0;
     auth_mode=min_version=max_version=hostname_checked=ca_configured=rng_configured=0;
-    write_result=read_chunk=99999; read_error=0;
+    write_result=read_chunk=99999; read_error=read_zero=0;
     received_size=received_offset=written_size=0;
     retry_pointer=NULL; retry_length=0;
+    diagnostics[0]='\0'; diagnostics_size=0;
     strcpy(mock_password,"public-fake-test-value"); strcpy(mock_client,"host-test-client");
     rtspark_mqtt_init();
 }
@@ -198,6 +211,7 @@ static void test_refusal_timeout_and_ping(void)
     reset(); online(); assert(rtspark_mqtt_offer("{}")==1);
     poll_once(); now+=MQTT_TIMEOUT_MS; poll_once();
     assert(mqtt.phase==BACKOFF && mqtt.deliveries==0);
+    assert(strstr(diagnostics,"state=PUBACK_WAIT age_ms=5000")!=NULL);
     reset(); online(); now+=PING_INTERVAL_MS; poll_once();
     assert(mqtt.phase==PING_SEND); poll_once(); assert(mqtt.phase==PING_REPLY);
     assert(written_bytes[written_size-2]==0xc0 && written_bytes[written_size-1]==0);
@@ -206,11 +220,64 @@ static void test_refusal_timeout_and_ping(void)
     assert(rtspark_mqtt_offer("{}")==0);
 }
 
+static void test_terminal_tls_errors_are_reported(void)
+{
+    reset(); online(); assert(rtspark_mqtt_offer("{}")==1);
+    poll_once(); assert(mqtt.phase==PUBLISH_REPLY);
+    read_error=MBEDTLS_ERR_SSL_INTERNAL_ERROR;
+    poll_once();
+    assert(mqtt.phase==BACKOFF && mqtt.deliveries==0 && tls_freed==1);
+    assert(strstr(diagnostics,"MQTT acknowledgement read failed: -0x6C00")!=NULL);
+
+    reset(); online(); assert(rtspark_mqtt_offer("{}")==1);
+    write_result=MBEDTLS_ERR_SSL_INTERNAL_ERROR;
+    poll_once();
+    assert(mqtt.phase==BACKOFF && mqtt.deliveries==0);
+    assert(strstr(diagnostics,"MQTT write failed: -0x6C00")!=NULL);
+
+    reset(); online(); assert(rtspark_mqtt_offer("{}")==1);
+    poll_once(); read_zero=1; poll_once();
+    assert(mqtt.phase==BACKOFF && mqtt.deliveries==0);
+    assert(strstr(diagnostics,"MQTT acknowledgement read failed: -0x7280")!=NULL);
+
+    reset(); online(); assert(rtspark_mqtt_offer("{}")==1);
+    write_result=0; poll_once();
+    assert(mqtt.phase==BACKOFF && mqtt.deliveries==0);
+    assert(strstr(diagnostics,"MQTT write failed: -0x7280")!=NULL);
+    assert(strstr(diagnostics,"public-fake-test-value")==NULL);
+}
+
+static void test_busy_sample_report_is_bounded(void)
+{
+    static const unsigned char ack[]={0x40,2,0,1};
+    unsigned char packet_copy[768];
+    size_t first_report_size;
+    reset(); online(); assert(rtspark_mqtt_offer("{}")==1);
+    poll_once(); assert(mqtt.phase==PUBLISH_REPLY);
+    memcpy(packet_copy,mqtt.packet,sizeof(packet_copy));
+    now+=1000U;
+    assert(rtspark_mqtt_offer("{\"acceleration_x\":1}")==0);
+    assert(strstr(diagnostics,"sample skipped: state=PUBACK_WAIT age_ms=1000 busy_offers=1")!=NULL);
+    first_report_size=diagnostics_size;
+    now+=1000U;
+    assert(rtspark_mqtt_offer("{\"acceleration_x\":2}")==0);
+    assert(diagnostics_size==first_report_size); /* One report per busy interval. */
+    assert(memcmp(packet_copy,mqtt.packet,sizeof(packet_copy))==0);
+    reply(ack,sizeof(ack)); poll_once(); assert(mqtt.phase==ONLINE && mqtt.deliveries==1);
+    assert(rtspark_mqtt_offer("{}")==1); poll_once();
+    now+=1000U;
+    assert(rtspark_mqtt_offer("{}")==0);
+    assert(strstr(diagnostics,"sample skipped: state=PUBACK_WAIT age_ms=1000 busy_offers=3")!=NULL);
+    assert(strstr(diagnostics,"acceleration_x")==NULL); /* Samples are not logged by this diagnostic. */
+}
+
 int main(void)
 {
     test_prerequisites_and_tls();
     test_partial_io_and_delivery();
     test_refusal_timeout_and_ping();
+    test_terminal_tls_errors_are_reported();
+    test_busy_sample_report_is_bounded();
     puts("PASS: actual nonblocking MQTT state, TLS verification gates, partial I/O, ACK/refusal/timeouts and ping");
     return 0;
 }

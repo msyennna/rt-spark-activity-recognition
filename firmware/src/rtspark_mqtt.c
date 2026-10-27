@@ -38,6 +38,8 @@ static struct {
     uint32_t started;
     uint32_t last_send;
     uint32_t deliveries;
+    uint32_t busy_offers;
+    int skip_reported;
     int tls_initialized;
     mqtt_phase phase;
 } mqtt;
@@ -55,11 +57,32 @@ static int retryable(int rc)
            rc == MBEDTLS_ERR_SSL_CRYPTO_IN_PROGRESS;
 }
 
+static const char *phase_name(mqtt_phase state)
+{
+    switch (state) {
+    case WAIT_READY: return "WAIT_READY";
+    case WAIT_TCP: return "WAIT_TCP";
+    case TLS_START: return "TLS_START";
+    case TLS_HANDSHAKE: return "TLS_HANDSHAKE";
+    case CONNECT_SEND: return "CONNECT_SEND";
+    case CONNECT_REPLY: return "CONNACK_WAIT";
+    case ONLINE: return "ONLINE";
+    case PUBLISH_SEND: return "PUBLISH_SEND";
+    case PUBLISH_REPLY: return "PUBACK_WAIT";
+    case PING_SEND: return "PING_SEND";
+    case PING_REPLY: return "PINGRESP_WAIT";
+    case BACKOFF: return "BACKOFF";
+    case DISABLED: return "DISABLED";
+    default: return "UNKNOWN";
+    }
+}
+
 static void phase(mqtt_phase next)
 {
     mqtt.phase = next;
     mqtt.started = HAL_GetTick();
     mqtt.offset = 0;
+    if (next == ONLINE) mqtt.skip_reported = 0;
 }
 
 static void close_connection(void)
@@ -80,8 +103,9 @@ static void close_connection(void)
 
 static void fail(const char *step, int error)
 {
-    LWIP_Port_Diag("[RTSpark] %s failed: -0x%04X; retry in 5s\r\n",
-                   step, (unsigned int)(error < 0 ? -error : error));
+    LWIP_Port_Diag("[RTSpark] %s failed: -0x%04X; state=%s age_ms=%lu; retry in 5s\r\n",
+                   step, (unsigned int)(error < 0 ? -error : error),
+                   phase_name(mqtt.phase), (unsigned long)(HAL_GetTick() - mqtt.started));
     close_connection();
     phase(BACKOFF);
 }
@@ -136,7 +160,8 @@ static int write_step(void)
 {
     int rc = mbedtls_ssl_write(&mqtt.ssl, mqtt.packet + mqtt.offset, mqtt.length - mqtt.offset);
     if (rc > 0) mqtt.offset += (size_t)rc;
-    else if (!retryable(rc)) return -1;
+    else if (rc == 0) return MBEDTLS_ERR_SSL_CONN_EOF;
+    else if (!retryable(rc)) return rc;
     if (mqtt.offset == mqtt.length) {
         mqtt.last_send = HAL_GetTick();
         return 1;
@@ -148,7 +173,8 @@ static int read_step(size_t size)
 {
     int rc = mbedtls_ssl_read(&mqtt.ssl, mqtt.reply + mqtt.offset, size - mqtt.offset);
     if (rc > 0) mqtt.offset += (size_t)rc;
-    else if (!retryable(rc)) return -1;
+    else if (rc == 0) return MBEDTLS_ERR_SSL_CONN_EOF;
+    else if (!retryable(rc)) return rc;
     return mqtt.offset == size ? 1 : 0;
 }
 
@@ -156,7 +182,18 @@ int rtspark_mqtt_offer(const char *json)
 {
     int length;
     uint16_t id;
-    if (mqtt.phase != ONLINE || !json) return 0;
+    if (!json || mqtt.phase == DISABLED) return 0;
+    if (mqtt.phase != ONLINE) {
+        ++mqtt.busy_offers;
+        /* Report once until ONLINE resumes; never print a payload or credentials. */
+        if (!mqtt.skip_reported) {
+            mqtt.skip_reported = 1;
+            LWIP_Port_Diag("[RTSpark] sample skipped: state=%s age_ms=%lu busy_offers=%lu\r\n",
+                           phase_name(mqtt.phase), (unsigned long)(HAL_GetTick() - mqtt.started),
+                           (unsigned long)mqtt.busy_offers);
+        }
+        return 0;
+    }
     id = (uint16_t)(mqtt.packet_id + 1U);
     if (!id) id = 1U;
     length = rtspark_packet_publish(mqtt.packet, sizeof(mqtt.packet), id, RTSPARK_TOPIC, json);
