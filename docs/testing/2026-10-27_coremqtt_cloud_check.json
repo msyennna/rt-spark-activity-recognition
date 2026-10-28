@@ -1,0 +1,86 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "evidence_source": "User-pasted Ubuntu subscriber and local HTTP API output following the programmed-board runtime; readings and API object transcribed, not independently queried by the reviewer or preserved as byte-exact terminal output.",
+  "preceding_runtime_record": "docs/testing/2026-10-27_coremqtt_runtime.json",
+  "firmware_source_commit": "b44d2ba1478a7596a8161eb38d3fcbc8cf561f03",
+  "subscriber": {
+    "command": "mosquitto_sub -h 127.0.0.1 -p 1883 -t activity/sensor -C 5 -W 15 -v",
+    "host": "127.0.0.1",
+    "port": 1883,
+    "topic": "activity/sensor",
+    "requested_messages": 5,
+    "reported_messages": 5,
+    "all_selected_fields_finite": true,
+    "readings": [
+      {
+        "acceleration_x": 0.138306,
+        "acceleration_y": -0.001648,
+        "acceleration_z": 0.998779,
+        "gyro_x": -0.05196,
+        "gyro_y": -0.000266,
+        "gyro_z": -0.002265
+      },
+      {
+        "acceleration_x": 0.146545,
+        "acceleration_y": -0.033203,
+        "acceleration_z": 0.992432,
+        "gyro_x": -0.071545,
+        "gyro_y": 0.004663,
+        "gyro_z": -0.149752
+      },
+      {
+        "acceleration_x": 0.135925,
+        "acceleration_y": -0.003357,
+        "acceleration_z": 1.000244,
+        "gyro_x": -0.052893,
+        "gyro_y": 0.001865,
+        "gyro_z": -0.001998
+      },
+      {
+        "acceleration_x": 0.137146,
+        "acceleration_y": -0.00238,
+        "acceleration_z": 1.007751,
+        "gyro_x": -0.051028,
+        "gyro_y": 0.001998,
+        "gyro_z": -0.003064
+      },
+      {
+        "acceleration_x": 0.134644,
+        "acceleration_y": -0.001831,
+        "acceleration_z": 0.99939,
+        "gyro_x": -0.052493,
+        "gyro_y": 0.001732,
+        "gyro_z": -0.001066
+      }
+    ],
+    "per_message_timestamps_supplied": false
+  },
+  "api": {
+    "command": "curl -sS --max-time 10 http://127.0.0.1:5000/api/activity/latest",
+    "transport_scope": "Local loopback HTTP; not a repeated public HTTPS trust test.",
+    "returned_record": {
+      "activity": "WALKING",
+      "activity_id": 0,
+      "confidence": 0.9989190101623535,
+      "created_at": "2026-10-27 01:32:41",
+      "id": 6746
+    },
+    "created_at_utc": "2026-10-27T01:32:41Z",
+    "created_at_asia_manila": "2026-10-27T09:32:41+08:00",
+    "display_confidence_one_decimal_percent": "99.9%",
+    "http_status_explicitly_supplied": false,
+    "response_age_independently_measured": false
+  },
+  "database_evidence_scope": "Reviewed API code reads activity_records ordered by newest id. Returned API row is database-backed evidence; SQLite was not queried directly in this observation, and no source-acquisition ID links a particular subscriber reading to this prediction.",
+  "previous_record_for_progress_comparison": {
+    "id": 6060,
+    "created_at_utc": "2026-10-26T04:17:56Z",
+    "source": "docs/testing/2026-10-26_pytorch_android_public.json"
+  },
+  "not_established": [
+    "A matching Android screenshot after this upload.",
+    "A new independently labelled PyTorch movement evaluation; confidence is not accuracy.",
+    "An independent response-age measurement, HTTP status header, direct SQLite query or exact matching sensor-to-prediction window.",
+    "Per-message sensor/publication cadence or repeat public HTTPS verification."
+  ]
+}

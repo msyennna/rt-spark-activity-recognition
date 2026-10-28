@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-27",
+  "review_timezone": "Asia/Manila",
+  "evidence_type": "independent_recalculation_from_uploaded_original_session_json",
+  "original_session_audit": "PASS",
+  "original_session_json_reviewed": true,
+  "original_prediction_rows_reviewed": 83,
+  "unique_eligible_windows": 53,
+  "context_rows_excluded_by_predefined_time_and_id_rules": 30,
+  "all_six_saved_trial_analyses_match": true,
+  "all_saved_aggregate_metrics_match": true,
+  "participant_confirmed_all_six_intervals": true,
+  "duplicate_selected_prediction_ids": 0,
+  "selected_prediction_interval_seconds": {
+    "minimum": 5,
+    "maximum": 6
+  },
+  "largest_utc_monotonic_difference_seconds": 0.00003615503121778829,
+  "trials": [
+    {
+      "trial": 1,
+      "actual": "WALKING",
+      "duration_seconds": 60.00017105205916,
+      "utc_monotonic_difference_seconds": 0.00003405205915640863,
+      "eligible_windows": 9,
+      "correct": 9,
+      "minimum_selected_prediction_interval_seconds": 5,
+      "maximum_selected_prediction_interval_seconds": 5
+    },
+    {
+      "trial": 2,
+      "actual": "RUNNING",
+      "duration_seconds": 60.00013519905042,
+      "utc_monotonic_difference_seconds": 0.000034199050418237675,
+      "eligible_windows": 9,
+      "correct": 0,
+      "minimum_selected_prediction_interval_seconds": 5,
+      "maximum_selected_prediction_interval_seconds": 5
+    },
+    {
+      "trial": 3,
+      "actual": "WALKING",
+      "duration_seconds": 60.000156816095114,
+      "utc_monotonic_difference_seconds": 0.00003281609511418537,
+      "eligible_windows": 9,
+      "correct": 9,
+      "minimum_selected_prediction_interval_seconds": 5,
+      "maximum_selected_prediction_interval_seconds": 6
+    },
+    {
+      "trial": 4,
+      "actual": "RUNNING",
+      "duration_seconds": 60.000154085922986,
+      "utc_monotonic_difference_seconds": 0.00003208592298875601,
+      "eligible_windows": 9,
+      "correct": 0,
+      "minimum_selected_prediction_interval_seconds": 5,
+      "maximum_selected_prediction_interval_seconds": 5
+    },
+    {
+      "trial": 5,
+      "actual": "WALKING",
+      "duration_seconds": 60.00017915503122,
+      "utc_monotonic_difference_seconds": 0.00003615503121778829,
+      "eligible_windows": 8,
+      "correct": 8,
+      "minimum_selected_prediction_interval_seconds": 5,
+      "maximum_selected_prediction_interval_seconds": 5
+    },
+    {
+      "trial": 6,
+      "actual": "RUNNING",
+      "duration_seconds": 60.00016976404004,
+      "utc_monotonic_difference_seconds": 0.00003476404003777134,
+      "eligible_windows": 9,
+      "correct": 3,
+      "minimum_selected_prediction_interval_seconds": 5,
+      "maximum_selected_prediction_interval_seconds": 6
+    }
+  ],
+  "metrics": {
+    "confusion_matrix_rows_actual_columns_predicted": {
+      "WALKING": {
+        "WALKING": 26,
+        "RUNNING": 0
+      },
+      "RUNNING": {
+        "WALKING": 24,
+        "RUNNING": 3
+      }
+    },
+    "valid_trial_count": 6,
+    "scored_windows": 53,
+    "correct_windows": 29,
+    "support_by_actual_activity": {
+      "WALKING": 26,
+      "RUNNING": 27
+    },
+    "window_accuracy_percent": 54.716981132075475,
+    "correct_identification_percent_by_activity": {
+      "WALKING": 100,
+      "RUNNING": 11.11111111111111
+    }
+  },
+  "confidence_aggregates": {
+    "correct_predictions": {
+      "min": 0.7588627934455872,
+      "mean": 0.9884902732125644,
+      "max": 0.9997747540473938
+    },
+    "incorrect_predictions": {
+      "min": 0.8786203265190125,
+      "mean": 0.9882935831944147,
+      "max": 0.9998964071273804
+    }
+  },
+  "evidence_limits": [
+    "Participant-confirmed activity and placement; no independent motion observer.",
+    "Original JSON records predictions and interval timing, not raw sensor acquisition timestamps or six-axis motion samples.",
+    "No checkpoint hash is embedded in this session file; model attribution follows preceding deployment history.",
+    "Single participant, one placement, fixed order and clustered windows; no population-accuracy claim."
+  ],
+  "completion_scope": {
+    "planned_live_evaluation": "complete_and_independently_verified",
+    "known_performance_limitation": "Jogging/Running correct identification is 3/27 (11.1%).",
+    "handout_minimum_accuracy_specified": false,
+    "further_repeats_required_to_verify_this_session": false
+  }
+}

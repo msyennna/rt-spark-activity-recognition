@@ -1,0 +1,30 @@
+{
+  "format": "rtspark-pytorch-gru-v1",
+  "framework": "PyTorch",
+  "torch_version": "2.14.1+cpu",
+  "architecture": "GRU(8 inputs, 8 hidden) + Linear(8, 2)",
+  "hidden_size": 8,
+  "trainable_parameters": 450,
+  "sensor_columns": [
+    "acceleration_x",
+    "acceleration_y",
+    "acceleration_z",
+    "gyro_x",
+    "gyro_y",
+    "gyro_z"
+  ],
+  "window_size": 5,
+  "labels": {
+    "0": "WALKING",
+    "1": "RUNNING"
+  },
+  "units": {
+    "acceleration": "g",
+    "gyroscope": "rad/s"
+  },
+  "nominal_sample_hz": 1.0,
+  "dataset_csv_sha256": "56ab5e861da22f7b1b4eaefa2d6fdc170f6febc2cf03d5a1883a180dab083271",
+  "model_sha256": "be60d75d699a6bc317806426c2ec7e47432c2e907e0ceafbab145ba16cce3331",
+  "training_scope": "all 12 recording days; evaluation scores were obtained before this refit",
+  "live_board_validation": "completed 2026-10-27; independently audited six-trial session: 29/53 correct (54.7%), Walking 26/26, Running 3/27; see docs/testing/2026-10-27_pytorch_walk_jog_audit.md"
+}

@@ -1,140 +1,172 @@
 # RT-Spark Activity Recognition
 
-A cloud-side activity-recognition prototype for classifying walking and running from accelerometer and gyroscope readings. It receives sensor messages over MQTT, predicts an activity with a trained scikit-learn model, stores predictions in SQLite, and exposes the latest prediction and history through a Flask API.
+An end-to-end IoT laboratory project that collects motion readings on an
+RT-Spark board, classifies walking and running in the cloud, and displays live
+predictions and history in an Android app.
 
-This repository contains the cloud components only. It does not currently include RT-Spark firmware, an Android/mobile app, or the training dataset.
+**STM32F407ZG · ICM20608 · RW007 · MQTT/TLS · PyTorch · Flask · SQLite · Kotlin**
 
-## System flow
+The complete implementation is maintained on `main`. Firmware programming,
+cloud deployment, Android operation and the six-trial movement evaluation are
+documented. The final live PyTorch result is **29/53 windows correct (54.7%)**;
+jogging recognition remains the main limitation.
 
-```text
-+----------------------------+
-| RT-Spark / Sensor Publisher|
-+----------------------------+
-              |
-              | MQTT: activity/sensor
-              v
-+----------------------------+       +-------------------+       +-----------------+
-|      MQTT Classifier       | ----> |  Activity Model   | ----> |     SQLite      |
-+----------------------------+       +-------------------+       +-----------------+
-              |                                                           ^
-              | MQTT: activity/prediction                                 |
-              v                                                           |
-+----------------------------+                                   +-----------------+
-| Mobile or other API Client | --------------------------------> |    Flask API    |
-+----------------------------+                                   +-----------------+
-```
+**Start here:** [Setup guide](docs/RTSPARK_SETUP.md) ·
+[Completion review](docs/LAB_COMPLETION.md) ·
+[Test evidence](docs/testing/README.md) · [Documentation index](docs/README.md)
 
-The classifier expects six numeric fields per sensor message:
+## What the project does
 
-| Field | Sensor axis |
+The board publishes six motion axes to `activity/sensor` over authenticated
+MQTT/TLS. A cloud subscriber collects five ordered readings, applies a
+450-parameter PyTorch GRU, saves the prediction in SQLite and publishes it to
+`activity/prediction`. The Android app reads the Flask API over HTTPS.
+
+| Component | Implementation |
 | --- | --- |
-| `acceleration_x` | Accelerometer X |
-| `acceleration_y` | Accelerometer Y |
-| `acceleration_z` | Accelerometer Z |
-| `gyro_x` | Gyroscope X |
-| `gyro_y` | Gyroscope Y |
-| `gyro_z` | Gyroscope Z |
+| Motion sensing | ICM20608 accelerometer and gyroscope over I2C2 |
+| Embedded application | STM32Cube/HAL, PlatformIO and RW007 Wi-Fi over SPI2 |
+| Device transport | AWS coreMQTT 2.3.1 serialization, QoS 1 and verified TLS |
+| Cloud inference | PyTorch GRU, five readings per window, Walking/Running labels |
+| Storage and API | SQLite prediction history and Flask latest/history endpoints |
+| Android client | Kotlin, Volley, Live/History views and automatic refresh |
 
-The incoming sensor topic is `activity/sensor`; predictions are published to `activity/prediction`. The classifier buffers five readings before predicting. The device publisher and model must use compatible sampling rates, units, and axis conventions.
+The supplied handout also names different reference hardware. The actual
+ICM20608/RW007 adaptation is explained in
+[hardware/toolchain notes](docs/LAB_COMPLETION.md#hardwaretoolchain-reference-differences).
 
-## Requirements
+## Android app
 
-- Python with support for the versions pinned in [requirements.txt](requirements.txt)
-- An MQTT broker reachable at `localhost:1883` (the current broker address is configured in the classifier)
-- The included model at `cloud/classifier/activity_model.joblib`
-- For retraining only: the Run or Walk dataset saved as `dataset/dataset.csv`
+| Live activity | Activity history |
+| :---: | :---: |
+| <img src="docs/testing/images/2026-10-26_pytorch_android_live.jpeg" alt="Android Live activity screen showing a Walking prediction" width="250"> | <img src="docs/testing/images/2026-10-26_pytorch_android_history.jpeg" alt="Android History screen showing recent predictions" width="250"> |
 
-## Setup
+Screenshots were captured after the October 26, 2026 PyTorch deployment.
+The percentage on a card is model confidence; measured movement accuracy is
+reported below. See the [screenshot evidence](docs/testing/2026-10-26_pytorch_android_public.md).
 
-From the project root, create and activate a virtual environment, then install dependencies:
+## Repository guide
+
+| Folder | Contents |
+| --- | --- |
+| [firmware/](firmware/README.md) | Active PlatformIO firmware, drivers, CubeMX configuration and build instructions |
+| [cloud/](cloud/README.md) | Model, training pipeline, MQTT subscriber, database and API |
+| [android_app/](android_app/README.md) | Android Studio project and client configuration |
+| [data_collection/](data_collection/README.md) | Earlier serial capture, unit conversion and gateway tools |
+| [docs/](docs/README.md) | Setup, completion review, dated evidence and archived reports |
+| [tests/](tests/README.md) | Model/API, firmware, CubeMX and deployment-helper tests |
+| [tools/](tools/) | Dataset download, deployment, evaluation and archived RT-Thread helpers |
+
+## Get started
+
+Clone the project and run commands from its root:
 
 ```powershell
-py -m venv .venv
+git clone https://github.com/msyennna/rt-spark-activity-recognition.git
+cd rt-spark-activity-recognition
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 ```
 
-Start an MQTT broker separately. For example, with Mosquitto installed and running with its default local listener, the classifier can connect to it at `localhost:1883`.
+### Cloud services
 
-## Run the services
-
-Start the MQTT classifier in one terminal:
+Start Mosquitto separately with a local listener on `localhost:1883`.
+Run these commands in two terminals with the same Python environment activated:
 
 ```powershell
 python -m cloud.mqtt.mqtt_classifier
 ```
 
-Start the Flask API in another terminal:
-
 ```powershell
 python -m cloud.api.app
 ```
 
-The API listens on port `5000`. The current implementation uses Flask's built-in development server; do not expose it as a production deployment.
+The API listens on port `5000`; SQLite is created automatically at
+`cloud/database/activity.db`. These commands start the local development
+services. The [setup guide](docs/RTSPARK_SETUP.md) describes the lab's
+MQTT/TLS and HTTPS deployment. The repository includes the trained PyTorch
+checkpoint and metadata; the training dataset is downloaded separately.
 
-## Sensor message format
+### Firmware
 
-Publish one JSON object per reading to `activity/sensor`. Include all six sensor fields:
+Install PlatformIO Core and configure local Wi-Fi/MQTT settings using the
+supplied example headers:
+
+```powershell
+Copy-Item firmware/include/rw007_wifi_config.example.h firmware/include/rw007_wifi_config.h
+Copy-Item firmware/include/rtspark_private.h.example firmware/include/rtspark_private.h
+```
+
+Fill in those local headers, then validate and build:
+
+```powershell
+python firmware/scripts/check_cubemx.py
+pio run -d firmware
+```
+
+Follow [firmware/README.md](firmware/README.md) for CubeMX review, ST-LINK
+programming and serial monitoring. Private headers and compiled firmware are
+excluded from Git because the compiled image contains the configured secrets.
+
+### Android
+
+Open `android_app/` in Android Studio and follow the
+[Android guide](android_app/README.md). The API hostname and public CA are
+configured for the original lab deployment; configure both for your own server.
+
+## Sensor and API contract
+
+One MQTT message contains all six numeric fields. Acceleration is in **g** and
+angular velocity is in **rad/s**; firmware schedules a nominal one-second interval.
 
 ```json
 {
-  "acceleration_x": 0.12,
-  "acceleration_y": -0.04,
-  "acceleration_z": 9.78,
-  "gyro_x": 0.01,
-  "gyro_y": -0.02,
-  "gyro_z": 0.03
+  "acceleration_x": 0.01,
+  "acceleration_y": -0.02,
+  "acceleration_z": 1.01,
+  "gyro_x": 0.001,
+  "gyro_y": -0.002,
+  "gyro_z": 0.003
 }
 ```
 
-The values above are illustrative only. Use the same measurement units, sensor orientation, and scaling as the data used to train the model.
-
-## API
-
-| Method | Endpoint | Description |
+| Method | Endpoint | Response |
 | --- | --- | --- |
-| `GET` | `/` | Service name and status |
-| `GET` | `/api/activity/latest` | Most recent stored prediction; returns `404` if there are no records |
-| `GET` | `/api/activity/history` | Recent prediction records; accepts an optional `limit` query parameter (default `50`, bounded from `1` to `500`) |
+| GET | `/` | Service name and status |
+| GET | `/api/activity/latest` | Latest prediction; `404` when no predictions exist |
+| GET | `/api/activity/history?limit=50` | Count and newest-first records; limit bounded to 1–500 |
 
-Example requests:
+The classifier resets incomplete windows after invalid readings, reconnects or
+delivery gaps over 2.5 seconds. A prediction includes an activity ID, label,
+confidence and stored timestamp. See the [cloud guide](cloud/README.md).
 
-```text
-http://localhost:5000/
-http://localhost:5000/api/activity/latest
-http://localhost:5000/api/activity/history?limit=20
-```
+## Recorded results
 
-History responses contain a `count` and a `records` array. Each stored prediction includes its database ID, activity ID, activity name, confidence, and creation time. SQLite data is created automatically at `cloud/database/activity.db`.
+| Evaluation | Correct / windows | Accuracy |
+| --- | ---: | ---: |
+| PyTorch development out-of-fold | 2,219 / 2,258 | 98.27% |
+| PyTorch untouched two-day dataset holdout | 1,197 / 1,300 | 92.08% |
+| PyTorch live board evaluation: six valid trials | 29 / 53 | **54.7%** |
 
-## Retrain the model
+The live evaluation recorded Walking **26/26** and jogging/Running **3/27**.
+The original session was independently replayed and audited. Dataset scores
+come from evaluation before the final deployment refit; they describe a
+different evaluation from the live board trial.
 
-Place the dataset at `dataset/dataset.csv`, with the sensor columns shown above and the `activity` and `wrist` columns used by the training pipeline. Then run:
+The project demonstrates the complete device-to-phone pipeline. The measured
+live result shows weak jogging generalization under the tested conditions.
+The model has two classes and no resting class, and confidence does not measure
+accuracy. Earlier Random Forest results remain historical evidence.
 
-```powershell
-python -m cloud.classifier.train_model
-```
+See the [model methodology](cloud/classifier/README.md),
+[original-session audit](docs/testing/2026-10-27_pytorch_walk_jog_audit.md) and
+[completion review](docs/LAB_COMPLETION.md) for the evidence and its limits.
 
-The script downsamples the source data, builds five-reading windows, evaluates a random forest with stratified group five-fold cross-validation, and saves the final model to `cloud/classifier/activity_model.joblib`. It prints evaluation metrics to the terminal; those metrics are not stored in the repository.
+## Validation and reports
 
-## Project layout
-
-```text
-cloud/
-├── classifier/
-│   ├── train_model.py       # Model training, StratifiedGroupKFold, Joblib export
-│   ├── predictor.py         # Window buffering, 48-feature extractor, Predictor class
-│   └── model.joblib         # Serialized Random Forest model artifact
-├── database/
-│   └── database.py          # SQLite connection manager & CRUD queries
-├── mqtt/
-│   └── mqtt_classifier.py   # Paho-MQTT consumer daemon & pipeline bridge
-└── api/
-    └── app.py               # Flask RESTful API web server
-```
-
-## Scope and next steps
-
-The accompanying lab brief describes a complete IoT system, including RT-Spark firmware and a mobile client. Those components are outside this repository's current contents. To complete the end-to-end activity, add a device publisher that sends compatible sensor readings and a mobile app that consumes the API. Before reporting model performance, run the training/evaluation workflow with the intended dataset and validate it with the target hardware.
-
-See the [Laboratory Report (Markdown)](laboratory_report_3_activity_recognition.md) or [Laboratory Report (PDF)](<Laboratory Report 3_ Activity Recognition.pdf>) for implementation details, results, and limitations.
+Use the [test guide](tests/README.md) to run the existing offline checks, and
+the [evidence index](docs/testing/README.md) to inspect the recorded builds,
+programming results, cloud deployment, phone observations and movement tests.
+The [report archive](docs/reports/README.md) preserves the earlier reports
+from `main` and explains which implementation they describe.

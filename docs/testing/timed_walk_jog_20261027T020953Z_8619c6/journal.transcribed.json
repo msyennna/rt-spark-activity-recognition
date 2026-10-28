@@ -1,0 +1,377 @@
+{
+  "reviewed_date_manila": "2026-10-27",
+  "provenance": "Normalized transcription of receipt counts, explicit gap-reset messages and prediction events from the user-pasted targeted journal. Repeated separator/wait lines are omitted; this is not an original journal export or an independent server query.",
+  "query": "journalctl -u rtspark-classifier.service --utc --since \"2026-10-27 02:09:45 UTC\" --until \"2026-10-27 02:11:30 UTC\" --no-pager",
+  "process_pid_in_supplied_entries": 131672,
+  "timestamp_resolution_in_paste": "one second; actual monotonic interarrival values were not printed",
+  "receipt_events": [
+    {
+      "utc": "2026-10-27T02:09:45Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:46Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:47Z",
+      "buffer_count_after_receive": 5,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:48Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:49Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:50Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:51Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:52Z",
+      "buffer_count_after_receive": 5,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:53Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:54Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:55Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:56Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:57Z",
+      "buffer_count_after_receive": 5,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:58Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:09:59Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:00Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:01Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:02Z",
+      "buffer_count_after_receive": 5,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:04Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:05Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:06Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:07Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:08Z",
+      "buffer_count_after_receive": 5,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:09Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:10Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:12Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:13Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:16Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": true
+    },
+    {
+      "utc": "2026-10-27T02:10:17Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:18Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:19Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:10:22Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": true
+    },
+    {
+      "utc": "2026-10-27T02:11:06Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": true
+    },
+    {
+      "utc": "2026-10-27T02:11:07Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:08Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:10Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:13Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": true
+    },
+    {
+      "utc": "2026-10-27T02:11:14Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:18Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": true
+    },
+    {
+      "utc": "2026-10-27T02:11:23Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": true
+    },
+    {
+      "utc": "2026-10-27T02:11:24Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:25Z",
+      "buffer_count_after_receive": 3,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:26Z",
+      "buffer_count_after_receive": 4,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:27Z",
+      "buffer_count_after_receive": 5,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:28Z",
+      "buffer_count_after_receive": 1,
+      "window_size": 5,
+      "gap_reset_logged": false
+    },
+    {
+      "utc": "2026-10-27T02:11:29Z",
+      "buffer_count_after_receive": 2,
+      "window_size": 5,
+      "gap_reset_logged": false
+    }
+  ],
+  "explicit_gap_resets": [
+    {
+      "previous_receipt_utc": "2026-10-27T02:10:13Z",
+      "gap_reset_receipt_utc": "2026-10-27T02:10:16Z",
+      "displayed_interarrival_seconds": 3.0,
+      "previous_partial_buffer_count": 4,
+      "new_buffer_count": 1
+    },
+    {
+      "previous_receipt_utc": "2026-10-27T02:10:19Z",
+      "gap_reset_receipt_utc": "2026-10-27T02:10:22Z",
+      "displayed_interarrival_seconds": 3.0,
+      "previous_partial_buffer_count": 4,
+      "new_buffer_count": 1
+    },
+    {
+      "previous_receipt_utc": "2026-10-27T02:10:22Z",
+      "gap_reset_receipt_utc": "2026-10-27T02:11:06Z",
+      "displayed_interarrival_seconds": 44.0,
+      "previous_partial_buffer_count": 1,
+      "new_buffer_count": 1
+    },
+    {
+      "previous_receipt_utc": "2026-10-27T02:11:10Z",
+      "gap_reset_receipt_utc": "2026-10-27T02:11:13Z",
+      "displayed_interarrival_seconds": 3.0,
+      "previous_partial_buffer_count": 4,
+      "new_buffer_count": 1
+    },
+    {
+      "previous_receipt_utc": "2026-10-27T02:11:14Z",
+      "gap_reset_receipt_utc": "2026-10-27T02:11:18Z",
+      "displayed_interarrival_seconds": 4.0,
+      "previous_partial_buffer_count": 2,
+      "new_buffer_count": 1
+    },
+    {
+      "previous_receipt_utc": "2026-10-27T02:11:18Z",
+      "gap_reset_receipt_utc": "2026-10-27T02:11:23Z",
+      "displayed_interarrival_seconds": 5.0,
+      "previous_partial_buffer_count": 1,
+      "new_buffer_count": 1
+    }
+  ],
+  "prediction_events": [
+    {
+      "id": 7166,
+      "utc": "2026-10-27T02:09:47Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.88
+    },
+    {
+      "id": 7167,
+      "utc": "2026-10-27T02:09:52Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.88
+    },
+    {
+      "id": 7168,
+      "utc": "2026-10-27T02:09:57Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.88
+    },
+    {
+      "id": 7169,
+      "utc": "2026-10-27T02:10:02Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.88
+    },
+    {
+      "id": 7170,
+      "utc": "2026-10-27T02:10:08Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.88
+    },
+    {
+      "id": 7171,
+      "utc": "2026-10-27T02:11:27Z",
+      "activity": "WALKING",
+      "displayed_confidence_percent": 99.87
+    }
+  ],
+  "gap_guard_seconds_in_reviewed_source": 2.5,
+  "prediction_7170_to_7171_gap_seconds": 79.0,
+  "maximum_displayed_interarrival_seconds": 44.0,
+  "immediate_cause": "Irregular delivery to the classifier repeatedly cleared its partial five-reading buffer; no full window completed during the walking interval.",
+  "underlying_cause": "Not established. Publisher, wireless/link, power, broker/client transport and other receipt interruptions require comparison; no model inference error or service restart appears in the supplied interval.",
+  "firmware_model_classifier_or_gap_rule_changed": false,
+  "continuity_check_completed": false,
+  "continuity_check_command": "mosquitto_sub -h 127.0.0.1 -p 1883 -t activity/sensor -R -F '%I %U' -C 70 -W 90",
+  "continuity_check_scope": "Fresh broker-receipt timestamps only; no model labels or synthetic publishing, no service/database mutation. Seventy receipts or a ninety-second processing timeout, with timestamp gaps still requiring inspection.",
+  "format_verified_against": "https://github.com/eclipse-mosquitto/mosquitto/blob/v2.0.18/man/mosquitto_sub.1.xml"
+}

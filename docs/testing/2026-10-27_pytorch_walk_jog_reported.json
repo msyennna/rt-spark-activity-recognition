@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "evidence_type": "console_summary_verified_against_uploaded_original_session_json",
+  "reviewed_on": "2026-10-27",
+  "review_timezone": "Asia/Manila",
+  "reported_session_status": "COMPLETE",
+  "original_session_json_reviewed": true,
+  "model_attribution": {
+    "framework": "PyTorch",
+    "basis": "Previously reported deployment; no new checkpoint hash or service startup evidence supplied with this session.",
+    "checkpoint_hash_rechecked_for_this_session": false
+  },
+  "reported_protocol": {
+    "trial_count": 6,
+    "trial_seconds": 60,
+    "requested_order": [
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING",
+      "WALKING",
+      "RUNNING"
+    ],
+    "board_placement": "held in right hand",
+    "participant_confirmed_all_intervals": true,
+    "predictions_hidden_until_session_end": true
+  },
+  "reported_trials": [
+    {
+      "trial": 1,
+      "actual": "WALKING",
+      "eligible": 9,
+      "correct": 9,
+      "confirmed": true,
+      "valid": true
+    },
+    {
+      "trial": 2,
+      "actual": "RUNNING",
+      "eligible": 9,
+      "correct": 0,
+      "confirmed": true,
+      "valid": true
+    },
+    {
+      "trial": 3,
+      "actual": "WALKING",
+      "eligible": 9,
+      "correct": 9,
+      "confirmed": true,
+      "valid": true
+    },
+    {
+      "trial": 4,
+      "actual": "RUNNING",
+      "eligible": 9,
+      "correct": 0,
+      "confirmed": true,
+      "valid": true
+    },
+    {
+      "trial": 5,
+      "actual": "WALKING",
+      "eligible": 8,
+      "correct": 8,
+      "confirmed": true,
+      "valid": true
+    },
+    {
+      "trial": 6,
+      "actual": "RUNNING",
+      "eligible": 9,
+      "correct": 3,
+      "confirmed": true,
+      "valid": true
+    }
+  ],
+  "confusion_matrix_rows_actual_columns_predicted": {
+    "WALKING": {
+      "WALKING": 26,
+      "RUNNING": 0
+    },
+    "RUNNING": {
+      "WALKING": 24,
+      "RUNNING": 3
+    }
+  },
+  "recalculated_metrics": {
+    "valid_trial_count_reported": 6,
+    "scored_windows": 53,
+    "correct_windows": 29,
+    "window_accuracy_percent": 54.716981132075475,
+    "correct_identification_percent_by_activity": {
+      "WALKING": 100,
+      "RUNNING": 11.11111111111111
+    },
+    "balanced_accuracy_percent": 55.55555555555556
+  },
+  "limitations": [
+    "All six trial analyses, interval selection and aggregate metrics were independently verified against the uploaded original session.json.",
+    "Single participant, one placement, fixed activity order and clustered windows; no population-accuracy claim.",
+    "Prediction-completion timestamps approximate window timing and do not measure sensor acquisition or network delay.",
+    "Confidence aggregates are available in the follow-up audit; raw six-axis motion samples and a checkpoint hash are not embedded in this session.",
+    "The older Random Forest live score and dataset holdout score do not describe this live result."
+  ],
+  "next_step": "Original-session audit complete. Present the verified result and limitations using the class submission instructions; keep any model-improvement evaluation separate.",
+  "followup_audit": {
+    "status": "PASS",
+    "original_prediction_rows_reviewed": 83,
+    "unique_eligible_windows": 53,
+    "all_saved_analyses_match": true,
+    "all_saved_metrics_match": true,
+    "reference": "2026-10-27_pytorch_walk_jog_audit.json"
+  }
+}

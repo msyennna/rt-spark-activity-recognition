@@ -1,0 +1,8 @@
+/* Copy to include/rtspark_private.h locally. The completed file is ignored.
+ * Use the existing broker password and a unique device client ID.
+ * Wi-Fi still uses Shanice's ignored rw007_wifi_config.h. */
+#ifndef RTSPARK_PRIVATE_H
+#define RTSPARK_PRIVATE_H
+#define RTSPARK_MQTT_PASSWORD ""
+#define RTSPARK_CLIENT_ID ""
+#endif

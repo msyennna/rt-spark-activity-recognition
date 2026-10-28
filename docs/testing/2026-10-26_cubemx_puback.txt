@@ -1,0 +1,176 @@
+PS C:\Users\Yena> python -m serial.tools.miniterm COM3 115200 --eol CR
+--- Miniterm on COM3  115200,8,N,1 ---
+--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+{"acceleration_x":0.032166,"acceleration_y":-0.060059,"acceleration_z":1.005371,"gyro_x":-0.052093,"gyro_y":0.003331,"gyro_z":-0.001865}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1482 count=1482
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.034302,"acceleration_y":-0.060791,"acceleration_z":1.006653,"gyro_x":-0.052493,"gyro_y":0.000799,"gyro_z":-0.001865}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1483 count=1483
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.034607,"acceleration_y":-0.061096,"acceleration_z":1.005554,"gyro_x":-0.052760,"gyro_y":0.001066,"gyro_z":-0.002531}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1484 count=1484
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.033691,"acceleration_y":-0.060303,"acceleration_z":1.005188,"gyro_x":-0.051694,"gyro_y":0.000933,"gyro_z":-0.002798}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1485 count=1485
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.032288,"acceleration_y":-0.061646,"acceleration_z":1.004883,"gyro_x":-0.052893,"gyro_y":0.001332,"gyro_z":-0.003198}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1486 count=1486
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.034668,"acceleration_y":-0.060791,"acceleration_z":1.009033,"gyro_x":-0.051294,"gyro_y":0.001466,"gyro_z":-0.001732}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1487 count=1487
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.034058,"acceleration_y":-0.062866,"acceleration_z":1.007507,"gyro_x":-0.051694,"gyro_y":0.000799,"gyro_z":-0.002398}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1488 count=1488
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.031921,"acceleration_y":-0.061768,"acceleration_z":1.008057,"gyro_x":-0.052760,"gyro_y":0.001332,"gyro_z":-0.002665}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1489 count=1489
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.031677,"acceleration_y":-0.061340,"acceleration_z":1.005859,"gyro_x":-0.051827,"gyro_y":0.000933,"gyro_z":-0.001599}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1490 count=1490
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.033813,"acceleration_y":-0.060486,"acceleration_z":1.006287,"gyro_x":-0.051427,"gyro_y":0.002398,"gyro_z":-0.001732}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1491 count=1491
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.030762,"acceleration_y":-0.059692,"acceleration_z":1.006897,"gyro_x":-0.051427,"gyro_y":0.000400,"gyro_z":-0.001998}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1492 count=1492
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.031921,"acceleration_y":-0.061157,"acceleration_z":1.008179,"gyro_x":-0.051827,"gyro_y":0.001332,"gyro_z":-0.003064}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1493 count=1493
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.031494,"acceleration_y":-0.062988,"acceleration_z":1.008240,"gyro_x":-0.052626,"gyro_y":0.000933,"gyro_z":-0.002398}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1494 count=1494
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.034607,"acceleration_y":-0.062317,"acceleration_z":1.004761,"gyro_x":-0.052360,"gyro_y":0.000533,"gyro_z":-0.002398}
+
+LWIP TX: ETH len=243
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1495 count=1495
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.033386,"acceleration_y":-0.060913,"acceleration_z":1.006348,"gyro_x":-0.051694,"gyro_y":-0.000266,"gyro_z":-0.002665}
+
+LWIP TX: ETH len=244
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1496 count=1496
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.032532,"acceleration_y":-0.061218,"acceleration_z":1.007446,"gyro_x":-0.052760,"gyro_y":-0.000666,"gyro_z":-0.001466}
+
+LWIP TX: ETH len=244
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1497 count=1497
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.032043,"acceleration_y":-0.061096,"acceleration_z":1.006042,"gyro_x":-0.051294,"gyro_y":-0.000133,"gyro_z":-0.001466}
+
+LWIP TX: ETH len=244
+
+LWIP RX: ETH len=87
+
+[RTSpark] MQTT PUBACK id=1498 count=1498
+
+LWIP TX: ETH len=54
+
+{"acceleration_x":0.032227,"acceleration_y":-0.062744,"acceleration_z":1.007324,"gyro_x":-0.052360,"gyro_y":0.000799,"gyro_z":-0.002665}
+
+LWIP TX: ETH len=243
